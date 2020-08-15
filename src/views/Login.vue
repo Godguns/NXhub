@@ -16,7 +16,7 @@
     <label for="input-live">用户名:</label>
     <b-form-input
       id="input-live"
-      v-model="name"
+      v-model="username"
       :state="nameState"
       aria-describedby="input-live-help input-live-feedback"
       placeholder="Enter your name"
@@ -36,7 +36,7 @@
     <label for="input-live">用户名:</label>
     <b-form-input
       id="input-live"
-      v-model="name"
+      v-model="pass"
       :state="nameState"
       aria-describedby="input-live-help input-live-feedback"
       placeholder="Enter your name"
@@ -52,7 +52,8 @@
    
   </div>
 
-    <b-button class="bt" href="#" size="lg" >Go somewhere</b-button>
+    <b-button @click="login"  class="bt" href="#" size="lg" >Go somewhere</b-button>
+     
   </b-card>
 </div>
   </div>
@@ -89,3 +90,38 @@ label{
 }
 
 </style>
+<script>
+import axios from 'axios'
+export default {
+  data(){
+    return {
+        username:"",
+        pass:"",
+        msg:""
+    }
+  },
+  methods:{
+    
+    login(){
+       var that=this
+        axios({
+    method: 'post',
+    url: 'http://103.123.160.132:8090/api/v1/auth/login',
+    data: {
+        username: this.username,
+        password: this.pass,
+       
+    }
+})
+.then(function (response) {
+    console.log(response);
+     that.msg=response.data.msg;
+     that.$router.push({path:'/nxhome'})
+})
+.catch(function (error) {
+    console.log(error);
+});
+    }
+  }
+}
+</script>

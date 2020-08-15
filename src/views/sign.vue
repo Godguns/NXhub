@@ -6,9 +6,9 @@
         </div>
  <div class="content" role="group">  
 
-    <label for="input-live">用户名:</label>
+    <label for="input-live1">用户名:</label>
     <b-form-input
-      id="input-live"
+      id="input-live1"
       v-model="name"
       :state="nameState"
       aria-describedby="input-live-help input-live-feedback"
@@ -26,13 +26,13 @@
   </div>
    <div class="content" role="group">  
 
-    <label for="input-live">昵称:</label>
+    <label for="input-live2">昵称:</label>
     <b-form-input
-      id="input-live"
-      v-model="name"
+      id="input-live2"
+      v-model="nick"
       :state="nameState"
       aria-describedby="input-live-help input-live-feedback"
-      placeholder="Enter your name"
+      placeholder="Enter your nickname"
       trim
     ></b-form-input>
 
@@ -44,11 +44,12 @@
     <!-- This is a form text block (formerly known as help block) -->
    
   </div>
+  
    <div class="content" role="group">  
 
-    <label for="input-live">密码:</label>
+    <label for="input-live3">密码:</label>
     <b-form-input
-      id="input-live"
+      id="input-live3"
       v-model="pass"
       :state="nameState"
       aria-describedby="input-live-help input-live-feedback"
@@ -64,7 +65,8 @@
     <!-- This is a form text block (formerly known as help block) -->
    <b-form-text id="input-live-help">.Make sure it's at least 15 characters OR at least 8 characters including a number and a lowercase letter. Learn more.</b-form-text>
   </div>
-   <b-button size="lg">Sign in</b-button>
+   <b-button v-b-modal="'my-modal'" @click="sign" size="lg">Sign in</b-button>
+    <b-modal  size="sm" centered id="my-modal">{{msg}}</b-modal>
     </div>
 </template>
 <style  scoped>
@@ -93,10 +95,43 @@ label{
 </style>
 <script>
 import Navbar from "@/components/Navbar"
+import axios from 'axios'
+import qs from 'qs';
 export default {
     components:{
         Navbar
 
+    },
+    data(){
+        return {
+            name:"",
+            nick:"",
+            pass:"",
+            msg:"loading.."
+        }
+    },
+    methods:{
+        sign(){
+            var that=this;
+                //         axios({
+                //     method: 'post',
+                //     url: 'http://103.123.160.132:8090/api/v1/auth/register',
+                //    qs .stringify({jobNumber: '430525', password: '123'}),
+                //    {headers: {'Content-Type':'application/x-www-form-urlencoded'}}
+                // })
+            
+                axios.post('http://103.123.160.132:8090/api/v1/auth/register',qs .stringify({username: this.name,nickname:this.nick, password: this.pass}), 
+    {headers: {'Content-Type':'application/x-www-form-urlencoded'}}
+) .then(function (response) {
+                    console.log(that.msg);
+                    
+                    that.msg=response.data.msg
+                    //this.$router.push({path:"/login"})
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     }
 }
 </script>

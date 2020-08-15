@@ -78,7 +78,7 @@ export default {
             this.$router.push({path:'/sign'})
         },
         gologin(){
-             this.$router.push({path:'/about'})
+             this.$router.push({path:'/login'})
         }
     }
 }
