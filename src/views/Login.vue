@@ -2,6 +2,7 @@
   <div class="about">
     <div>
       <h2>登录到NXhub</h2>
+       <b-spinner v-show="show" class="prograss" type="grow" label="Spinning"></b-spinner>
   <b-card
    
   
@@ -53,6 +54,7 @@
   </div>
 
     <b-button @click="login"  class="bt" href="#" size="lg" >Go somewhere</b-button>
+   
      
   </b-card>
 </div>
@@ -63,6 +65,10 @@
  height: 50px !;
   
   
+}
+.prograss{
+  position: relative;
+  top: 50px;
 }
 h2{
   font-weight: 400;
@@ -97,12 +103,14 @@ export default {
     return {
         username:"",
         pass:"",
-        msg:""
+        msg:"",
+        show:false
     }
   },
   methods:{
     
     login(){
+      this.show=true
        var that=this
         axios({
     method: 'post',
@@ -116,7 +124,10 @@ export default {
 .then(function (response) {
     console.log(response);
      that.msg=response.data.msg;
+   setTimeout(()=>{
+       that.show=false
      that.$router.push({path:'/nxhome'})
+   },500)
 })
 .catch(function (error) {
     console.log(error);
