@@ -1,0 +1,82 @@
+<template>
+    <div>
+        <Navbar></Navbar>
+        <div>
+            <h1>注册成为用户</h1>
+        </div>
+ <div class="content" role="group">  
+
+    <label for="input-live">用户名:</label>
+    <b-form-input
+      id="input-live"
+      v-model="name"
+      :state="nameState"
+      aria-describedby="input-live-help input-live-feedback"
+      placeholder="Enter your name"
+      trim
+    ></b-form-input>
+
+    <!-- This will only be shown if the preceding input has an invalid state -->
+    <b-form-invalid-feedback id="input-live-feedback">
+      Enter at least 3 letters
+    </b-form-invalid-feedback>
+
+    <!-- This is a form text block (formerly known as help block) -->
+   
+  </div>
+   <div class="content" role="group">  
+
+    <label for="input-live">密码:</label>
+    <b-form-input
+      id="input-live"
+      v-model="pass"
+      :state="nameState"
+      aria-describedby="input-live-help input-live-feedback"
+      placeholder="Enter your password"
+      trim
+    ></b-form-input>
+
+    <!-- This will only be shown if the preceding input has an invalid state -->
+    <b-form-invalid-feedback id="input-live-feedback">
+      Enter at least 3 letters
+    </b-form-invalid-feedback>
+
+    <!-- This is a form text block (formerly known as help block) -->
+   <b-form-text id="input-live-help">.Make sure it's at least 15 characters OR at least 8 characters including a number and a lowercase letter. Learn more.</b-form-text>
+  </div>
+   <b-button size="lg">Large Button</b-button>
+    </div>
+</template>
+<style  scoped>
+.card{
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    border: 0;
+}
+h1{
+    margin-top: 10%;
+}
+.content{
+    position: relative;
+    width: 40vw;
+    margin: 50px auto;
+   
+}
+label{
+    position: absolute;
+    left: 0;
+    top: -30px;
+    font-weight: 500;
+}
+
+</style>
+<script>
+import Navbar from "@/components/Navbar"
+export default {
+    components:{
+        Navbar
+
+    }
+}
+</script>
