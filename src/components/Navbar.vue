@@ -76,6 +76,9 @@ export default {
     methods:{
         gosign(){
             this.$router.push({path:'/sign'})
+        },
+        gologin(){
+             this.$router.push({path:'/about'})
         }
     }
 }
