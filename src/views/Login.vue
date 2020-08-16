@@ -34,7 +34,7 @@
   </div>
    <div class="content" role="group">  
 
-    <label for="input-live">用户名:</label>
+    <label for="input-live">密码:</label>
     <b-form-input
       id="input-live"
       v-model="pass"
@@ -88,7 +88,7 @@ h2{
    
 }
 label{
-  font-size: 5px;
+  font-size: .7rem;
     position: absolute;
     left: 0;
     top: -20px;
@@ -122,8 +122,16 @@ export default {
     }
 })
 .then(function (response) {
-    console.log(response);
+   
      that.msg=response.data.msg;
+     that.$store.state.username=response.data.data.username;
+     that.$store.state.nickname=response.data.data.nickname;
+
+     that.$store.state.img=response.data.data.avatar;
+     sessionStorage.setItem('username',that.$store.state.username)
+     sessionStorage.setItem('nickname', that.$store.state.nickname)
+      sessionStorage.setItem('avater', that.$store.state.img)
+ console.log(that.$store.state.avatar);
    setTimeout(()=>{
        that.show=false
      that.$router.push({path:'/nxhome'})

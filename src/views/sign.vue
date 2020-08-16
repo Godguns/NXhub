@@ -63,8 +63,29 @@
     </b-form-invalid-feedback>
 
     <!-- This is a form text block (formerly known as help block) -->
+   
+  </div>
+       <div class="content" role="group">  
+
+    <label for="input-live2">邮箱:</label>
+    <b-form-input
+      id="input-live2"
+      v-model="mail"
+      :state="nameState"
+      aria-describedby="input-live-help input-live-feedback"
+      placeholder="Enter your nickname"
+      trim
+    ></b-form-input>
+
+    <!-- This will only be shown if the preceding input has an invalid state -->
+    <b-form-invalid-feedback id="input-live-feedback">
+      Enter at least 3 letters
+    </b-form-invalid-feedback>
+
+    <!-- This is a form text block (formerly known as help block) -->
    <b-form-text id="input-live-help">.Make sure it's at least 15 characters OR at least 8 characters including a number and a lowercase letter. Learn more.</b-form-text>
   </div>
+
    <b-button v-b-modal="'my-modal'" @click="sign" size="lg">Sign in</b-button>
     <b-modal  size="sm" centered id="my-modal">{{msg}}</b-modal>
     </div>
@@ -95,8 +116,8 @@ label{
 </style>
 <script>
 import Navbar from "@/components/Navbar"
-import axios from 'axios'
-import qs from 'qs';
+
+
 export default {
     components:{
         Navbar
@@ -107,30 +128,41 @@ export default {
             name:"",
             nick:"",
             pass:"",
-            msg:"loading.."
+            msg:"loading..",
+            mail:0
         }
     },
     methods:{
         sign(){
             var that=this;
-                //         axios({
-                //     method: 'post',
-                //     url: 'http://103.123.160.132:8090/api/v1/auth/register',
-                //    qs .stringify({jobNumber: '430525', password: '123'}),
-                //    {headers: {'Content-Type':'application/x-www-form-urlencoded'}}
-                // })
+           
             
-                axios.post('http://103.123.160.132:8090/api/v1/auth/register',qs .stringify({username: this.name,nickname:this.nick, password: this.pass}), 
-    {headers: {'Content-Type':'application/x-www-form-urlencoded'}}
-) .then(function (response) {
-                    console.log(that.msg);
-                    
-                    that.msg=response.data.msg
-                    //this.$router.push({path:"/login"})
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                    this.$axios({
+                        method:'post',
+                        url:'http://103.123.160.132:8090/api/v1/auth/register',
+                        data:{
+                            email:this.mail,
+                            username:this.name,
+                            nickname:this.nick,
+                            password:this.pass,
+                        
+
+                        } 
+                        }) 
+                                .then(function (response) {
+                                        console.log(that.msg);
+                                        
+                                        that.msg=response.data.msg
+                                     if(response.data.code==200)
+                                     {
+                                      
+                                        that.$router.push({path:"/login"})
+                                     }
+                                        //this.$router.push({path:"/login"})
+                                    })
+                                    .catch(function (error) {
+                                        console.log(error);
+                                    });
         }
     }
 }
