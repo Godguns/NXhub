@@ -10,13 +10,20 @@
         <main>
 
         </main>
-        <Rightbar></Rightbar>
+        <Rightbar class="right"></Rightbar>
         </div>
        
       
     </div>
 </template>
 <style  scoped>
+@media screen and (max-width: 800px) {
+    .right {
+      
+          display: none;
+      
+    }
+}
 *{
      background: rgb(243, 246, 249);
 }

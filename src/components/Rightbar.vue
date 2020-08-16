@@ -1,5 +1,5 @@
 <template>
-    <div class="rightbar">
+<div class="rightbar">
         <div>
   <b-card
   class="card"
@@ -30,10 +30,18 @@
       Some quick example text to build on the card and make up the bulk of the card's content.
     </b-card-text>
   </b-card>
-</div>
     </div>
+</div>
 </template>
 <style  scoped>
+@media screen and (max-width: 800px) {
+   .card {
+         display: none;
+    }
+    .card2 {
+         display: none;
+    }
+}
 .info{
      color: black;
 }
@@ -41,17 +49,17 @@
     color: white;
 }
  .rightbar{
-     width: 320px;
+     width: 20vw;
      height: 100vh;
  }
  .card{
-     width: 285px;
+     width: 20vw;
     color: black;
      padding: 16px;
      margin-top: 20px;
  }
  .card2{
-      width: 285px;
+      width: 20vw;
     color: white;
      padding: 16px;
      margin-top: 20px;

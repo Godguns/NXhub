@@ -23,11 +23,16 @@
          display: none;
     }
 }
+@media screen and (max-width: 800px) {
+   .mb-2 {
+         width: 30vw;
+    }
+}
  .mb-2{
      
    
      border-radius: 0 !important;
-     width: 310px;
-     height: 100vh;
+     width: 280px;
+     height: 100%;
  }
 </style>
