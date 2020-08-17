@@ -49,19 +49,22 @@
     color: white;
 }
  .rightbar{
-     width: 20vw;
-     height: 100vh;
+     width: 250px;
+      height: 100vh;
+    
+      margin-right: -250px; 
  }
  .card{
-     width: 20vw;
+     width: 250px;
     color: black;
      padding: 16px;
-     margin-top: 20px;
+     margin-top: 5px;
  }
  .card2{
-      width: 20vw;
+      width: 250px;
     color: white;
-     padding: 16px;
+      background-color: rgb(29, 30, 32);
+      background-clip: border-box;
      margin-top: 20px;
  }
 </style>
