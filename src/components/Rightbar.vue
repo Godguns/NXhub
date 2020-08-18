@@ -51,20 +51,23 @@
  .rightbar{
      width: 250px;
       height: 100vh;
-    
-      margin-right: -250px; 
+    position: relative;
+    right: 20px;
+    top: 30px;
+      margin-right: -280px; 
  }
  .card{
      width: 250px;
     color: black;
      padding: 16px;
-     margin-top: 5px;
+     margin-top: 0px;
  }
  .card2{
       width: 250px;
     color: white;
+   
       background-color: rgb(29, 30, 32);
       background-clip: border-box;
-     margin-top: 20px;
+     margin-top: 10px;
  }
 </style>

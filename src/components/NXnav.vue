@@ -3,7 +3,7 @@
   <b-navbar class="nxnav" toggleable="lg" type="dark" variant="info">
     <b-navbar-brand href="#">NXhub</b-navbar-brand>
 
-    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+    <!-- <b-navbar-toggle ></b-navbar-toggle> -->
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
@@ -35,7 +35,7 @@
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
           <template v-slot:button-content>
-           <b-img class="avater" v-bind="mainProps" :src="avater" rounded="circle" ></b-img>
+           <b-img class="avater"  :src="avater" rounded="circle" ></b-img>
           </template>
           <b-dropdown-item href="#">个人主页</b-dropdown-item>
           <b-dropdown-item href="#">退出</b-dropdown-item>

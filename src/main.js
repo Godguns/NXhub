@@ -6,6 +6,17 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import axios from 'axios'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
+
+Vue.use(ElementUI);
+axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL="https://nxhub.seefs.cn/";
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; 
+
+
 Vue.prototype.$axios = axios;
 
 // Install BootstrapVue

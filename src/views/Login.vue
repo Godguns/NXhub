@@ -18,7 +18,7 @@
     <b-form-input
       id="input-live"
       v-model="username"
-      :state="nameState"
+      
       aria-describedby="input-live-help input-live-feedback"
       placeholder="Enter your name"
       trim
@@ -38,7 +38,7 @@
     <b-form-input
       id="input-live"
       v-model="pass"
-      :state="nameState"
+      
       aria-describedby="input-live-help input-live-feedback"
       placeholder="Enter your name"
       trim
@@ -97,7 +97,7 @@ label{
 
 </style>
 <script>
-import axios from 'axios'
+//import axios from 'axios'
 export default {
   data(){
     return {
@@ -112,9 +112,9 @@ export default {
     login(){
       this.show=true
        var that=this
-        axios({
+        this.$axios({
     method: 'post',
-    url: 'http://103.123.160.132:8090/api/v1/auth/login',
+    url: '/api/v1/auth/login',
     data: {
         username: this.username,
         password: this.pass,
@@ -122,7 +122,8 @@ export default {
     }
 })
 .then(function (response) {
-   
+  console.log(response);
+       //document.cookie="session_id=8f6efba5-f8cc-44d5-90ed-fedecffc2403;domain=test.seefs.cn";
      that.msg=response.data.msg;
      that.$store.state.username=response.data.data.username;
      that.$store.state.nickname=response.data.data.nickname;
@@ -131,7 +132,7 @@ export default {
      sessionStorage.setItem('username',that.$store.state.username)
      sessionStorage.setItem('nickname', that.$store.state.nickname)
       sessionStorage.setItem('avater', that.$store.state.img)
- console.log(that.$store.state.avatar);
+ //console.log(response.data);
    setTimeout(()=>{
        that.show=false
      that.$router.push({path:'/nxhome'})
