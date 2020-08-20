@@ -6,7 +6,7 @@
         <div class="home">
             <main class="col">
                
-                 <iNew :items=items :imglist=imglist></iNew>
+                 <iNew :items= this.$store.state.items :imglist=imglist></iNew>
             </main>
             <NXside class="col"></NXside>
             <Rightbar id=right class="col"></Rightbar>
@@ -59,15 +59,18 @@ main{
     import Rightbar from "@/components/Rightbar"
     import NXside from "@/components/NXside"
     import NXnav from "@/components/NXnav"
+     
 export default {
+
    components:{
        NXnav,
        NXside,
        Rightbar,
        iNew
    },
- 
+
     data(){
+        
         return{
             show:true,
             username:sessionStorage.getItem("username"),
@@ -76,6 +79,7 @@ export default {
             page:1,
             limit:20,
             items:[]
+           
         }
     },
 
@@ -88,31 +92,42 @@ export default {
        }else{
 
           
-           this.getalk()
+           this.ngetalk()
            this.getuserinfo()
        }
     },
     methods:{
-        getalk(){
-            this.$axios({
-                methods:'get',
-                url:'/api/v1/spit?page='+this.page+'&limit='+this.limit,
-              
-            }).then((response)=>{
-                console.log(response)
-                this.items=response.data.data.items;
-            })
+       async ngetalk(){
+          await  this.$store.dispatch('getalk')
+         // this.items=this.$store.state.items
+          console.log("wait!!!",this.items)
         },
-        getuserinfo(){
-            
-                  this.$axios({
-                methods:'get',
-                url:'/api/v1/auth',
+        // getalk(){
+           
+        //     this.$axios({
+        //         methods:'get',
+        //         url:'/api/v1/spit?page='+this.page+'&limit='+this.limit,
               
-            }).then((response)=>{
+        //     }).then((response)=>{
+               
+        //        this.$store.state.items=response.data.data.items;
+        //         //this.reload()
+        //         this.items=this.$store.state.items
+        //         console.log(this.items)
+               
+                
+        //     })
+        // },
+        getuserinfo(){
+              this.$store.dispatch('getuserinfo')
+            //       this.$axios({
+            //     methods:'get',
+            //     url:'/api/v1/auth',
+              
+            // }).then((response)=>{
             
-                console.log(response)
-            })
+            //     console.log(response)
+            // })
         }
     }
 }

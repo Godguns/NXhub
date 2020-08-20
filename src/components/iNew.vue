@@ -12,14 +12,14 @@
                         trigger="hover">
                         
                         <div class="peason">
-                            <img   class="avaterinfo" :src="item.avatar" alt="">
+                            <el-image fit="fill"   class="avaterinfo" :src="item.avatar" alt=""></el-image>
                             <h4>{{item.username}}</h4>
                             
                         </div>
                         
                         
                        <div class="itemtitle" slot="reference">
-                        <img   class="avater" :src="item.avatar" alt="">
+                        <el-image fit="cover"  class="avater" :src="item.avatar" alt=""></el-image>
                             <p>{{item.username}}</p>
                        </div> 
                         
@@ -31,16 +31,18 @@
            
   
              <b-card class="card"  img-alt="Card image" img-top>
+                 
                 <b-card-text class="text">
                     
                    {{item.content}}
                  </b-card-text>
+                 
                      <div class="action">
-                            <i class="el-icon-star-on">{{item.visits}}</i>
-                            <i class="el-icon-share">{{item.thump_up}}</i>
+                            <i @click="star(item.id)" class="el-icon-star-on">{{item.thump_up }}</i>
+                            <i class="el-icon-share">{{item.visits}}</i>
                             <i class="el-icon-chat-dot-square">{{item.share}}</i>
                             </div>
-                            <el-collapse >
+                         <el-collapse  >
                             <el-collapse-item  name="1">
                                  <template slot="title"> <span>显示所有评论</span><i class="header-icon el-icon-info"></i></template>
                                <div class="pinlun">
@@ -54,13 +56,13 @@
                                  
                                </div>
                             </el-collapse-item>
-                            </el-collapse>
+                        </el-collapse>
                  
              </b-card>
                
                   
                  
-              <hr>
+              
     </div>
 
     
@@ -76,13 +78,15 @@
     }
 }
 .text{
+    font-weight: 100;
+    margin-bottom: 0;
     color:rgb(70, 77, 86) ;
     text-align: left;
-    font-size: 10px;
+    font-size: 13px;
 }
 .new{
    margin-left: -30px;
-     overflow: hidden;
+     
     
 }
 .action{
@@ -115,7 +119,7 @@
     font-size: 20px;
 }
 i{
-     color: #a29bfe;
+     color: #ccc;
     cursor: pointer;
     margin: 10px;
 }
@@ -145,8 +149,8 @@ i:hover{
         width: 100%;
     }
     .avater{
-        width: 32px;
-        height: 32px;
+        width: 38px;
+        height: 38px;
         border-radius: 50%;
         margin-top: 10px;
     }
@@ -171,11 +175,15 @@ i:hover{
       margin-top: -20px;
        margin-left: 65px;
         width: 90%;
+         padding: 5px !important;
         box-shadow: .5;
-       
+    }
+   
+    .card-body{
+         padding: 0px !important;
     }
     .avaterinfo{
-        border: solid 1px grey;
+        border: solid 1px grey !important;
         width: 60px;
         height: 60px;
         border-radius: 50%;
@@ -188,13 +196,21 @@ export default {
     props:['imglist','items'],
     data(){
         return{
-           
+           activeNames:['1']
         }
     },
     mounted(){
         console.log(this.imglist)
     },methods:{
-        
+        star(e){
+            this.$axios({
+                method:'post',
+                url:'/api/v1/spit/thump_up?id='+e,
+
+            }).then(()=>{
+                alert("成功！")
+            })
+        }
     }
 }
 </script>

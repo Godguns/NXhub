@@ -72,11 +72,9 @@ export default {
                       this.$axios({
                     method:'post',
                      url:'/api/v1/spit?content='+value,
-                }).then((response)=>{
-                    this.$message({
-                        type: 'info',
-                        message: 'action: ' + response
-                    });
+                }).then(()=>{
+                 this.$store.dispatch('getalk')
+                   
                 })
         }).catch(() => {
           this.$message({

@@ -37,7 +37,7 @@
           <template v-slot:button-content>
            <b-img class="avater"  :src="avater" rounded="circle" ></b-img>
           </template>
-          <b-dropdown-item href="#">个人主页</b-dropdown-item>
+          <b-dropdown-item href="#/peason">个人主页</b-dropdown-item>
           <b-dropdown-item href="#">退出</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>

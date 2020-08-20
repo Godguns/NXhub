@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 import sign from '../views/sign.vue'
 import Home from '../views/Home.vue'
 import nxhome from '../views/NXhome.vue'
-
+import Peason from '../views/Peason.vue'
+import blank from '../views/blank.vue'
 Vue.use(VueRouter)
 
   const routes = [
@@ -12,6 +13,16 @@ Vue.use(VueRouter)
     name: 'Home',
     component: Home
 
+  },
+  {
+    path:'/blank',
+    component:blank
+    
+  },
+  {
+    path:'/peason',
+    component:Peason
+    
   },
   {
     path:'/nxhome',

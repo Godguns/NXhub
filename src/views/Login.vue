@@ -127,11 +127,13 @@ export default {
      that.msg=response.data.msg;
      that.$store.state.username=response.data.data.username;
      that.$store.state.nickname=response.data.data.nickname;
+      that.$store.state.password=response.data.data.password;
 
      that.$store.state.img=response.data.data.avatar;
      sessionStorage.setItem('username',that.$store.state.username)
      sessionStorage.setItem('nickname', that.$store.state.nickname)
       sessionStorage.setItem('avater', that.$store.state.img)
+       sessionStorage.setItem('password', that.$store.state.password)
  //console.log(response.data);
    setTimeout(()=>{
        that.show=false
