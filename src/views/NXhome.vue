@@ -27,8 +27,9 @@
     }
 }
 *{
-     background: rgb(243, 246, 249);
+    
 }
+
 
 .col{
    
@@ -102,32 +103,10 @@ export default {
          // this.items=this.$store.state.items
           console.log("wait!!!",this.items)
         },
-        // getalk(){
-           
-        //     this.$axios({
-        //         methods:'get',
-        //         url:'/api/v1/spit?page='+this.page+'&limit='+this.limit,
-              
-        //     }).then((response)=>{
-               
-        //        this.$store.state.items=response.data.data.items;
-        //         //this.reload()
-        //         this.items=this.$store.state.items
-        //         console.log(this.items)
-               
-                
-        //     })
-        // },
+  
         getuserinfo(){
               this.$store.dispatch('getuserinfo')
-            //       this.$axios({
-            //     methods:'get',
-            //     url:'/api/v1/auth',
-              
-            // }).then((response)=>{
-            
-            //     console.log(response)
-            // })
+          
         }
     }
 }

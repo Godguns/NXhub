@@ -5,28 +5,31 @@
 <div class="nav">
     <el-tabs class="navc" v-model="activeName" >
     <el-tab-pane class="navcc1" label="个人信息" name="first">
-          <b-list-group>
-  
-  <b-list-group-item variant="primary">Primary list group item</b-list-group-item>
-  <b-list-group-item variant="secondary">Secondary list group item</b-list-group-item>
-  <b-list-group-item variant="success">Success list group item</b-list-group-item>
-  <b-list-group-item variant="danger">Danger list group item</b-list-group-item>
-  <b-list-group-item variant="warning">Warning list group item</b-list-group-item>
-  <b-list-group-item variant="info">Info list group item</b-list-group-item>
- 
-  
-</b-list-group>
-    </el-tab-pane>
-    <el-tab-pane class="navcc1" label="我的动态" name="second">
-         
+       <el-divider content-position="left" style="color:rgb(218,242,207)">个性标签</el-divider>
                  <el-tag
+                 class="tip"
                 v-for="tag in tags"
                 :key="tag.name"
                 closable
                 :type="tag.type">
                 {{tag.name}}
               </el-tag>
-               
+       <el-divider content-position="left" style="color:rgb(218,242,207)">全部动态</el-divider>
+            <el-timeline >
+             
+            <el-timeline-item class="timeline"
+              v-for="(activity, index) in list"
+              :key="index"
+               color="rgb(218,242,207)"
+              :timestamp="activity.time">
+              {{activity.content}}
+            </el-timeline-item>
+          </el-timeline>
+          <hr style="clear:both">
+    </el-tab-pane>
+    <el-tab-pane class="navcc1" label="我的收藏" name="second">
+         
+            <h1>halo</h1>
             
     </el-tab-pane>
     <el-tab-pane class="navcc1" label="角色管理" name="third">
@@ -84,23 +87,23 @@
     </div>
 </template>
 <style  scoped>
-.pinlun{
-    display: flex;
-    
+
+.home{
+  min-height: 100vh;
 }
-.pinlun div{
-    line-height: 42px;
-}
-.pinlun img{
-    margin-top: 0;
-    margin-right: 10px;
+.timeline{
+  text-align: left;
 }
 .navc{
   margin-left: 30vw;
   width: 70vw;
-  height: 100vh;
+  
+}
+.tip{
+  margin-left: 10px;
 }
 .navcc1{
+ 
   margin-right: 10vw;
 }
 .avaterpl{
@@ -109,9 +112,7 @@
         border-radius: 50%;
         margin-top: 10px;
 }
-.wz{
-  margin-left: 100px;
-}
+
 .content{
   display: flex;
   
@@ -123,19 +124,19 @@
   display: flex;
  
 }
-ul{
+/* ul{
   display: flex;
   padding:0 !important;
   list-style: none;
-}
+} */
 hr{
   width: 286px;
 }
-li{
+/* li{
  margin:0 30px;
   font-size: 10px;
   font-weight: 500;
-}
+} */
 .avater{
   width: 280px;
   height: 280px;
@@ -209,10 +210,7 @@ h3{
    .nav{
      border-bottom: 1px solid #ccc;
    }
-   .nav li{
-      font-size: 16px;
-      line-height: 90px;
-   }
+ 
    
     
 
@@ -225,6 +223,7 @@ import NXnav from "@/components/NXnav"
 export default {
     components:{
         NXnav
+       
 
     },
     data(){
@@ -234,13 +233,13 @@ export default {
           activeName: 'second',
            token:"",
            imageUrl:"",
-           list:[1,2,3,4,5],
+           list:[],
             tags: [
-          { name: '标签一', type: '' },
-          { name: '标签二', type: 'success' },
-          { name: '标签三', type: 'info' },
-          { name: '标签四', type: 'warning' },
-          { name: '标签五', type: 'danger' }
+          { name: '萝莉控', type: '' },
+          { name: '死肥宅', type: 'success' },
+          { name: '技术第一', type: 'info' },
+          { name: '拯救世界', type: 'warning' },
+          { name: '哔哩哔哩干杯( ゜-゜)つロ', type: 'danger' }
         ],
             avater:sessionStorage.getItem('avater')
        } 
@@ -252,13 +251,22 @@ export default {
         }).then(response=>{
             this.token=response.data.token;
             console.log("七牛云token",response)
+        });
+        this.$axios({
+          method:'get',
+          url:'/api/peason?username='+sessionStorage.getItem('username'),
+
+        }).then(response=>{
+          this.list=response.data.data
+          console.log(response)
         })
     },
     beforeCreate(){
        this.$store.dispatch('getuserinfo')
     },
     methods:{
-            handleSuccess(res) {
+      
+   handleSuccess(res) {
                 this.$message({
                    message: '正在保存..',
                     type: 'warning'

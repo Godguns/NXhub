@@ -12,20 +12,20 @@
                         trigger="hover">
                         
                         <div class="peason">
-                            <el-image fit="fill"   class="avaterinfo" :src="item.avatar" alt=""></el-image>
+                            <el-image fit="fill"   class="avaterinfo" :src="item.avater" alt=""></el-image>
                             <h4>{{item.username}}</h4>
                             
                         </div>
                         
                         
                        <div class="itemtitle" slot="reference">
-                        <el-image fit="cover"  class="avater" :src="item.avatar" alt=""></el-image>
+                        <el-image fit="cover"  class="avater" :src="item.avater" alt=""></el-image>
                             <p>{{item.username}}</p>
                        </div> 
                         
                  </el-popover>
                        
-                        <span class="time">{{item.published_time}}</span>
+                        <span class="time">{{item.time}}</span>
                         
             </div>
            
@@ -42,21 +42,7 @@
                             <i class="el-icon-share">{{item.visits}}</i>
                             <i class="el-icon-chat-dot-square">{{item.share}}</i>
                             </div>
-                         <el-collapse  >
-                            <el-collapse-item  name="1">
-                                 <template slot="title"> <span>显示所有评论</span><i class="header-icon el-icon-info"></i></template>
-                               <div class="pinlun">
-                                <div><img   class="avater" src="peko.jpg" alt=""></div>
-                                <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
-                                 
-                               </div>
-                                 <div class="pinlun">
-                                <div><img   class="avater" src="tower.jpg" alt=""></div>
-                                <div>说的好！牛逼牛逼</div>
-                                 
-                               </div>
-                            </el-collapse-item>
-                        </el-collapse>
+                     
                  
              </b-card>
                
@@ -78,9 +64,9 @@
     }
 }
 .text{
-    font-weight: 100;
+    font-weight: 350;
     margin-bottom: 0;
-    color:rgb(70, 77, 86) ;
+    color:#606266 ;
     text-align: left;
     font-size: 13px;
 }
@@ -144,13 +130,13 @@ i:hover{
    margin-top: 5px;
 }
     .item{
-        margin-top: 0px;
+        margin-top: 20px;
         display: flex;
         width: 100%;
     }
     .avater{
-        width: 38px;
-        height: 38px;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
         margin-top: 10px;
     }

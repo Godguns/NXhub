@@ -1,13 +1,13 @@
 <template>
     <div>
   <b-navbar class="nxnav" toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand href="#">NXhub</b-navbar-brand>
+    <b-navbar-brand href="#/nxhome">NXhub</b-navbar-brand>
 
     <!-- <b-navbar-toggle ></b-navbar-toggle> -->
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item href="#">Link</b-nav-item>
+        <b-nav-item href="#">Pixiv</b-nav-item>
         <b-nav-item href="#" disabled>Disabled</b-nav-item>
 
         <b-nav-form  >
@@ -28,7 +28,7 @@
             </template>
             
           
-          <b-dropdown-item href="#">RU</b-dropdown-item>
+          <b-dropdown-item @click="add" href="#">发表动态</b-dropdown-item>
           <b-dropdown-item href="#">FA</b-dropdown-item>
         </b-nav-item-dropdown>
 
@@ -53,8 +53,8 @@
     font-size: 20px;
 }
     .avater{
-        width: 20px;
-        height: 20px;
+        width: 25px;
+        height: 25px;
     }
     .nxnav{
         line-height: 1.5em;
@@ -79,7 +79,51 @@ export default {
         }
     },
     methods:{
-       
+  add() {
+        this.$prompt('New', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          
+          
+        }).then(({ value }) => {
+            // 获取当前日期
+              var date = new Date();
+
+              // 获取当前月份
+              var nowMonth = date.getMonth() + 1;
+
+              // 获取当前是几号
+              var strDate = date.getDate();
+
+              // 添加分隔符“-”
+              var seperator = "-";
+
+              // 对月份进行处理，1-9月在前面添加一个“0”
+              if (nowMonth >= 1 && nowMonth <= 9) {
+                nowMonth = "0" + nowMonth;
+              }
+
+              // 对月份进行处理，1-9号在前面添加一个“0”
+              if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+              }
+
+      // 最后拼接字符串，得到一个格式为(yyyy-MM-dd)的日期
+          var nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;
+                    this.$axios({
+                          method:'get',
+                          url:'/api/v1/spit2?username='+sessionStorage.getItem('username')+'&avater='+sessionStorage.getItem('avater')+'&content='+value+'&time='+nowDate,
+                      }).then(()=>{
+                      this.$store.dispatch('getalk')
+                        
+                      })
+              }).catch(() => {
+                this.$message({
+                  type: 'info',
+                  message: '取消输入'
+                });       
+              });
+  }
     }
 }
 </script>

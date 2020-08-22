@@ -53,7 +53,7 @@
       height: 100vh;
     position: relative;
     right: 20px;
-    top: 30px;
+    top: 20px;
       margin-right: -280px; 
  }
  .card{
