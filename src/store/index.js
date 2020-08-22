@@ -46,17 +46,21 @@ export default new Vuex.Store({
        
         axios({
     method: 'get',
-    url: '/api/v1/auth'
+    url: '/api/v1/auth',
+    params:{
+      username: sessionStorage.getItem('username'),
+      password:sessionStorage.getItem('password')
+    }
  
 })
 .then( (response)=> {
   console.log(response);
        //document.cookie="session_id=8f6efba5-f8cc-44d5-90ed-fedecffc2403;domain=test.seefs.cn";
     
-       this.state.username=response.data.data.username;
-      this.state.nickname=response.data.data.nickname;
-       this.state.password=response.data.data.password;
-      this.state.img=response.data.data.avatar;
+       this.state.username=response.data.username;
+      this.state.nickname=response.data.nickname;
+       this.state.password=response.data.password;
+      this.state.img=response.data.avater;
     sessionStorage.setItem('username',this.state.username)
     sessionStorage.setItem('nickname', this.state.nickname)
      sessionStorage.setItem('avater', this.state.img)

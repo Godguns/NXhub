@@ -10,7 +10,7 @@
     <b-form-input
       id="input-live1"
       v-model="name"
-      :state="nameState"
+     
       aria-describedby="input-live-help input-live-feedback"
       placeholder="Enter your name"
       trim
@@ -30,7 +30,7 @@
     <b-form-input
       id="input-live2"
       v-model="nick"
-      :state="nameState"
+     
       aria-describedby="input-live-help input-live-feedback"
       placeholder="Enter your nickname"
       trim
@@ -51,7 +51,7 @@
     <b-form-input
       id="input-live3"
       v-model="pass"
-      :state="nameState"
+      
       aria-describedby="input-live-help input-live-feedback"
       placeholder="Enter your password"
       trim
@@ -71,7 +71,7 @@
     <b-form-input
       id="input-live2"
       v-model="mail"
-      :state="nameState"
+      
       aria-describedby="input-live-help input-live-feedback"
       placeholder="Enter your nickname"
       trim
@@ -129,7 +129,8 @@ export default {
             nick:"",
             pass:"",
             msg:"loading..",
-            mail:0
+            mail:0,
+             avater:'http://qfeuhyill.hn-bkt.clouddn.com/peko2.jpg'
         }
     },
     methods:{
@@ -137,19 +138,13 @@ export default {
             var that=this;
            
             
-                    this.$axios({
-                        method:'post',
-                        url:'http://103.123.160.132:8090/api/v1/auth/register',
-                        data:{
-                            email:this.mail,
-                            username:this.name,
-                            nickname:this.nick,
-                            password:this.pass,
-                        
-
-                        } 
-                        }) 
-                                .then(function (response) {
+              this.$axios.get('/api/v1/user/register', {
+	params : { //请求参数
+    username : this.name,
+    password:this.pass,
+    avater:this.avater
+	}
+})  .then(function (response) {
                                         console.log(that.msg);
                                         
                                         that.msg=response.data.msg

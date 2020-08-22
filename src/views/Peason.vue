@@ -41,9 +41,9 @@
   
 <div class="content">
       <div class="peason">
-                <el-upload
+      <el-upload
         class="avatar-uploader"
-        action="http://upload.qiniup.com"
+        action="http://upload-z2.qiniup.com"
         :show-file-list="false"
         :on-success="handleSuccess"
         :data="{token: token}"
@@ -229,6 +229,8 @@ export default {
     },
     data(){
        return{
+         username:sessionStorage.getItem('username'),
+         password:sessionStorage.getItem('password'),
           activeName: 'second',
            token:"",
            imageUrl:"",
@@ -246,10 +248,10 @@ export default {
     mounted(){
         this.$axios({
             method:'get',
-            url:'api/v1/file/token'
+            url:'/api/v1/file/token'
         }).then(response=>{
-            this.token=response.data.data;
-            console.log(this.token)
+            this.token=response.data.token;
+            console.log("七牛云token",response)
         })
     },
     beforeCreate(){
@@ -261,14 +263,12 @@ export default {
                    message: '正在保存..',
                     type: 'warning'
                 });
-     this.imageUrl = 'http://oss.seefs.cn/'+res.hash
+     this.imageUrl = 'http://dongdove.cn/'+res.hash
      console.log(this.imageUrl)
      this.$axios({
-       method:'post',
-       url:'/api/v1/auth/change_info',
-       data:{
-         avatar:this.imageUrl
-       }
+       method:'get',
+       url:'/api/v1/auth/change_info?username='+this.username+'&password='+this.password+'&avater='+this.imageUrl,
+      
      }).then( async (res)=>{
        await    this.$message({
                    message: '保存成功',

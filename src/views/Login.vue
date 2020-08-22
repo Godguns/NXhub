@@ -113,13 +113,13 @@ export default {
       this.show=true
        var that=this
         this.$axios({
-    method: 'post',
-    url: '/api/v1/auth/login',
-    data: {
-        username: this.username,
-        password: this.pass,
+    method: 'get',
+    url: '/api/v1/auth/login?username='+that.username+"&password="+that.pass,
+    // data: {
+    //     username: this.username,
+    //     password: this.pass,
        
-    }
+    // }
 })
 .then(function (response) {
   console.log(response);
@@ -129,7 +129,7 @@ export default {
      that.$store.state.nickname=response.data.data.nickname;
       that.$store.state.password=response.data.data.password;
 
-     that.$store.state.img=response.data.data.avatar;
+     that.$store.state.img=response.data.data.avater;
      sessionStorage.setItem('username',that.$store.state.username)
      sessionStorage.setItem('nickname', that.$store.state.nickname)
       sessionStorage.setItem('avater', that.$store.state.img)
