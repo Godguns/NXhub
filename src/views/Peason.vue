@@ -15,7 +15,7 @@
                 {{tag.name}}
               </el-tag>
        <el-divider content-position="left" style="color:rgb(218,242,207)">全部动态</el-divider>
-            <el-timeline >
+            <el-timeline class="timelinecontent" >
              
             <el-timeline-item class="timeline"
               v-for="(activity, index) in list"
@@ -29,15 +29,11 @@
     </el-tab-pane>
     <el-tab-pane class="navcc1" label="我的收藏" name="second">
          
-            <h1>halo</h1>
+          
+           
             
     </el-tab-pane>
-    <el-tab-pane class="navcc1" label="角色管理" name="third">
-      <el-card class="box-card"></el-card>
-    </el-tab-pane>
-    <el-tab-pane class="navcc1" label="定时任务补偿" name="fourth">
-      定时任务补偿
-    </el-tab-pane>
+    
   </el-tabs>
 </div>
 
@@ -64,7 +60,9 @@
    
       <div class="avater2">😂</div>
       <h3>{{this.$store.state.username}}<br><h4>{{this.$store.state.username}}</h4></h3>
-        <button  class="edit">编辑头像_</button>
+      <el-tooltip content="关注" placement="right-start">
+        <el-button type="danger" class="focus" icon="el-icon-plus" circle></el-button>
+      </el-tooltip>
         <div class="msg">
           <ul>
             <li>one:xxx</li>
@@ -87,12 +85,25 @@
     </div>
 </template>
 <style  scoped>
-
+.focus{
+    position: absolute;
+  top: 170px;
+  left: 230px;
+  
+  
+  
+  
+}
 .home{
   min-height: 100vh;
 }
 .timeline{
   text-align: left;
+  display: block;
+}
+.timelinecontent{
+  height: 400px;
+  overflow: scroll;
 }
 .navc{
   margin-left: 30vw;
@@ -122,13 +133,14 @@
 .msg{
   margin-top: 10px;
   display: flex;
+  list-style: none;
  
 }
-/* ul{
+ .msg ul{
   display: flex;
   padding:0 !important;
   list-style: none;
-} */
+}
 hr{
   width: 286px;
 }
@@ -147,14 +159,7 @@ hr{
 }
 .avater2{
   position: absolute;
-  top: 170px;
-  left: 240px;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  border-radius: 50%;
-  background: white;
-  border:1px solid #ccc;
+display: none;
 }
 h4{
   color: #666;
@@ -223,6 +228,7 @@ import NXnav from "@/components/NXnav"
 export default {
     components:{
         NXnav
+  
        
 
     },
@@ -230,12 +236,12 @@ export default {
        return{
          username:sessionStorage.getItem('username'),
          password:sessionStorage.getItem('password'),
-          activeName: 'second',
+          activeName: 'first',
            token:"",
            imageUrl:"",
            list:[],
             tags: [
-          { name: '萝莉控', type: '' },
+          { name: '技术控', type: '' },
           { name: '死肥宅', type: 'success' },
           { name: '技术第一', type: 'info' },
           { name: '拯救世界', type: 'warning' },
@@ -265,7 +271,7 @@ export default {
        this.$store.dispatch('getuserinfo')
     },
     methods:{
-      
+
    handleSuccess(res) {
                 this.$message({
                    message: '正在保存..',

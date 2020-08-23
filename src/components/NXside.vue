@@ -2,7 +2,8 @@
     <div class="side">
   <b-card
    
-   
+   img-src="banner.png"
+   img-height="100px"
     tag="article"
     style="max-width: 20rem;"
     class="mb-2"
@@ -39,10 +40,9 @@
    position: relative;
        width: 300px;
      margin-top: 0px;
-   height: 200px;
+   height: 190px;
  border-radius: 5px !important;
-background-color: rgba(237,249,230,.2);
-filter: blur(.7);
+
     
  }
  .like{
@@ -52,7 +52,7 @@ filter: blur(.7);
    display: flex;
     position: absolute;
     left: 0px;
-    top:116px ;
+    top:96px ;
   
  }
 
@@ -74,15 +74,16 @@ filter: blur(.7);
    overflow: hidden;
    position: absolute;
    left: 40px;
-   top: 44px;
+   top: 24px;
    width: 52px;
    height: 52px;
  }
  h5{
+   color: white;
    position: absolute;
    line-height: 52px;
-   top: 44px;
-   left: 134px;
+   top: 24px;
+   left: 104px;
  }
  .side{
      

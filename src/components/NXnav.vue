@@ -7,7 +7,7 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item href="#">Pixiv</b-nav-item>
+        <b-nav-item href="#/pixiv">Pixiv热榜</b-nav-item>
         <b-nav-item href="#" disabled>Disabled</b-nav-item>
 
         <b-nav-form  >
@@ -35,7 +35,8 @@
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
           <template v-slot:button-content>
-           <b-img class="avater"  :src="avater" rounded="circle" ></b-img>
+             <el-image fit="cover"  class="avater" :src="avater" alt=""></el-image>
+           <!-- <b-img class="avater"  :src="avater" rounded="circle" ></b-img> -->
           </template>
           <b-dropdown-item href="#/peason">个人主页</b-dropdown-item>
           <b-dropdown-item href="#">退出</b-dropdown-item>
@@ -49,12 +50,17 @@
 .ml-auto{
     line-height: 20px !important;
 }
+.mb-2{
+  width: 30px;
+  height: 30px;
+}
 .add{
     font-size: 20px;
 }
     .avater{
-        width: 25px;
-        height: 25px;
+      border-radius: 50%;
+        width: 30px;
+        height: 30px;
     }
     .nxnav{
         line-height: 1.5em;

@@ -80,7 +80,7 @@ var nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;
       }).then((response)=>{
        
         //context.commit("talk",response.data.data.items)
-         this.state.items=response.data.data;
+         this.state.items=response.data.data.reverse();
           //this.reload()
           console.log("hgagag",this.state.items)
 

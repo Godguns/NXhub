@@ -5,9 +5,14 @@ import Home from '../views/Home.vue'
 import nxhome from '../views/NXhome.vue'
 import Peason from '../views/Peason.vue'
 import blank from '../views/blank.vue'
+import pixiv from '../views/Pixiv.vue'
 Vue.use(VueRouter)
 
   const routes = [
+    {
+      path:'/pixiv',
+      component:pixiv
+    },
   {
     path: '/',
     name: 'Home',

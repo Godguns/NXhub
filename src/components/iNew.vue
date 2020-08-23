@@ -12,7 +12,7 @@
                         trigger="hover">
                         
                         <div class="peason">
-                            <el-image fit="fill"   class="avaterinfo" :src="item.avater" alt=""></el-image>
+                            <el-image fit="cover"   class="avaterinfo" :src="item.avater" alt=""></el-image>
                             <h4>{{item.username}}</h4>
                             
                         </div>
@@ -139,6 +139,7 @@ i:hover{
         height: 32px;
         border-radius: 50%;
         margin-top: 10px;
+
     }
     p{  
         color: black;

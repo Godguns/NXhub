@@ -5,7 +5,25 @@
              
         <div class="home">
             <main class="col">
-               
+               <div>
+                   <el-card shadow="hover" class="box-card">
+                       <textarea class="textarea" v-model="value" ></textarea>
+                      <div class="row">
+
+                            
+                        <el-row >
+                       
+                        <el-button type="primary" icon="el-icon-picture" circle></el-button>
+                        <el-button type="success" icon="el-icon-share" circle></el-button>
+                        <el-button type="info" icon="el-icon-message" circle></el-button>
+                        <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+                        
+                        </el-row>
+                        <el-button @click="fabu" type="danger">发布</el-button>
+                      </div>
+                    </el-card>
+               </div>
+              <hr>
                  <iNew :items= this.$store.state.items :imglist=imglist></iNew>
             </main>
             <NXside class="col"></NXside>
@@ -26,14 +44,24 @@
       
     }
 }
-*{
-    
+textarea{
+        outline: none;
+        border:solid 1px #ccc
 }
 
-
+.row{
+    margin-top: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    display: flex;
+    justify-content: space-between;
+}
 .col{
    
     float: left;
+}
+.textarea{
+    width: 100%;
 }
 article{
     clear: both;
@@ -73,6 +101,7 @@ export default {
     data(){
         
         return{
+            value:"",
             show:true,
             username:sessionStorage.getItem("username"),
             avater:sessionStorage.getItem("avater"),
@@ -98,6 +127,43 @@ export default {
        }
     },
     methods:{
+           fabu() {
+               // 获取当前日期
+              var date = new Date();
+
+              // 获取当前月份
+              var nowMonth = date.getMonth() + 1;
+
+              // 获取当前是几号
+              var strDate = date.getDate();
+
+              // 添加分隔符“-”
+              var seperator = "-";
+
+              // 对月份进行处理，1-9月在前面添加一个“0”
+              if (nowMonth >= 1 && nowMonth <= 9) {
+                nowMonth = "0" + nowMonth;
+              }
+
+              // 对月份进行处理，1-9号在前面添加一个“0”
+              if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+              }
+
+      // 最后拼接字符串，得到一个格式为(yyyy-MM-dd)的日期
+          var nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;
+                    this.$axios({
+                          method:'get',
+                          url:'/api/v1/spit2?username='+sessionStorage.getItem('username')+'&avater='+sessionStorage.getItem('avater')+'&content='+this.value+'&time='+nowDate,
+                      }).then(()=>{
+                        this.$message({
+          message: '恭喜你，这是一条成功消息',
+          type: 'success'
+        });
+                      this.$store.dispatch('getalk')
+                        
+                      })
+  },
        async ngetalk(){
           await  this.$store.dispatch('getalk')
          // this.items=this.$store.state.items
