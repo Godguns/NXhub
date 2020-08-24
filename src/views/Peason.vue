@@ -22,7 +22,28 @@
               :key="index"
                color="rgb(218,242,207)"
               :timestamp="activity.time">
-              {{activity.content}}
+                                <div>
+                        <b-card  no-body class="overflow-hidden" style="background-size:cover; margin-top:30px;max-height:300px">
+                          <b-row no-gutters>
+                            <b-col md="6">
+                              <b-card-img  v-if="activity.img" :src="activity.img" class="rounded-0"></b-card-img>
+                            </b-col>
+                            <b-col md="6">
+                              <b-card-body >
+                                <b-card-text>
+                                 {{activity.content}}
+                                </b-card-text>
+                              </b-card-body>
+                            </b-col>
+                          </b-row>
+                        </b-card>
+                      </div>
+              <!-- {{activity.content}} -->
+                      <!-- <el-image
+              v-if="activity.img"
+              style="max-width:400px;transform:scale(.5);display:block; "
+              :src="activity.img"
+              fit="cover"></el-image> -->
             </el-timeline-item>
           </el-timeline>
           <hr style="clear:both">
@@ -94,12 +115,16 @@
   
   
 }
+.itemimg{
+  
+}
 .home{
   min-height: 100vh;
 }
 .timeline{
   text-align: left;
   display: block;
+  transform: scale(.9);
 }
 .timelinecontent{
   height: 400px;
@@ -137,6 +162,7 @@
  
 }
  .msg ul{
+   margin-top: 10px;
   display: flex;
   padding:0 !important;
   list-style: none;
@@ -255,7 +281,9 @@ export default {
             method:'get',
             url:'/api/v1/file/token'
         }).then(response=>{
+         
             this.token=response.data.token;
+             sessionStorage.setItem('token',this.token)
             console.log("七牛云token",response)
         });
         this.$axios({
@@ -263,7 +291,7 @@ export default {
           url:'/api/peason?username='+sessionStorage.getItem('username'),
 
         }).then(response=>{
-          this.list=response.data.data
+          this.list=response.data.data.reverse()
           console.log(response)
         })
     },

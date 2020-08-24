@@ -32,11 +32,31 @@
   
              <b-card class="card"  img-alt="Card image" img-top>
                  
-                <b-card-text class="text">
+                <b-card-text  v-if="!item.img" class="text">
                     
                    {{item.content}}
                  </b-card-text>
-                 
+                             <div class="imgitem"  v-if="item.img">
+                                <b-card no-body class="overflow-hidden" style="background-size:cover; margin-top:30px;max-height:300px">
+                                    <b-row no-gutters>
+                                    <b-col md="6">
+                                        <b-card-img :src="item.img" class="rounded-0"></b-card-img>
+                                    </b-col>
+                                    <b-col md="6">
+                                        <b-card-body >
+                                        <b-card-text>
+                                            {{item.content}}
+                                        </b-card-text>
+                                        </b-card-body>
+                                    </b-col>
+                                    </b-row>
+                                </b-card>
+                                </div>
+                 <!-- <el-image
+                 style="width: 200px; height: 100px"
+                       v-if="item.img"
+                        :src="item.img"
+                        fit="fit"></el-image> -->
                      <div class="action">
                             <i @click="star(item.id)" class="el-icon-star-on">{{item.thump_up }}</i>
                             <i class="el-icon-share">{{item.visits}}</i>
@@ -88,6 +108,9 @@
 }
 .pinlun div{
     line-height: 42px;
+}
+.imgitem{
+    margin-top: 30px;
 }
 .pinlun img{
     margin-top: 0;
@@ -161,9 +184,9 @@ i:hover{
     .card{
       margin-top: -20px;
        margin-left: 65px;
-        width: 90%;
+        width: 87%;
          padding: 5px !important;
-        box-shadow: .5;
+        border:none;
     }
    
     .card-body{
@@ -183,11 +206,13 @@ export default {
     props:['imglist','items'],
     data(){
         return{
+            picshow:true,
            activeNames:['1']
         }
     },
     mounted(){
         console.log(this.imglist)
+
     },methods:{
         star(e){
             this.$axios({

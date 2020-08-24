@@ -5,25 +5,41 @@
              
         <div class="home">
             <main class="col">
-               <div>
+               <div class="fa">
                    <el-card shadow="hover" class="box-card">
                        <textarea class="textarea" v-model="value" ></textarea>
                       <div class="row">
 
                             
                         <el-row >
-                       
-                        <el-button type="primary" icon="el-icon-picture" circle></el-button>
-                        <el-button type="success" icon="el-icon-share" circle></el-button>
-                        <el-button type="info" icon="el-icon-message" circle></el-button>
-                        <el-button type="warning" icon="el-icon-star-off" circle></el-button>
-                        
+                            <el-upload
+                               
+                                action="http://upload-z2.qiniup.com"
+                               
+                                :on-success="handleSuccess"
+                                :data="{token: token}"
+                                >
+
+                                 <el-tooltip class="item" effect="dark" content="添加图片" placement="right">
+                               <el-button type="primary" @click="addpic" icon="el-icon-picture" circle></el-button>
+                               </el-tooltip>
+
+
+                               <el-button type="success" disabled icon="el-icon-share" circle></el-button>
+                                <el-button type="info" disabled icon="el-icon-message" circle></el-button>
+                                <el-button type="warning" disabled icon="el-icon-star-off" circle></el-button>
+                             </el-upload>
                         </el-row>
                         <el-button @click="fabu" type="danger">发布</el-button>
                       </div>
+                        <el-image
+                            v-show="show"
+                            style="transform:scale(.7);width: 20%; height: 20%"
+                            :src="this.pic"
+                            fit="fit"></el-image>
                     </el-card>
                </div>
-              <hr>
+             
                  <iNew :items= this.$store.state.items :imglist=imglist></iNew>
             </main>
             <NXside class="col"></NXside>
@@ -66,6 +82,9 @@ textarea{
 article{
     clear: both;
 }
+.fa{
+    margin-top: 20px;
+}
 .home{
    padding-left: 330px;
    padding-right: 260px;
@@ -101,14 +120,16 @@ export default {
     data(){
         
         return{
+            pic:"",
             value:"",
-            show:true,
+            show:false,
             username:sessionStorage.getItem("username"),
             avater:sessionStorage.getItem("avater"),
             imglist:['https://picsum.photos/600/300/?image=26','https://picsum.photos/600/300/?image=27','https://picsum.photos/600/300/?image=28','https://picsum.photos/600/300/?image=29'],
             page:1,
             limit:20,
-            items:[]
+            items:[],
+            token:""
            
         }
     },
@@ -125,6 +146,17 @@ export default {
            this.ngetalk()
            this.getuserinfo()
        }
+         this.$axios({
+            method:'get',
+            url:'/api/v1/file/token'
+        }).then(response=>{
+         
+            this.token=response.data.token;
+             sessionStorage.setItem('token',this.token)
+            
+           
+        });
+     
     },
     methods:{
            fabu() {
@@ -150,19 +182,21 @@ export default {
                 strDate = "0" + strDate;
               }
 
-      // 最后拼接字符串，得到一个格式为(yyyy-MM-dd)的日期
-          var nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;
-                    this.$axios({
-                          method:'get',
-                          url:'/api/v1/spit2?username='+sessionStorage.getItem('username')+'&avater='+sessionStorage.getItem('avater')+'&content='+this.value+'&time='+nowDate,
-                      }).then(()=>{
-                        this.$message({
-          message: '恭喜你，这是一条成功消息',
-          type: 'success'
-        });
-                      this.$store.dispatch('getalk')
-                        
-                      })
+                     // 最后拼接字符串，得到一个格式为(yyyy-MM-dd)的日期
+                      var nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;
+                                                this.$axios({
+                                            method:'get',
+                                            url:'/api/v1/spit2?username='+sessionStorage.getItem('username')+'&avater='+sessionStorage.getItem('avater')+'&content='+this.value+'&time='+nowDate+'&img='+this.pic,
+                                        }).then(()=>{
+                                            this.$message({
+                            message: '恭喜你，这是一条成功消息',
+                            type: 'success'
+                            });
+                             this.show=false;
+                             this.value=""
+                                        this.$store.dispatch('getalk')
+                                            
+                                        })
   },
        async ngetalk(){
           await  this.$store.dispatch('getalk')
@@ -173,7 +207,18 @@ export default {
         getuserinfo(){
               this.$store.dispatch('getuserinfo')
           
-        }
+        },
+        addpic(){
+        console.log("???")
+        this.show=!this.show;
+        console.log(this.show)
+    },
+    handleSuccess(res){
+        this.pic = 'http://dongdove.cn/'+res.hash
+        console.log("上传地址为",this.pic)
+       
     }
+    },
+  
 }
 </script>

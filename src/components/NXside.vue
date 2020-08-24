@@ -23,6 +23,23 @@
 
    
   </b-card>
+  <div>
+  <b-card
+    title="推荐关注"
+    img-src="https://picsum.photos/600/300/?image=25"
+    img-alt="Image"
+    img-top
+    tag="article"
+    style="max-width: 20rem;"
+    class="mb-3"
+  >
+    <!-- <b-card-text>
+     推荐关注
+    </b-card-text> -->
+
+    
+  </b-card>
+</div>
 </div>
 </template>
 <style  scoped>
@@ -44,6 +61,9 @@
  border-radius: 5px !important;
 
     
+ }
+ .mb-3{
+   width: 300px;
  }
  .like{
    width: 100%;
