@@ -200,7 +200,7 @@ export default {
   },
        async ngetalk(){
           await  this.$store.dispatch('getalk')
-         // this.items=this.$store.state.items
+          this.items=this.$store.state.items
           console.log("wait!!!",this.items)
         },
   

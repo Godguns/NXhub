@@ -6,12 +6,18 @@ import nxhome from '../views/NXhome.vue'
 import Peason from '../views/Peason.vue'
 import blank from '../views/blank.vue'
 import pixiv from '../views/Pixiv.vue'
+import people from '../views/people.vue'
 Vue.use(VueRouter)
 
   const routes = [
     {
       path:'/pixiv',
       component:pixiv
+    },
+    {
+      path:'/people/:username',
+      component:people,
+      props: true
     },
   {
     path: '/',

@@ -15,7 +15,7 @@
       <h5>{{this.name}}</h5>
       
      <ul class="like">
-       <li>10<br>关注</li>
+       <li>{{gz}}<br>关注</li>
        <li>05<br>收藏</li>
        <li>--<br>XX</li>
      </ul>
@@ -131,6 +131,7 @@
 export default {
   data(){
     return {
+      gz: sessionStorage.getItem('gz'),
       name:sessionStorage.getItem('username')
     }
   },
