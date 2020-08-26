@@ -115,11 +115,7 @@ export default {
         this.$axios({
     method: 'get',
     url: '/api/v1/auth/login?username='+that.username+"&password="+that.pass,
-    // data: {
-    //     username: this.username,
-    //     password: this.pass,
-       
-    // }
+    
 })
 .then(function (response) {
   console.log(response);
@@ -128,12 +124,16 @@ export default {
      that.$store.state.username=response.data.data.username;
      that.$store.state.nickname=response.data.data.nickname;
       that.$store.state.password=response.data.data.password;
-
+      that.$store.state.history=response.data.data.history;
+      that.$store.state.collect=response.data.data.collect
      that.$store.state.img=response.data.data.avater;
      sessionStorage.setItem('username',that.$store.state.username)
      sessionStorage.setItem('nickname', that.$store.state.nickname)
       sessionStorage.setItem('avater', that.$store.state.img)
        sessionStorage.setItem('password', that.$store.state.password)
+        sessionStorage.setItem('history', that.$store.state.history)
+         sessionStorage.setItem('collect', that.$store.state.collect)
+
  //console.log(response.data);
    setTimeout(()=>{
        that.show=false

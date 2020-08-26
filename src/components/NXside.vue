@@ -23,23 +23,17 @@
 
    
   </b-card>
-  <div>
-  <b-card
-    title="推荐关注"
-    img-src="https://picsum.photos/600/300/?image=25"
-    img-alt="Image"
-    img-top
-    tag="article"
-    style="max-width: 20rem;"
-    class="mb-3"
-  >
-    <!-- <b-card-text>
-     推荐关注
-    </b-card-text> -->
+     <el-card class="box-card">
+  <div slot="header" class="clearfix">
+    <span>推荐关注</span>
+    <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
+  </div>
+  <div v-for="o in 4" :key="o" class=" item">
+    <el-avatar> user </el-avatar>
+    <div class="text">{{'推荐用户 ' + o }}</div>
+  </div>
+</el-card>
 
-    
-  </b-card>
-</div>
 </div>
 </template>
 <style  scoped>
@@ -65,6 +59,32 @@
  .mb-3{
    width: 300px;
  }
+   .text {
+   
+    line-height: 40px;
+    margin: 10px;
+  }
+
+  .item {
+    margin-left: 30px;
+     font-size: 14px;
+     line-height: 40px;
+      display: flex;
+      justify-content: flex-start;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+  .clearfix:after {
+    clear: both
+  }
+
+  .box-card {
+    width: 300px;
+  }
  .like{
    width: 100%;
   
@@ -135,8 +155,23 @@ export default {
       name:sessionStorage.getItem('username')
     }
   },
+  beforeMount(){
+    this.getuserfork()
+  },
     methods:{
-       
+                getuserfork(){
+          this.$axios({
+            method:'get',
+            url:'/getuserforks',
+            params:{
+              username:sessionStorage.getItem('username')
+            }
+          }).then((response)=>{
+           //this.gz=response.data.forks.length
+          sessionStorage.setItem('gz',response.data.forks.length)
+          sessionStorage.setItem('fans',response.data.data.length)
+          })
+        },
    open() {
         this.$prompt('New', '提示', {
           confirmButtonText: '确定',

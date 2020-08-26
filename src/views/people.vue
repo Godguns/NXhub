@@ -86,7 +86,7 @@
        
             
         </div>
-           <el-divider content-position="left">TA的关注</el-divider>
+           <el-divider content-position="left">TA的粉丝</el-divider>
           <div class="gzitem">
       <el-image
       v-for="(i,index) in forkimg " :key=index
@@ -268,7 +268,7 @@ export default {
     
     data(){
        return{
-
+         User_gz:[],
            msg:"关注",
            fork:false,
            forklist:[],
@@ -289,12 +289,13 @@ export default {
             avater:""
        } 
     },
-    beforeMount(){
+    mounted(){
       this.getpeopleinfo()
       this.getuserfork()
     },
   
-    beforeCreate(){
+    created(){
+
       // this.$store.dispatch('getuserinfo')
     },
     methods:{
@@ -306,11 +307,12 @@ export default {
                   }).then(response=>{
                   this.list=response.data.data.reverse()
                   this.avater=response.data.info.avater;
-                  this.forklist=response.data.info.fork;
+                  this.forklist=response.data.info.fans;
+                  this.User_gz=response.data.info.fork;
                   
                   sessionStorage.setItem('gz',this.forklist.length)
                   console.log(response.data.info.fork)
-                  response.data.info.fork.forEach((item)=>{
+                  response.data.info.fans.forEach((item)=>{
                       if(item!==sessionStorage.getItem('username')){
                             this.fork=false
                           console.log("没关注")
@@ -342,16 +344,18 @@ export default {
           })
         },
       addfork(){
-       
+       this.User_gz.push(this.$route.params.username)
+
        this.forklist.push(sessionStorage.getItem('username'))
         console.log("这里是添加关注方法哟",this.forklist)
         this.$axios({
             method:'get',
-            url:'/addfork?username='+this.$route.params.username+"&fork="+this.forklist,
+            url:'/addfork?username='+this.$route.params.username+"&fork="+this.forklist+"&user="+sessionStorage.getItem('username')+"&usergz="+this.User_gz,
       
         }).then((response)=>{
             console.log(response)
             this.getpeopleinfo()
+            this.getuserfork()
 
         })
       },

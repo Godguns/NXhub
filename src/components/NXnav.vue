@@ -28,7 +28,7 @@
             </template>
             
           
-          <b-dropdown-item href="#">发表动态</b-dropdown-item>
+          <b-dropdown-item href="#/userupdate">上传图片</b-dropdown-item>
           <b-dropdown-item href="#">FA</b-dropdown-item>
         </b-nav-item-dropdown>
 

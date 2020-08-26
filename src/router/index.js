@@ -7,9 +7,19 @@ import Peason from '../views/Peason.vue'
 import blank from '../views/blank.vue'
 import pixiv from '../views/Pixiv.vue'
 import people from '../views/people.vue'
+import picinfo from '../views/picinfo.vue'
+import userupdate from '../views/userupdate'
 Vue.use(VueRouter)
 
   const routes = [
+    {
+      path:'/userupdate',
+      component:userupdate
+    },
+    {
+      path:'/picinfo:id',
+      component:picinfo
+    },
     {
       path:'/pixiv',
       component:pixiv

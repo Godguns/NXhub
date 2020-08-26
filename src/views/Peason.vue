@@ -92,7 +92,7 @@
        
             
         </div>
-         <el-divider content-position="left">TA的关注</el-divider>
+         <el-divider content-position="left">我的关注</el-divider>
              <div class="gzitem">
       <el-image
       v-for="(i,index) in forkimg " :key=index
@@ -316,6 +316,9 @@ export default {
     },
     created(){
        this.$store.dispatch('getuserinfo')
+       //this.getuserfork()
+    },
+    beforeMount(){
        this.getuserfork()
     },
     methods:{
@@ -328,7 +331,7 @@ export default {
             }
           }).then((response)=>{
            
-            for (var n of response.data.data) {
+            for (var n of response.data.forks) {
               console.log(n.avater)
               this.forkimg.push(n.avater)
             }

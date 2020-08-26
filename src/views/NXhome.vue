@@ -15,7 +15,7 @@
                             <el-upload
                                
                                 action="http://upload-z2.qiniup.com"
-                               
+                                :on-remove="remove"
                                 :on-success="handleSuccess"
                                 :data="{token: token}"
                                 >
@@ -36,7 +36,11 @@
                             v-show="show"
                             style="transform:scale(.7);width: 20%; height: 20%"
                             :src="this.pic"
-                            fit="fit"></el-image>
+                            fit="fit">
+                             <div slot="error" class="image-slot">
+       
+                                </div>
+                            </el-image>
                     </el-card>
                </div>
              
@@ -212,6 +216,13 @@ export default {
         console.log("???")
         this.show=!this.show;
         console.log(this.show)
+         this.$message({
+          message: '图片已上传',
+          type: 'success'
+        });
+    },
+    remove(){
+        this.show=false
     },
     handleSuccess(res){
         this.pic = 'http://dongdove.cn/'+res.hash

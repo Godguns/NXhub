@@ -42,6 +42,11 @@
                                     
                                     <b-col class="md6" md="6">
                                         <b-card-img :src="item.img" id="rounded-0"></b-card-img>
+                                         <!-- <el-image
+                                                 :preview-src-list="srcList"
+                                                id="rounded-0"
+                                                :src="item.img"
+                                                fit="scale-down"></el-image> -->
                                     </b-col>
                                         <b-col md="6">
                                         <b-card-body >
@@ -224,6 +229,7 @@ export default {
     props:['imglist','items'],
     data(){
         return{
+            srcList:[],
             picshow:true,
            activeNames:['1']
         }
