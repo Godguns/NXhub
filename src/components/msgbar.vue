@@ -1,13 +1,13 @@
 <template>
-    <div>
-        <el-card shadow="never" class="box-card">
+    <div class="home">
+        <el-card shadow="hover" class="box-card">
                 <div slot="header" class="clearfix">
                       <el-image
                         style="border-radius:50%; border:1px solid #ccc; width: 52px; height: 52px"
                         :src="avater"
                         fit="cover"></el-image>
                     <span >{{username}}</span>
-                   <el-button type="danger" class="addfork"  circle><p>+</p></el-button>
+                   <!-- <el-button type="danger" class="addfork"  circle><p>+</p></el-button> -->
                 </div>
                 <ul class="list">
                     <li>粉丝 {{fans}}</li>
@@ -18,9 +18,9 @@
          <el-divider content-position="left">他的相关推荐</el-divider>
         <div class="others1">
 
-            <el-image v-for="(item,index) in 8" :key="index"
+            <el-image v-for="(item,index) in history" :key="index"
                         style="  width: 84px; height: 84px"
-                        src="http://dongdove.cn/FvEv2oxvtAjxKpSeIFMrapRpAuFg"
+                        :src="item"
                         fit="cover"></el-image>
            
         </div>
@@ -31,8 +31,8 @@
 .header{
     position: relative;
 }
-.el-divider__text{
-    /* background: rgb(243, 246, 249); */
+.home{
+    margin-top: 10px;
 }
 .others1{
     width: 256px;
@@ -81,14 +81,32 @@
 </style>
 <script>
 export default {
+    props:['name'],
     data(){
         return {
-            fans:sessionStorage.getItem('fans'),
-            gz:sessionStorage.getItem('gz'),
+            history:JSON.parse(sessionStorage.getItem('history')),
+            fans:sessionStorage.getItem('fans')===[]?0:sessionStorage.getItem('fans'),
+      gz: sessionStorage.getItem('gz')===[]?0:sessionStorage.getItem('gz'),
             username:sessionStorage.getItem('username'),
             avater:sessionStorage.getItem('avater'),
             imglist:[1,2,3,4,5,6]
         }
+    },
+    mounted(){
+       
+       this.$axios({
+           method:'get',
+           url:'/usermsg',
+           params:{
+               img:sessionStorage.getItem('imgsrc')
+           }
+       }).then(response=>{
+          this.history=response.data.data.history;
+          this.avater=response.data.data.avater;
+          this.username=response.data.data.username;
+            this.gz=response.data.data.fork.length;
+            this.fans=response.data.data.fans.length
+       })
     }
 }
 </script>

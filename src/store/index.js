@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 axios.defaults.withCredentials = true;
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL="https://nxhub.seefs.cn/";
+axios.defaults.baseURL="http://dongdove.cn";
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; 
 Vue.use(Vuex)
 
@@ -103,16 +103,22 @@ var nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;
 })
 .then( (response)=> {
   console.log(response);
-      
+
+ 
+      console.log("历史",JSON.stringify(response.data.history))
        this.state.username=response.data.username;
       this.state.nickname=response.data.nickname;
        this.state.password=response.data.password;
       this.state.img=response.data.avater;
-      this.state.fork=response.data.fork
+      this.state.fork=response.data.fork;
+      this.state.history=response.data.history;
+      this.state.collect=response.data.collect
     sessionStorage.setItem('username',this.state.username)
     sessionStorage.setItem('nickname', this.state.nickname)
      sessionStorage.setItem('avater', this.state.img)
      sessionStorage.setItem('password', this.state.password)
+     sessionStorage.setItem('history', JSON.stringify(this.state.history) )
+     sessionStorage.setItem('collect',JSON.stringify( this.state.collect))
  
 })
 .catch(function (error) {

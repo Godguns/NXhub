@@ -17,8 +17,9 @@ Vue.use(VueRouter)
       component:userupdate
     },
     {
-      path:'/picinfo:id',
-      component:picinfo
+      path:'/picinfo/:id',
+      component:picinfo,
+      props: true
     },
     {
       path:'/pixiv',

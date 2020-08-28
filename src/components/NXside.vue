@@ -8,7 +8,7 @@
     style="max-width: 20rem;"
     class="mb-2"
   >     
-      <div class="icon">
+      <div @click="gopeason" class="icon">
           <img :src="this.$store.state.img" >
       </div>
       
@@ -16,7 +16,7 @@
       
      <ul class="like">
        <li>{{gz}}<br>关注</li>
-       <li>05<br>收藏</li>
+       <li>{{fans}}<br>收藏</li>
        <li>--<br>XX</li>
      </ul>
  
@@ -151,7 +151,8 @@
 export default {
   data(){
     return {
-      gz: sessionStorage.getItem('gz'),
+      fans:sessionStorage.getItem('fans')==[]?0:sessionStorage.getItem('fans'),
+      gz: sessionStorage.getItem('gz')==[]?0:sessionStorage.getItem('gz'),
       name:sessionStorage.getItem('username')
     }
   },
@@ -159,6 +160,9 @@ export default {
     this.getuserfork()
   },
     methods:{
+      gopeason(){
+        this.$router.push({path:'/peason'})
+      },
                 getuserfork(){
           this.$axios({
             method:'get',

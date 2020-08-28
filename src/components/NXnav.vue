@@ -7,7 +7,7 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item href="#/pixiv">Pixiv热榜</b-nav-item>
+        <b-nav-item href="#/pixiv">Pixiv社区</b-nav-item>
         <b-nav-item href="#" disabled>Disabled</b-nav-item>
 
         <b-nav-form  >
@@ -29,7 +29,7 @@
             
           
           <b-dropdown-item href="#/userupdate">上传图片</b-dropdown-item>
-          <b-dropdown-item href="#">FA</b-dropdown-item>
+          <b-dropdown-item href="#">DarkMod</b-dropdown-item>
         </b-nav-item-dropdown>
 
         <b-nav-item-dropdown right>

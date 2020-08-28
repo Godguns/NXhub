@@ -291,7 +291,18 @@ export default {
     },
     mounted(){
       this.getpeopleinfo()
-      this.getuserfork()
+      this.getuserfork();
+            this.$axios({
+                method:'get',
+                url:'/getpeopleinfo?username='+sessionStorage.getItem('username'),
+
+                  }).then(response=>{
+                 
+                  this.User_gz=response.data.info.fork;
+                  
+                
+             
+        })
     },
   
     created(){
@@ -308,7 +319,7 @@ export default {
                   this.list=response.data.data.reverse()
                   this.avater=response.data.info.avater;
                   this.forklist=response.data.info.fans;
-                  this.User_gz=response.data.info.fork;
+                 // this.User_gz=response.data.info.fork;
                   
                   sessionStorage.setItem('gz',this.forklist.length)
                   console.log(response.data.info.fork)
@@ -337,7 +348,7 @@ export default {
           }).then((response)=>{
            
             for (var n of response.data.data) {
-              console.log(n.avater)
+              console.log(n)
               this.forkimg.push(n.avater)
             }
 
@@ -345,7 +356,7 @@ export default {
         },
       addfork(){
        this.User_gz.push(this.$route.params.username)
-
+     //this. User_gz.push(this.$route.params.username)
        this.forklist.push(sessionStorage.getItem('username'))
         console.log("这里是添加关注方法哟",this.forklist)
         this.$axios({

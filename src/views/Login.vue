@@ -131,8 +131,8 @@ export default {
      sessionStorage.setItem('nickname', that.$store.state.nickname)
       sessionStorage.setItem('avater', that.$store.state.img)
        sessionStorage.setItem('password', that.$store.state.password)
-        sessionStorage.setItem('history', that.$store.state.history)
-         sessionStorage.setItem('collect', that.$store.state.collect)
+       // sessionStorage.setItem('history', that.$store.state.history)
+       //  sessionStorage.setItem('collect', that.$store.state.collect)
 
  //console.log(response.data);
    setTimeout(()=>{

@@ -6,41 +6,37 @@
         <div class="home">
             <main class="col">
                <div class="fa">
-                   <el-card shadow="hover" class="box-card">
-                       <textarea class="textarea" v-model="value" ></textarea>
+                   <el-card shadow="never" class="box-card">
+                     <div class="cardbody">
+                           <textarea @focus="inputmsg"  placeholder="分享你的新鲜事把！" class="textarea" v-model="value" ></textarea>
+                         <el-button class="fabubt" @click="fabu" type="danger">发布</el-button>
+                     </div>
                       <div class="row">
 
                             
                         <el-row >
-                            <el-upload
-                               
+                     
+                             <el-upload
+                            
+                              v-show="show"
+                             ref="upload"
+                              @click="addpic"
+                              :limit="1"
+                               :multiple="false"
                                 action="http://upload-z2.qiniup.com"
                                 :on-remove="remove"
                                 :on-success="handleSuccess"
                                 :data="{token: token}"
-                                >
-
-                                 <el-tooltip class="item" effect="dark" content="添加图片" placement="right">
-                               <el-button type="primary" @click="addpic" icon="el-icon-picture" circle></el-button>
-                               </el-tooltip>
-
-
-                               <el-button type="success" disabled icon="el-icon-share" circle></el-button>
-                                <el-button type="info" disabled icon="el-icon-message" circle></el-button>
-                                <el-button type="warning" disabled icon="el-icon-star-off" circle></el-button>
-                             </el-upload>
+  list-type="picture-card"
+ >
+   <el-tooltip class="item" effect="dark" content="添加图片" placement="right">
+          <i slot="default" class="el-icon-plus"></i>
+    </el-tooltip>                 
+</el-upload>
                         </el-row>
-                        <el-button @click="fabu" type="danger">发布</el-button>
+                      
                       </div>
-                        <el-image
-                            v-show="show"
-                            style="transform:scale(.7);width: 20%; height: 20%"
-                            :src="this.pic"
-                            fit="fit">
-                             <div slot="error" class="image-slot">
-       
-                                </div>
-                            </el-image>
+                      
                     </el-card>
                </div>
              
@@ -57,6 +53,28 @@
     </div>
 </template>
 <style  scoped>
+.fabubt{
+    width: 100px;
+     border-top-right-radius: 25px;
+      border-bottom-right-radius: 25px;
+      margin-left: -10px;
+}
+.cardbody{
+    display: flex !important;
+    align-content: center !important;
+    justify-content: center;
+}
+.box-card{
+    display: flex;
+    justify-content: center;
+   background: transparent;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border: none;
+   
+}
+
 @media screen and (max-width: 800px) {
     #right {
       
@@ -65,8 +83,19 @@
     }
 }
 textarea{
-        outline: none;
-        border:solid 1px #ccc
+    
+    background: white !important;
+    padding-left: 20px;
+    padding-top: 10px;
+    border: none;
+     background: transparent;
+    border-right: none;
+    padding-right: 10px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    outline: none;
+       width: 820px;
+   
 }
 
 .row{
@@ -80,9 +109,7 @@ textarea{
    
     float: left;
 }
-.textarea{
-    width: 100%;
-}
+
 article{
     clear: both;
 }
@@ -163,7 +190,14 @@ export default {
      
     },
     methods:{
+       hidden(){
+           this.show=false
+       },
+        inputmsg(){
+            this.show=true;
+        },
            fabu() {
+              
                // 获取当前日期
               var date = new Date();
 
@@ -196,6 +230,7 @@ export default {
                             message: '恭喜你，这是一条成功消息',
                             type: 'success'
                             });
+                              this.$refs.upload.clearFiles()
                              this.show=false;
                              this.value=""
                                         this.$store.dispatch('getalk')
@@ -225,6 +260,7 @@ export default {
         this.show=false
     },
     handleSuccess(res){
+      
         this.pic = 'http://dongdove.cn/'+res.hash
         console.log("上传地址为",this.pic)
        

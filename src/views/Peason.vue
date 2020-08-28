@@ -1,6 +1,7 @@
 <template>
     <div class="home">
         <NXnav class="nxnav"></NXnav>
+         <b-spinner v-show="show" variant="success" style="width: 3rem; height: 3rem; margin-top:20px;" label="Large Spinner" type="grow"></b-spinner>
           <div>
 <div class="nav">
     <el-tabs class="navc" v-model="activeName" >
@@ -44,10 +45,28 @@
           <hr style="clear:both">
     </el-tab-pane>
     <el-tab-pane class="navcc1" label="我的收藏" name="second">
-     <div>
-  
- 
-</div>
+        <el-divider content-position="left">个人收藏</el-divider>
+             <div class="pbl">
+            <b-card-group class="group"  columns>
+                
+                <b-card
+                v-for="(item,index) in collect" :key="index"
+                img-width="300px"
+                class="card"
+                @click="goinfo(index)"
+                :img-src="item"
+                img-alt="Image"
+                 overlay
+                >
+             
+                </b-card>
+                
+
+               
+            
+                
+            </b-card-group>
+            </div>
           
            
             
@@ -60,6 +79,7 @@
 <div class="content">
       <div class="peason">
       <el-upload
+      :on-progress="onprograss"
         class="avatar-uploader"
         action="http://upload-z2.qiniup.com"
         :show-file-list="false"
@@ -115,6 +135,10 @@
     </div>
 </template>
 <style  scoped>
+.pbl{
+  transform: scale(.7);
+  margin-top: -90px;
+}
 .gzitem :hover{
 transform: scale(1.2);
 transition: .8s;
@@ -278,6 +302,8 @@ export default {
     },
     data(){
        return{
+         collect:JSON.parse(sessionStorage.getItem('collect')),
+         show:false,
          forkimg:[],
          username:sessionStorage.getItem('username'),
          password:sessionStorage.getItem('password'),
@@ -296,6 +322,7 @@ export default {
        } 
     },
     mounted(){
+      console.log("这是个人收藏",this.collect)
         this.$axios({
             method:'get',
             url:'/api/v1/file/token'
@@ -322,6 +349,10 @@ export default {
        this.getuserfork()
     },
     methods:{
+      onprograss(){
+        this.show=true;
+        
+      },
             getuserfork(){
           this.$axios({
             method:'get',

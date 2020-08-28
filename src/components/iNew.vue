@@ -37,16 +37,12 @@
                    {{item.content}}
                  </b-card-text>
                              <div class="imgitem"  v-if="item.img">
-                                <b-card no-body class="overflow-hidden" style=" margin-left:20px; background-size:cover;  margin-top:6px;max-height:300px">
+                                <b-card no-body class="overflow-hidden" style=" margin-left:20px; background-size:cover;  margin-top:6px;max-height:400px">
                                     <b-row  class="itembody" no-gutters>
                                     
                                     <b-col class="md6" md="6">
                                         <b-card-img :src="item.img" id="rounded-0"></b-card-img>
-                                         <!-- <el-image
-                                                 :preview-src-list="srcList"
-                                                id="rounded-0"
-                                                :src="item.img"
-                                                fit="scale-down"></el-image> -->
+                                         
                                     </b-col>
                                         <b-col md="6">
                                         <b-card-body >
@@ -87,9 +83,7 @@
        display: none;
     }
 }
-.md6{
-  
-}
+
 .itemtext{
       position: relative;
   left: 70px;
@@ -101,6 +95,7 @@
 }
 #rounded-0{
   border-radius: 5px;
+
 }
 .text{
  margin-left: 30px;
@@ -182,6 +177,7 @@ i:hover{
         height: 32px;
         border-radius: 50%;
         margin-top: 10px;
+          border: solid .5px #ccc !important;
 
     }
     p{  
@@ -205,7 +201,7 @@ i:hover{
       margin-top: -20px;
        margin-left: 55px;
        box-sizing: border-box;
-       
+       transform: scale(.95);
        
          padding: 5px !important;
         border:none;
@@ -216,7 +212,7 @@ i:hover{
          padding: 0px !important;
     }
     .avaterinfo{
-        border: solid 1px grey !important;
+        border: solid 1px black !important;
         width: 60px;
         height: 60px;
         border-radius: 50%;
