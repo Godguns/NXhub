@@ -26,7 +26,7 @@
   </div>
    <div class="content" role="group">  
 
-    <label for="input-live2">昵称:</label>
+    <!-- <label for="input-live2">昵称:</label>
     <b-form-input
       id="input-live2"
       v-model="nick"
@@ -34,7 +34,7 @@
       aria-describedby="input-live-help input-live-feedback"
       placeholder="Enter your nickname"
       trim
-    ></b-form-input>
+    ></b-form-input> -->
 
     <!-- This will only be shown if the preceding input has an invalid state -->
     <b-form-invalid-feedback id="input-live-feedback">
@@ -67,7 +67,7 @@
   </div>
        <div class="content" role="group">  
 
-    <label for="input-live2">邮箱:</label>
+    <!-- <label for="input-live2">邮箱:</label>
     <b-form-input
       id="input-live2"
       v-model="mail"
@@ -75,7 +75,7 @@
       aria-describedby="input-live-help input-live-feedback"
       placeholder="Enter your nickname"
       trim
-    ></b-form-input>
+    ></b-form-input> -->
 
     <!-- This will only be shown if the preceding input has an invalid state -->
     <b-form-invalid-feedback id="input-live-feedback">

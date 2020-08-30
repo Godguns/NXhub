@@ -55,8 +55,8 @@
 <style  scoped>
 .fabubt{
     width: 100px;
-     border-top-right-radius: 25px;
-      border-bottom-right-radius: 25px;
+     border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
       margin-left: -10px;
 }
 .cardbody{
@@ -86,15 +86,17 @@ textarea{
     
     background: white !important;
     padding-left: 20px;
-    padding-top: 10px;
+    /* padding-top: 10px; */
+   height: 50px;
+   line-height: 50px;
     border: none;
      background: transparent;
     border-right: none;
     padding-right: 10px;
-    border-top-left-radius: 25px;
-    border-bottom-left-radius: 25px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
     outline: none;
-       width: 820px;
+       width: 45vw;
    
 }
 

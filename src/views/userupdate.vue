@@ -210,7 +210,8 @@ export default {
                     title:this.title,
                     author:sessionStorage.getItem('username'),
                     imgsrc:this.imageUrl,
-                    time:this.getNowFormatDate()
+                    time:this.getNowFormatDate(),
+                    avater:sessionStorage.getItem('avater')
                 }
             }).then(()=>{
                  this.$message({

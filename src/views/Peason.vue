@@ -45,7 +45,8 @@
           <hr style="clear:both">
     </el-tab-pane>
     <el-tab-pane class="navcc1" label="我的收藏" name="second">
-        <el-divider content-position="left">个人收藏</el-divider>
+        <el-divider content-position="left">全部收藏</el-divider>
+
              <div class="pbl">
             <b-card-group class="group"  columns>
                 
@@ -136,6 +137,7 @@
 </template>
 <style  scoped>
 .pbl{
+  height: 70vh;
   transform: scale(.7);
   margin-top: -90px;
 }
@@ -181,7 +183,7 @@ transition: .8s;
   margin-left: 10px;
 }
 .navcc1{
- 
+ overflow: scroll;
   margin-right: 10vw;
 }
 .avaterpl{
@@ -250,7 +252,7 @@ h3{
 
 }
 .home{
-    width: 100%;
+    width: 100vw;
     background-color: white;
 }
 .peason{

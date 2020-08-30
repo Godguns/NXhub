@@ -1,20 +1,57 @@
 <template>
     <div class="home">
-        <el-card shadow="hover" class="box-card">
-                <div slot="header" class="clearfix">
+        <div style="background:url('http://tva2.sinaimg.cn/large/006BFMdqly1gi17nb5nooj315o0th7wh.jpg')">
+                    <!-- <el-card shadow="hover"  class="box-card">
+                <div slot="header"   class="clearfix">
                       <el-image
                         style="border-radius:50%; border:1px solid #ccc; width: 52px; height: 52px"
                         :src="avater"
                         fit="cover"></el-image>
                     <span >{{username}}</span>
-                   <!-- <el-button type="danger" class="addfork"  circle><p>+</p></el-button> -->
+                 
                 </div>
                 <ul class="list">
                     <li>粉丝 {{fans}}</li>
                     <li>关注{{gz}} </li>
                     <li>收藏 --</li>
                 </ul>
-        </el-card>
+        </el-card> -->
+                   <b-card
+  class="card2"
+    overlay
+    img-src="http://tva2.sinaimg.cn/large/006BFMdqly1gi17nb5nooj315o0th7wh.jpg"
+    img-alt="Card Image"
+    text-variant="white"
+  >
+  <div class="title2">
+       <el-image
+                        style="border-radius:50%; border:1px solid #ccc; width: 52px; height: 52px"
+                        :src="avater"
+                        fit="cover"></el-image>
+                    <span >{{username}}</span>
+  </div>
+    <ul class="list">
+                    <li>粉丝 {{fans}}</li>
+                    <li>关注{{gz}} </li>
+                    <li>收藏 --</li>
+                </ul>
+      
+  </b-card>
+               <!-- <b-card
+  class="card2"
+    overlay
+    img-src="http://tva2.sinaimg.cn/large/006BFMdqly1gi0u1zrhr6j30jt0rsaqn.jpg"
+    img-alt="Card Image"
+    text-variant="white"
+    
+    
+  >
+    <b-card-text class="info2">
+        Animex动漫站<br>
+      Some quick example text to build on the card and make up the bulk of the card's content.
+    </b-card-text>
+  </b-card> -->
+        </div>
          <el-divider content-position="left">他的相关推荐</el-divider>
         <div class="others1">
 
@@ -24,10 +61,19 @@
                         fit="cover"></el-image>
            
         </div>
-       
+
+
     </div>
 </template>
 <style  scoped>
+.info2{
+    margin-top: 50px;
+    color: black;
+}
+.title2{
+    display: flex;
+    justify-content: center;
+}
 .header{
     position: relative;
 }
@@ -44,6 +90,7 @@
     justify-content: flex-start;
 }
 .list{
+    margin-top: 30px;
     padding-left: 0;
     display: flex;
     list-style: none;
@@ -52,7 +99,9 @@
 .list li{
     margin:0 10px;
 }
+
 .clearfix{
+  
     display: flex;
     flex-direction: row;
     
@@ -80,7 +129,11 @@
  }
 </style>
 <script>
+
 export default {
+    components:{
+       
+    },
     props:['name'],
     data(){
         return {

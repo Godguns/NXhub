@@ -2,7 +2,7 @@
     <div class="side">
   <b-card
    
-   img-src="banner.png"
+   img-src="http://tva2.sinaimg.cn/large/006BFMdqly1gi17nb5nooj315o0th7wh.jpg"
    img-height="100px"
     tag="article"
     style="max-width: 20rem;"
@@ -16,14 +16,14 @@
       
      <ul class="like">
        <li>{{gz}}<br>关注</li>
-       <li>{{fans}}<br>收藏</li>
+       <li>{{fans}}<br>粉丝</li>
        <li>--<br>XX</li>
      </ul>
  
 
    
   </b-card>
-     <el-card class="box-card">
+     <el-card shadow="hover" class="box-card">
   <div slot="header" class="clearfix">
     <span>推荐关注</span>
     <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>

@@ -19,7 +19,7 @@
         background-clip: border-box;
         background-size: cover;
        height: 100vh;
-        background-image: url('/tower.jpg') !important;
+        background-image: url('http://dongdove.cn/tower.jpg') !important;
     }
 </style>
 <script>

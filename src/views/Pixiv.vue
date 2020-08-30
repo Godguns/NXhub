@@ -12,26 +12,19 @@
   >
     <b-carousel-slide
     class="lbitem"
-      caption="First slide"
+      caption="Pixiv 社区"
       img-src="http://dongdove.cn/A63CC6AB483D1D3CA2232659740EFFE7.jpg"
     ></b-carousel-slide>
   
   </b-carousel>
 </div>
+<el-divider  content-position="left"><h3>官方合集</h3></el-divider>
+<div class="cdbody">
+<RCard style="width: 392px !important;" :list=item class="cd" v-for="(item,index) in list" :key="index"></RCard>
+</div>
 
- <b-card-group class="tags" >
-     <el-tag class="tag">#メルトリリス </el-tag>
-<el-tag class="tag" type="success">#Fate/GrandOrder</el-tag>
-<el-tag class="tag" type="info">#Fate/GO10000users入り</el-tag>
-<el-tag class="tag" type="warning">#Fat</el-tag>
-<el-tag class="tag" type="danger">#solo</el-tag>
-<el-tag class="tag" type="success">#童貞を殺す服 #オリジナル75</el-tag>
-<el-tag class="tag" type="info">#オリジナル </el-tag>
-<el-tag class="tag" type="warning">#オリジナルキャラクター</el-tag>
+  
 
-
-
- </b-card-group>
  <el-divider  content-position="left"><h3>Pixiv每日推荐</h3></el-divider>
      <div class="pbl">
             <b-card-group class="group"  columns>
@@ -45,7 +38,19 @@
                 img-alt="Image"
                  overlay
                 >
-             
+                 <template v-slot:footer>
+                             <div class="author">
+                                 <div style="display:flex">
+                    <el-image
+                    style=" border-radius:50%;border:1px solid #909399;width: 35px; height: 35px"
+                    :src="avater[index]"
+                    fit="cover"></el-image>
+                    <p style="margin-top:10px; color:#606266; margin-left:10px;">{{info[index]}}</p>
+                    </div>
+                    <span style="margin-top:10px; color:#909399;">{{time[index]}}</span>
+               </div>
+                </template>
+       
                 </b-card>
                 
 
@@ -54,10 +59,33 @@
                 
             </b-card-group>
             </div>
-            <el-divider  content-position="center">您已经摸到底部了，无法往下摸了哦^</el-divider>
+            <el-divider style="color:#ccc;"  content-position="center">您已经摸到底部了，无法往下摸了哦^</el-divider>
     </div>
 </template>
 <style  scoped>
+.cdbody{
+  
+   width:auto;
+    white-space:nowrap;
+   overflow-x: auto;
+}
+.cd{
+     border-radius: 15px !important;
+    margin-top: 10px;
+
+display: inline-block;
+
+}
+.card-footer{
+    background:transparent;
+    border: none;
+    position: relative;
+}
+.author{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
 .tag{
    min-width: 90px;
     margin:0 20px;
@@ -99,28 +127,33 @@
 
 .card-img{
      border-radius: 15px;
+     border-bottom-left-radius: 0px;
+   border-bottom-right-radius: 0px;
 }
-.card{
+.pbl .card{
    
+   position: relative;
     margin-top: 10px;
     width: 300px;
     border-radius: 15px;
+   /* border-bottom-left-radius: 0px;
+   border-bottom-right-radius: 0px; */
 }
-.card:hover{
+/* .card:hover{
     transition: .5s;
     transform: scale(1.02);
     
-}
+} */
    /* .pbl:hover div {
       
         cursor: pointer;
         filter: blur(15px);
     } */
-     .home div:hover {
+     /* .home div:hover {
        
         filter: none;
         z-index: 2;
-    }
+    } */
  .el-carousel__item h3 {
     color: #475669;
     font-size: 14px;
@@ -137,18 +170,26 @@
     background-color: #d3dce6;
   }
   .home{
+     
       /* background-image: url('http://dongdove.cn/download.jpg'); */
   }
 </style>
 <script>
 import NXnav from '@/components/NXnav'
+import RCard from '@/components/RCard'
 export default {
+   
     components:{
-        NXnav
+        NXnav,
+        RCard
 
     },
     data(){
         return {
+            list:[],
+            time:[],
+            info:[],
+            avater:[],
             imgs:[],
             imglist:['http://dongdove.cn/c60d5480664052f6064d8c084a15c2b8d0177234.jpg%402320w_664h.jpg','http://dongdove.cn/9531a9cdd4a3df606ec7961d32c4b56644424058.jpg%402320w_664h.jpg','http://dongdove.cn/11d1b1d61b099c2e27d071558d6bb62ed2ea0ffb.png%402320w_664h.png']
         }
@@ -160,9 +201,21 @@ export default {
              this.$router.push({
           path: `/picinfo/${e}`,
         })
+        },
+           getalbum(){
+            this.$axios({
+                method:'get',
+                url:'/get_album',
+
+            }).then(response=>{
+                this.list=response.data.data
+              
+
+            })
         }
     },
     beforeMount(){
+        this.getalbum()
         this.$axios({
             url:'/getpics',
             method:'get',
@@ -171,9 +224,12 @@ export default {
             //console.log(response.data.data)
             for(var i=0;i<response.data.data.length;i++){
                 this.imgs.push(response.data.data[i].imgsrc)
+                this.avater.push(response.data.data[i].avater)
+                this.info.push(response.data.data[i].author)
+                this.time.push(response.data.data[i].time)
                console.log(response.data.data[i].imgsrc)
             }
-            // console.log(this.imgs)
+             console.log(this.author,"作者")
            
         })
     }

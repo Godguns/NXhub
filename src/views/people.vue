@@ -260,7 +260,8 @@ import NXnav from "@/components/NXnav"
 export default {
     
     components:{
-        NXnav
+        NXnav,
+       
   
        
 

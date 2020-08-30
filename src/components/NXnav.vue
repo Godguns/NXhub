@@ -1,6 +1,6 @@
 <template>
     <div>
-  <b-navbar class="nxnav" toggleable="lg" type="dark" variant="info">
+  <b-navbar class="nxnav" toggleable="lg" type="light" variant="info">
     <b-navbar-brand href="#/nxhome">NXhub</b-navbar-brand>
 
     <!-- <b-navbar-toggle ></b-navbar-toggle> -->
@@ -8,7 +8,8 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item href="#/pixiv">Pixiv社区</b-nav-item>
-        <b-nav-item href="#" disabled>Disabled</b-nav-item>
+         <b-nav-item href="#" >插画专题</b-nav-item>
+        <b-nav-item href="#/album" >专辑</b-nav-item>
 
         <b-nav-form  >
           <b-form-input size="sm"  class="mr-sm-2" placeholder="Search"></b-form-input>
@@ -23,7 +24,7 @@
        
              <b-nav-item-dropdown   no-caret right>
             <template v-slot:button-content>
-                <b-icon  class="mb-2" style="color: #fff;" icon="plus"></b-icon>
+                <b-icon  class="mb-2" style="color: black;" icon="plus"></b-icon>
      
             </template>
             
@@ -65,11 +66,12 @@
     .nxnav{
         line-height: 1.5em;
         height: 53px !important;
-        background-color: rgb(27, 31, 35) !important;
+        /* rgb(27, 31, 35) */
+        background-color: white !important;
     }
     .mr-sm-2{
         margin-left: 50px;
-        background-color: rgb(48, 52, 56);
+        /* background-color: rgb(48, 52, 56); */
         outline: none;
         border:none;
         width: 245px !important;

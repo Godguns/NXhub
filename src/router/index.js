@@ -9,9 +9,14 @@ import pixiv from '../views/Pixiv.vue'
 import people from '../views/people.vue'
 import picinfo from '../views/picinfo.vue'
 import userupdate from '../views/userupdate'
+import album from '../views/Album'
 Vue.use(VueRouter)
 
   const routes = [
+    {
+      path:'/album',
+      component:album
+    },
     {
       path:'/userupdate',
       component:userupdate
