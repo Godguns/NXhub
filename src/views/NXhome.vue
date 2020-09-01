@@ -53,6 +53,11 @@
     </div>
 </template>
 <style  scoped>
+>>>  .el-upload--picture-card{
+    transform: scale(.7);
+    
+}
+
 .fabubt{
     width: 100px;
      border-top-right-radius: 20px;

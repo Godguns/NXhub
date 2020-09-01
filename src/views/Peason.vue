@@ -54,7 +54,7 @@
                 v-for="(item,index) in collect" :key="index"
                 img-width="300px"
                 class="card"
-                @click="goinfo(index)"
+                @click="goinfo(item)"
                 :img-src="item"
                 img-alt="Image"
                  overlay
@@ -120,6 +120,7 @@
       class="gzimg"
       style="  width: 45px; height: 45px;border-radius:50%"
       :src="i"
+      @click="gopeople(forks[index])"
       fit="cover"></el-image>
     
  
@@ -304,6 +305,7 @@ export default {
     },
     data(){
        return{
+         forks:[],
          collect:JSON.parse(sessionStorage.getItem('collect')),
          show:false,
          forkimg:[],
@@ -351,6 +353,31 @@ export default {
        this.getuserfork()
     },
     methods:{
+      goinfo(e){
+        
+        this.$axios({
+          method:'get',
+          url:'/toinfopic',
+          params:{
+            img:e
+          }
+        }).then(response=>{
+          console.log(response.data.data)
+          this.$router.push({path:`/picinfo/${response.data.data}`})
+        
+        })
+      },
+       gopeople(e){
+        console.log(e)
+        if(e==sessionStorage.getItem('username')){
+          this.$router.push({path:'/peason'})
+        }else{
+          this.$router.push({
+          path:`/people/${e}`
+        })
+        location.reload()
+        }
+      },
       onprograss(){
         this.show=true;
         
@@ -366,6 +393,7 @@ export default {
            
             for (var n of response.data.forks) {
               console.log(n.avater)
+              this.forks.push(n.username)
               this.forkimg.push(n.avater)
             }
 

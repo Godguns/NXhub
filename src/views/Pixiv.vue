@@ -18,7 +18,9 @@
   
   </b-carousel>
 </div>
-<el-divider  content-position="left"><h3>官方合集</h3></el-divider>
+
+
+<el-divider  content-position="left"><h3>推荐专辑</h3></el-divider>
 <div class="cdbody">
 <RCard style="width: 392px !important;" :list=item class="cd" v-for="(item,index) in list" :key="index"></RCard>
 </div>
@@ -42,6 +44,7 @@
                              <div class="author">
                                  <div style="display:flex">
                     <el-image
+                   
                     style=" border-radius:50%;border:1px solid #909399;width: 35px; height: 35px"
                     :src="avater[index]"
                     fit="cover"></el-image>
@@ -63,12 +66,17 @@
     </div>
 </template>
 <style  scoped>
+.cdbody::-webkit-scrollbar { width: 0 !important }
 .cdbody{
-  
+   
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    transform: scale(.8);
    width:auto;
     white-space:nowrap;
    overflow-x: auto;
 }
+
 .cd{
      border-radius: 15px !important;
     margin-top: 10px;
@@ -121,9 +129,10 @@ display: inline-block;
 .pbl{
     width: 1000px;
     margin:-30px auto;
-     transform: scale(.9);
+     transform: scale(.8);
    
 }
+
 
 .card-img{
      border-radius: 15px;
@@ -205,23 +214,24 @@ export default {
            getalbum(){
             this.$axios({
                 method:'get',
-                url:'/get_album',
+                url:'/getR_album',
 
             }).then(response=>{
                 this.list=response.data.data
-              
+              console.log(this.list)
 
             })
         }
     },
+  
     beforeMount(){
-        this.getalbum()
+     
         this.$axios({
             url:'/getpics',
             method:'get',
 
         }).then((response)=>{
-            //console.log(response.data.data)
+            console.log(response.data.data)
             for(var i=0;i<response.data.data.length;i++){
                 this.imgs.push(response.data.data[i].imgsrc)
                 this.avater.push(response.data.data[i].avater)
@@ -229,10 +239,12 @@ export default {
                 this.time.push(response.data.data[i].time)
                console.log(response.data.data[i].imgsrc)
             }
-             console.log(this.author,"作者")
+             console.log(this.info,"作者")
            
         })
+          this.getalbum()
     }
+    
         
     
 }

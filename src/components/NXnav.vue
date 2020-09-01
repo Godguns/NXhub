@@ -8,7 +8,7 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item href="#/pixiv">Pixiv社区</b-nav-item>
-         <b-nav-item href="#" >插画专题</b-nav-item>
+         <b-nav-item href="#" >实验室🧪</b-nav-item>
         <b-nav-item href="#/album" >专辑</b-nav-item>
 
         <b-nav-form  >
@@ -24,7 +24,7 @@
        
              <b-nav-item-dropdown   no-caret right>
             <template v-slot:button-content>
-                <b-icon  class="mb-2" style="color: black;" icon="plus"></b-icon>
+                <b-icon  class="mb-2" style="color: rgb(128,128,128);" icon="plus"></b-icon>
      
             </template>
             

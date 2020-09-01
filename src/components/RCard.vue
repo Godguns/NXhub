@@ -60,6 +60,7 @@
     bottom: 0px;
     background-color: rgba(0, 0, 0, 0.15);
     }
+   
     .info2{
         position: absolute;
         z-index: 99;
@@ -70,6 +71,9 @@
 </style>
 <script>
 export default {
-    props:['list']
+    props:['list'],
+    mounted(){
+        console.log(this.list)
+    }
 }
 </script>

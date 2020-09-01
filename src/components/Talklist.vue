@@ -6,6 +6,7 @@
         <el-card v-for="(item,index) in talks" :key="index" class="card" shadow="never">
             <div class="usertitle">
                 <el-image
+                   @click="gopeople(item.username)"
                 style="border:1px solid #ccc;border-radius:50%;width: 30px; height: 30px"
                 :src="item.avater"
                 fit="cover"></el-image>
@@ -102,6 +103,19 @@ export default {
         return {
             avater:sessionStorage.getItem('avater')
         }
+    },
+    methods:{
+           gopeople(e){
+        console.log(e)
+        if(e==sessionStorage.getItem('username')){
+          this.$router.push({path:'/peason'})
+        }else{
+          this.$router.push({
+          path:`/people/${e}`
+        })
+        location.reload()
+        }
+      },
     }
 }
 </script>

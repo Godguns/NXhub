@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <div style="background:url('http://tva2.sinaimg.cn/large/006BFMdqly1gi17nb5nooj315o0th7wh.jpg')">
+        <div style="background: transparent; border-radius:10px; background:url('http://tva2.sinaimg.cn/large/006BFMdqly1gi17nb5nooj315o0th7wh.jpg')">
                     <!-- <el-card shadow="hover"  class="box-card">
                 <div slot="header"   class="clearfix">
                       <el-image
@@ -18,13 +18,15 @@
         </el-card> -->
                    <b-card
   class="card2"
+  style=" background: transparent; border-radius:10px;"
     overlay
     img-src="http://tva2.sinaimg.cn/large/006BFMdqly1gi17nb5nooj315o0th7wh.jpg"
     img-alt="Card Image"
     text-variant="white"
   >
-  <div class="title2">
+  <div  class="title2">
        <el-image
+                        @click="gopeople(username)"
                         style="border-radius:50%; border:1px solid #ccc; width: 52px; height: 52px"
                         :src="avater"
                         fit="cover"></el-image>
@@ -58,6 +60,7 @@
             <el-image v-for="(item,index) in history" :key="index"
                         style="  width: 84px; height: 84px"
                         :src="item"
+                        @click="goinfo(item)"
                         fit="cover"></el-image>
            
         </div>
@@ -66,6 +69,11 @@
     </div>
 </template>
 <style  scoped>
+.card-img{
+    border-radius: 15px;
+    border:none;
+    background: transparent;
+}
 .info2{
     margin-top: 50px;
     color: black;
@@ -127,6 +135,9 @@
      transform: scale(.8);
 
  }
+ .card-body{
+    
+ }
 </style>
 <script>
 
@@ -160,6 +171,34 @@ export default {
             this.gz=response.data.data.fork.length;
             this.fans=response.data.data.fans.length
        })
+    },
+    methods:{
+           goinfo(e){
+        
+        this.$axios({
+          method:'get',
+          url:'/toinfopic',
+          params:{
+            img:e
+          }
+        }).then(response=>{
+          console.log(response.data.data)
+          this.$router.push({path:`/picinfo/${response.data.data}`})
+           location.reload()
+        
+        })
+      },
+         gopeople(e){
+        console.log(e)
+        if(e==sessionStorage.getItem('username')){
+          this.$router.push({path:'/peason'})
+        }else{
+          this.$router.push({
+          path:`/people/${e}`
+        })
+        location.reload()
+        }
+      },
     }
 }
 </script>

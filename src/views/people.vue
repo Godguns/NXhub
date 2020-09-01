@@ -93,6 +93,7 @@
       class="gzimg"
       style="  width: 45px; height: 45px;border-radius:50%"
       :src="i"
+       @click="gopeople(forks[index])"
       fit="cover"></el-image>
     
  
@@ -269,6 +270,7 @@ export default {
     
     data(){
        return{
+         forks:[],
          User_gz:[],
            msg:"关注",
            fork:false,
@@ -310,7 +312,19 @@ export default {
 
       // this.$store.dispatch('getuserinfo')
     },
+    
     methods:{
+       gopeople(e){
+        console.log(e)
+        if(e==sessionStorage.getItem('username')){
+          this.$router.push({path:'/peason'})
+        }else{
+          this.$router.push({
+          path:`/people/${e}`
+        })
+        location.reload()
+        }
+      },
         getpeopleinfo(){
                             this.$axios({
                 method:'get',
@@ -351,6 +365,7 @@ export default {
             for (var n of response.data.data) {
               console.log(n)
               this.forkimg.push(n.avater)
+              this.forks.push(n.username)
             }
 
           })

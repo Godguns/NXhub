@@ -28,12 +28,12 @@
     <span>推荐关注</span>
     <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
   </div>
-  <div v-for="o in 4" :key="o" class=" item">
-    <el-avatar> user </el-avatar>
-    <div class="text">{{'推荐用户 ' + o }}</div>
+  <div v-for="(o,index) in TJ" :key="index" class=" item">
+    <el-avatar style="border:1px solid #ccc;" :src="o.avater">  </el-avatar>
+    <div class="text"> {{o.username}}</div>
   </div>
 </el-card>
-
+<!-- <pcard></pcard> -->
 </div>
 </template>
 <style  scoped>
@@ -66,11 +66,12 @@
   }
 
   .item {
-    margin-left: 30px;
+   
      font-size: 14px;
      line-height: 40px;
       display: flex;
-      justify-content: flex-start;
+      align-items: center;
+      justify-content: center;
   }
 
   .clearfix:before,
@@ -148,16 +149,23 @@
 
 </style>
 <script>
+ //import pcard from "@/components/pcard"
+
 export default {
+  components:{
+    
+  },
   data(){
     return {
+      TJ:[],
       fans:sessionStorage.getItem('fans')==[]?0:sessionStorage.getItem('fans'),
       gz: sessionStorage.getItem('gz')==[]?0:sessionStorage.getItem('gz'),
       name:sessionStorage.getItem('username')
     }
   },
   beforeMount(){
-    this.getuserfork()
+    this.getuserfork();
+    this.getTJ()
   },
     methods:{
       gopeason(){
@@ -176,7 +184,7 @@ export default {
           sessionStorage.setItem('fans',response.data.data.length)
           })
         },
-   open() {
+      open() {
         this.$prompt('New', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -205,22 +213,31 @@ export default {
                 strDate = "0" + strDate;
               }
 
-      // 最后拼接字符串，得到一个格式为(yyyy-MM-dd)的日期
-          var nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;
-                    this.$axios({
-                          method:'get',
-                          url:'/api/v1/spit2?username='+sessionStorage.getItem('username')+'&avater='+sessionStorage.getItem('avater')+'&content='+value+'&time='+nowDate,
-                      }).then(()=>{
-                      this.$store.dispatch('getalk')
-                        
-                      })
-              }).catch(() => {
-                this.$message({
-                  type: 'info',
-                  message: '取消输入'
-                });       
-              });
-  }
+                  // 最后拼接字符串，得到一个格式为(yyyy-MM-dd)的日期
+                      var nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;
+                                this.$axios({
+                                      method:'get',
+                                      url:'/api/v1/spit2?username='+sessionStorage.getItem('username')+'&avater='+sessionStorage.getItem('avater')+'&content='+value+'&time='+nowDate,
+                                  }).then(()=>{
+                                  this.$store.dispatch('getalk')
+                                    
+                                  })
+                          }).catch(() => {
+                            this.$message({
+                              type: 'info',
+                              message: '取消输入'
+                            });       
+                          });
+      },
+      getTJ(){
+        this.$axios({
+          url:'/get_TJ',
+          method:'get',
+
+        }).then(response=>{
+          this.TJ=response.data.data
+        })
+      }
     }
 }
 </script>

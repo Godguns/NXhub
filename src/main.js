@@ -12,7 +12,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(ElementUI);
 axios.defaults.withCredentials = true;
-axios.defaults.withCredentials = true;
+
 axios.defaults.baseURL="http://localhost:4000/";
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; 
 

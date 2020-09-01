@@ -7,7 +7,7 @@
          
         <div class="content">
            
-             <card :list=item class="cd" v-for="(item,index) in list" :key="index"></card>
+             <card :list=item @click.native="go()" class="cd" v-for="(item,index) in list" :key="index"></card>
         </div>
         
        
@@ -39,10 +39,11 @@
     display: inline-block;
     border-radius: 15px;
     margin-top: 20px;
+    transform: scale(.8);
   
 }
 .content{
-    width: 100vw;
+  
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
@@ -61,6 +62,7 @@
 <script>
 import card from '@/components/RCard'
 import NXnav from '@/components/NXnav'
+import anime from 'animejs'
 
 export default {
     components:{
@@ -81,7 +83,22 @@ export default {
     beforeMount(){
         this.getalbum()
     },
+    mounted(){
+     
+    },
     methods:{
+        go(){
+            console.log("go")
+    anime({
+  targets: '.card',
+  translateX: anime.stagger(10, {grid: [3, 5], from: 'center', axis: 'x'}),
+  translateY: anime.stagger(10, {grid: [3, 5], from: 'center', axis: 'y'}),
+  rotateZ: anime.stagger([0, 90], {grid: [3, 5], from: 'center', axis: 'x'}),
+  delay: anime.stagger(200, {grid: [3, 5], from: 'center'}),
+  easing: 'easeInOutQuad'
+});
+   
+        },
         getalbum(){
             this.$axios({
                 method:'get',
@@ -94,6 +111,9 @@ export default {
                 this.master_img=response.data.data.master_img;
                 this.Album_time=response.data.data.Album_time;
                 this.Album_imgs=response.data.data.Album_imgs
+                // test
+
+
 
             })
         }
