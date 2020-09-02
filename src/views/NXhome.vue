@@ -7,7 +7,7 @@
             <main class="col">
                <div class="fa">
                    <el-card shadow="never" class="box-card">
-                     <div class="cardbody">
+                     <div style="transform: translateX(-27px); width:600px;" class="cardbody">
                            <textarea @focus="inputmsg"  placeholder="分享你的新鲜事把！" class="textarea" v-model="value" ></textarea>
                          <el-button class="fabubt" @click="fabu" type="danger">发布</el-button>
                      </div>
@@ -40,10 +40,10 @@
                     </el-card>
                </div>
              
-                 <iNew :items= this.$store.state.items :imglist=imglist></iNew>
+                 <iNew style="transform: translateX(-40px); " :items= this.$store.state.items :imglist=imglist></iNew>
             </main>
-            <NXside class="col"></NXside>
-            <Rightbar id=right class="col"></Rightbar>
+            <NXside style="  margin-top:-40px; transform: scale(.9);"  class="col"></NXside>
+            <Rightbar id=right style=" "  class="col" ></Rightbar>
         </div>
         <article>
 
@@ -54,6 +54,7 @@
 </template>
 <style  scoped>
 >>>  .el-upload--picture-card{
+  
     transform: scale(.7);
     
 }
@@ -101,7 +102,7 @@ textarea{
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     outline: none;
-       width: 45vw;
+       width: 46vw;
    
 }
 
@@ -114,6 +115,7 @@ textarea{
 }
 .col{
    
+   background: transparent;
     float: left;
 }
 
@@ -121,24 +123,31 @@ article{
     clear: both;
 }
 .fa{
-    margin-top: 20px;
+    width: 705px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+
+  
 }
 .home{
-   padding-left: 330px;
-   padding-right: 260px;
+   padding-left: 360px;
+   padding-right: 360px;
 
 }
 main{
     
     width: 100%;
-    height: 100vh;
+   
     background: rgb(243, 246, 249);
 }
     img{
         width: 50px;
         height: 50px;
     }
-   
+   .content{
+      background-size: cover;
+       background-image: url('http://dongdove.cn/download-1.png');
+   }
 </style>
 <script>
     import iNew from "@/components/iNew"

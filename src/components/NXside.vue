@@ -29,7 +29,11 @@
     <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
   </div>
   <div v-for="(o,index) in TJ" :key="index" class=" item">
-    <el-avatar style="border:1px solid #ccc;" :src="o.avater">  </el-avatar>
+    <!-- <el-avatar style=" border:1px solid #ccc;" :src="o.avater">  </el-avatar> -->
+    <el-image
+      style="width: 43px; height: 43px;border:1px solid #ccc; border-radius:50%;"
+      :src="o.avater"
+      fit="cover"></el-image>
     <div class="text"> {{o.username}}</div>
   </div>
 </el-card>
@@ -70,8 +74,9 @@
      font-size: 14px;
      line-height: 40px;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
   }
 
   .clearfix:before,

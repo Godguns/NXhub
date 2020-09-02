@@ -22,7 +22,7 @@
 
 <el-divider  content-position="left"><h3>推荐专辑</h3></el-divider>
 <div class="cdbody">
-<RCard style="width: 392px !important;" :list=item class="cd" v-for="(item,index) in list" :key="index"></RCard>
+<RCard style="width: 392px !important;" @click.native="go(item)" :list=item class="cd" v-for="(item,index) in list" :key="index"></RCard>
 </div>
 
   
@@ -68,7 +68,8 @@
 <style  scoped>
 .cdbody::-webkit-scrollbar { width: 0 !important }
 .cdbody{
-   
+   display: flex;
+   justify-content: flex-start;
     -ms-overflow-style: none;
     overflow: -moz-scrollbars-none;
     transform: scale(.8);
@@ -204,6 +205,11 @@ export default {
         }
     },
     methods:{
+        go(e){
+           this.$router.push({path:`/albuminfo/${e._id}`})
+            //console.log(e._id)
+   
+        },
         goinfo(e){
           console.log(e)
           sessionStorage.setItem('imgsrc',this.imgs[e])

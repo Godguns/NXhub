@@ -1,20 +1,33 @@
 <template>
     <div class="home" >
         <NXnav></NXnav>
+      
         <div style=" margin-top: 30px !important;">
              <el-divider  content-position="left"><h3 style="color:#606266;">插画专辑</h3></el-divider>
         </div>
          
         <div class="content">
            
-             <card :list=item @click.native="go()" class="cd" v-for="(item,index) in list" :key="index"></card>
+             <card  :list=item @click.native="go(item)" class="cd" v-for="(item,index) in list" :key="index"></card>
         </div>
-        
+          <div class="adbox">
+            <img class="ad" src="http://dongdove.cn/%E6%88%AA%E5%B1%8F2020-09-02%20%E4%B8%8B%E5%8D%888.20.20.png" alt="">
+        </div>
        
     </div>
 </template>
 <style  scoped>
+.adbox{
+    width:100vw;
+    background-color: white;
+}
+.ad{
+    width: 1224px;
+   
+}
 .home{
+    background-color: white;
+    height: 500vh;
     /* background: rgb(34, 34, 34); */
 }
 /* >>> svg{
@@ -44,7 +57,7 @@
 }
 .content{
   
-    justify-content: center;
+    justify-content: flex-start;
     display: flex;
     flex-wrap: wrap;
 
@@ -54,15 +67,18 @@
      */
     
 }
+.cd{
+    background: white;
+}
 .el-divider__text{
    
-    background-color:rgb(243, 246, 249) ;
+    /* background-color:rgb(243, 246, 249) ; */
 }
 </style>
 <script>
 import card from '@/components/RCard'
 import NXnav from '@/components/NXnav'
-import anime from 'animejs'
+//import anime from 'animejs'
 
 export default {
     components:{
@@ -71,6 +87,7 @@ export default {
     },
     data(){
         return {
+            id:"",
             list:{},
             Album_info:'',
             Album_author:'',
@@ -87,16 +104,9 @@ export default {
      
     },
     methods:{
-        go(){
-            console.log("go")
-    anime({
-  targets: '.card',
-  translateX: anime.stagger(10, {grid: [3, 5], from: 'center', axis: 'x'}),
-  translateY: anime.stagger(10, {grid: [3, 5], from: 'center', axis: 'y'}),
-  rotateZ: anime.stagger([0, 90], {grid: [3, 5], from: 'center', axis: 'x'}),
-  delay: anime.stagger(200, {grid: [3, 5], from: 'center'}),
-  easing: 'easeInOutQuad'
-});
+        go(e){
+           this.$router.push({path:`/albuminfo/${e._id}`})
+            //console.log(e._id)
    
         },
         getalbum(){
@@ -110,8 +120,10 @@ export default {
                 this.Album_author=response.data.data.Album_author;
                 this.master_img=response.data.data.master_img;
                 this.Album_time=response.data.data.Album_time;
-                this.Album_imgs=response.data.data.Album_imgs
+                this.Album_imgs=response.data.data.Album_imgs;
+                
                 // test
+               
 
 
 

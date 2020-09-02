@@ -10,9 +10,14 @@ import people from '../views/people.vue'
 import picinfo from '../views/picinfo.vue'
 import userupdate from '../views/userupdate'
 import album from '../views/Album'
+import albuminfo from '../views/Albuminfo.vue'
 Vue.use(VueRouter)
 
   const routes = [
+    {
+      path:'/albuminfo/:id',
+      component:albuminfo
+    },
     {
       path:'/album',
       component:album

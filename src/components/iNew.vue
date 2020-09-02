@@ -1,10 +1,14 @@
 <template>
-<div >
+<div  >
     <div class="new" v-for="(item,i) in items" :key="i">
-            <div  class="item">
+        
+           
+  
+             <b-card class="card"  img-alt="Card image" img-top>
+                     <div  class="item">
                  <el-popover
                         class="info"
-                        placement="left-end"
+                        placement="right-end"
                         visible-arrow=true
                         :offset="30"
                        
@@ -28,10 +32,6 @@
                       
                         
             </div>
-           
-  
-             <b-card class="card"  img-alt="Card image" img-top>
-                 
                 <b-card-text  v-if="!item.img" class="text">
                     
                    {{item.content}}
@@ -94,7 +94,7 @@
     font-size: 14px;
 }
 #rounded-0{
-  border-radius: 5px;
+  border-radius: 25px;
 
 }
 .text{
@@ -105,10 +105,11 @@
     text-align: left;
     font-size: 15px;
    
+   
     
 }
 .new{
-   margin-left: -30px;
+  
     
     
 }
@@ -168,24 +169,26 @@ i:hover{
    margin-top: 5px;
 }
     .item{
-        margin-top: 20px;
+     
+        
         display: flex;
         width: 100%;
     }
     .avater{
-        width: 32px;
-        height: 32px;
+        width: 42px;
+        height: 42px;
         border-radius: 50%;
         margin-top: 10px;
+        margin-left: 10px;
           border: solid .5px #ccc !important;
 
     }
     p{  
-        color: black;
+        color: #606266;
         font-size: 13px;
         font-weight: 700;
         margin-left: 10px;
-        line-height: 32px;
+        line-height: 52px;
     }
     p:hover{
         color: rgb(17, 80, 206);
@@ -202,8 +205,8 @@ i:hover{
        margin-left: 55px;
        box-sizing: border-box;
        transform: scale(.95);
-       
-         padding: 5px !important;
+       margin-bottom: 20px;
+    padding: 5px !important;
         border:none;
     }
    
@@ -217,8 +220,10 @@ i:hover{
         height: 60px;
         border-radius: 50%;
     }
- 
-   
+
+   .card-body{
+       border-radius: 20px !important;
+   }
 </style>
 <script>
 export default {

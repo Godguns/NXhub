@@ -24,7 +24,9 @@
        
              <b-nav-item-dropdown   no-caret right>
             <template v-slot:button-content>
-                <b-icon  class="mb-2" style="color: rgb(128,128,128);" icon="plus"></b-icon>
+               <el-button style="color:#606266;transform: scale(.8);border:none; background: rgb(243, 246, 249);" type="info" round>投稿作品+</el-button>
+              <!-- <p style="color:#606266;border-radius:30px;padding:5px ; background: rgb(243, 246, 249); line-height:30px; margin-right:20px;margin-bottom:0px;">投稿作品</p> -->
+                <!-- <b-icon  class="mb-2" style="color: rgb(128,128,128);" icon="plus"> </b-icon> -->
      
             </template>
             
@@ -49,6 +51,7 @@
 </template>
 <style  scoped>
 .ml-auto{
+  
     line-height: 20px !important;
 }
 .mb-2{
