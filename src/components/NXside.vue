@@ -2,10 +2,10 @@
     <div class="side">
   <b-card
    
-   img-src="http://tva2.sinaimg.cn/large/006BFMdqly1gi17nb5nooj315o0th7wh.jpg"
+   img-src="http://dongdove.cn/download-3.jpg"
    img-height="100px"
     tag="article"
-    style="max-width: 20rem;"
+    style="max-width: 20rem; color:black;"
     class="mb-2"
   >     
       <div @click="gopeason" class="icon">
@@ -41,6 +41,9 @@
 </div>
 </template>
 <style  scoped>
+>>> h5[data-v-2ff6789e]{
+  color: #303133;
+}
 @media screen and (max-width: 600px) {
    .mb-2 {
          display: none;

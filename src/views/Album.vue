@@ -1,7 +1,9 @@
 <template>
     <div class="home" >
         <NXnav></NXnav>
-      
+        <div class="adbox">
+            <img class="ad" src="http://dongdove.cn/%E6%88%AA%E5%B1%8F2020-09-02%20%E4%B8%8B%E5%8D%888.20.20.png" alt="">
+        </div>
         <div style=" margin-top: 30px !important;">
              <el-divider  content-position="left"><h3 style="color:#606266;">插画专辑</h3></el-divider>
         </div>
@@ -10,19 +12,19 @@
            
              <card  :list=item @click.native="go(item)" class="cd" v-for="(item,index) in list" :key="index"></card>
         </div>
-          <div class="adbox">
-            <img class="ad" src="http://dongdove.cn/%E6%88%AA%E5%B1%8F2020-09-02%20%E4%B8%8B%E5%8D%888.20.20.png" alt="">
-        </div>
+        
        
     </div>
 </template>
 <style  scoped>
 .adbox{
+   
     width:100vw;
     background-color: white;
 }
 .ad{
-    width: 1224px;
+    width: 100vw;
+    transform: scale(.9);
    
 }
 .home{
@@ -56,7 +58,7 @@
   
 }
 .content{
-  
+    margin-left: 50px;
     justify-content: flex-start;
     display: flex;
     flex-wrap: wrap;

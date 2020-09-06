@@ -1,6 +1,7 @@
 <template>
     <div class="home">
         <NXnav class="nxnav"></NXnav>
+        
          <b-spinner v-show="show" variant="success" style="width: 3rem; height: 3rem; margin-top:20px;" label="Large Spinner" type="grow"></b-spinner>
           <div>
 <div class="nav">

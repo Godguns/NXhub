@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import io from "socket.io-client"
 axios.defaults.withCredentials = true;
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL="http://dongdove.cn";
@@ -9,8 +10,13 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    m_queue:[],
+    p_queue:[],
+    socket: io('http://localhost:4000'),
     collect:[],
     history:[],
+    online:"danger",
+    peopleonline:"danger",
     gz:"",
     username:"",
     password:"",
@@ -89,6 +95,9 @@ var nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;
 
   },
   actions: {
+    change(e){
+        this.state.online=e
+    },
     getalk(){//获取吐槽列表
            
      return  axios({
@@ -100,7 +109,7 @@ var nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;
         //context.commit("talk",response.data.data.items)
          this.state.items=response.data.data.reverse();
           //this.reload()
-          console.log("hgagag",this.state.items)
+         // console.log("hgagag",this.state.items)
 
       })
   },
@@ -139,7 +148,8 @@ var nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;
     console.log(error);
 });
     
-  }
+  },
+ 
   },
   modules: {
   }

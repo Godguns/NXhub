@@ -11,9 +11,16 @@ import picinfo from '../views/picinfo.vue'
 import userupdate from '../views/userupdate'
 import album from '../views/Album'
 import albuminfo from '../views/Albuminfo.vue'
+import chat from '../views/chat'
+import newblank from  '../views/newblank.vue'
 Vue.use(VueRouter)
 
   const routes = [
+   
+    {
+      path:'/chat/:id',
+      component:chat
+    },
     {
       path:'/albuminfo/:id',
       component:albuminfo
@@ -49,6 +56,11 @@ Vue.use(VueRouter)
   {
     path:'/blank',
     component:blank
+    
+  },
+  {
+    path:'/newblank/:id',
+    component:newblank
     
   },
   {

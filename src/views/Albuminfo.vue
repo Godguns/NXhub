@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="home">
         <NXnav></NXnav>
         <section>
             <div style="height:70px;width:100vw;background:#fff;">
@@ -50,6 +50,9 @@
        <div class="cards">
             <acard style="margin:10px 10px;" :list="item" v-for="(item,index) in list" :key="index"></acard>
        </div>
+         <div class="adbox">
+            <img class="ad" src="http://dongdove.cn/%E6%88%AA%E5%B1%8F2020-09-02%20%E4%B8%8B%E5%8D%888.20.20.png" alt="">
+        </div>
     </div>
 </template>
 <script>
@@ -104,9 +107,21 @@ export default {
 }
 </script>
 <style  scoped>
+.home{
+    background: white;
+}
+.adbox{
+   
+    width:100vw;
+    background-color: white;
+}
+.ad{
+    width: 100vw;
+   
+}
 .cards{
     display: flex;
-
+    flex-wrap: wrap;
     margin-left: 70px;
 }
 ul{

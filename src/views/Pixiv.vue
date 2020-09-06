@@ -1,27 +1,19 @@
 <template>
     <div class="home">
-        <NXnav style="position:fixed;width:100vw; z-index:99;"></NXnav>
-    <div>
-  <b-carousel
-    id="carousel-fade"
-    style="text-shadow: 0px 0px 2px #000; height:350px"
-    fade
-    indicators
-    img-width="1024"
-    img-height="350"
-  >
-    <b-carousel-slide
-    class="lbitem"
-      caption="Pixiv 社区"
-      img-src="http://dongdove.cn/A63CC6AB483D1D3CA2232659740EFFE7.jpg"
-    ></b-carousel-slide>
-  
-  </b-carousel>
-</div>
+        <NXnav style="width:100vw; "></NXnav>
+   
+        <section>
+            <div style=" height:70px;width:100vw;background:#fff;">
+                <img src="http://dongdove.cn/file.jpeg" alt="">
+            </div>
+
+        </section>
 
 
-<el-divider  content-position="left"><h3>推荐专辑</h3></el-divider>
+
+
 <div class="cdbody">
+    
 <RCard style="width: 392px !important;" @click.native="go(item)" :list=item class="cd" v-for="(item,index) in list" :key="index"></RCard>
 </div>
 
@@ -68,8 +60,8 @@
 <style  scoped>
 .cdbody::-webkit-scrollbar { width: 0 !important }
 .cdbody{
-   display: flex;
-   justify-content: flex-start;
+   /* display: flex;
+   justify-content: flex-start; */
     -ms-overflow-style: none;
     overflow: -moz-scrollbars-none;
     transform: scale(.8);
@@ -110,7 +102,7 @@ display: inline-block;
     background: transparent !important;
 }
 .el-divider__text{
-     background-color: rgb(243, 246, 249);
+   
      margin-top:20px;
      color: #606266;
 }
@@ -141,7 +133,7 @@ display: inline-block;
    border-bottom-right-radius: 0px;
 }
 .pbl .card{
-   
+   background-color: white;
    position: relative;
     margin-top: 10px;
     width: 300px;
@@ -149,21 +141,11 @@ display: inline-block;
    /* border-bottom-left-radius: 0px;
    border-bottom-right-radius: 0px; */
 }
-/* .card:hover{
-    transition: .5s;
-    transform: scale(1.02);
-    
-} */
-   /* .pbl:hover div {
-      
-        cursor: pointer;
-        filter: blur(15px);
-    } */
-     /* .home div:hover {
-       
-        filter: none;
-        z-index: 2;
-    } */
+.home{
+   
+    background-color: white;
+}
+
  .el-carousel__item h3 {
     color: #475669;
     font-size: 14px;
@@ -179,9 +161,8 @@ display: inline-block;
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
-  .home{
-     
-      /* background-image: url('http://dongdove.cn/download.jpg'); */
+  .card{
+      background-color: white;
   }
 </style>
 <script>

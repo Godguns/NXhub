@@ -8,6 +8,11 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import axios from 'axios'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+//import VueSocketIO from 'vue-socket.io'
+//import io from "socket.io-client"
+Vue.config.productionTip = false
+//Vue.prototype.io=io('http://localhost:4000');
+Vue.prototype.gonline="danger"
 
 
 Vue.use(ElementUI);
@@ -26,8 +31,14 @@ Vue.use(IconsPlugin)
 Vue.config.productionTip = false
 
 new Vue({
+ 
+
+
   axios,
   router,
+ 
+
   store,
-  render: h => h(App)
+  render: h => h(App),
+  
 }).$mount('#app')

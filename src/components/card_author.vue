@@ -25,7 +25,23 @@
     </div>
 </template>
 <style  scoped>
+.home{
+    position: relative;
+}
+/* .img::before{
+    content: "";
+    z-index: 1;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+   
 
+} */
+/* .img::before:hover{
+    background-color: rgba(0, 0, 0, 0.15);
+} */
 
 .home{
     width: 184px;

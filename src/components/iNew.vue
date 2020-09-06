@@ -38,6 +38,9 @@
                  </b-card-text>
                              <div class="imgitem"  v-if="item.img">
                                 <b-card no-body class="overflow-hidden" style=" margin-left:20px; background-size:cover;  margin-top:6px;max-height:400px">
+                                    <b-card-text class="itemtext">
+                                            {{item.content}}
+                                        </b-card-text>
                                     <b-row  class="itembody" no-gutters>
                                     
                                     <b-col class="md6" md="6">
@@ -46,9 +49,7 @@
                                     </b-col>
                                         <b-col md="6">
                                         <b-card-body >
-                                        <b-card-text class="itemtext">
-                                            {{item.content}}
-                                        </b-card-text>
+                                        
                                         </b-card-body>
                                     </b-col>
                                     </b-row>
@@ -86,15 +87,17 @@
 
 .itemtext{
       position: relative;
-  left: 70px;
+        top: -20px;
      font-weight: 350;
     margin-bottom: 0;
     color:#606266 ;
     text-align: left;
     font-size: 14px;
+    margin-left: 60px;
 }
 #rounded-0{
-  border-radius: 25px;
+ margin-top: -20px;
+ margin-left: 60px;
 
 }
 .text{
@@ -108,11 +111,7 @@
    
     
 }
-.new{
-  
-    
-    
-}
+
 .action{
     
     display: flex;
@@ -224,6 +223,10 @@ i:hover{
    .card-body{
        border-radius: 20px !important;
    }
+   .itembody{
+      
+   }
+   
 </style>
 <script>
 export default {

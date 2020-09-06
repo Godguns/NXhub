@@ -28,3 +28,14 @@
   color: #42b983;
 }
 </style>
+<script>
+
+         
+      
+export default {
+ 
+ mounted(){
+    
+ }
+}
+</script>

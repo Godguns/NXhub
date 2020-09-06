@@ -1,6 +1,7 @@
 <template>
     <div class="home">
         <NXnav style="position:fixed;width:100vw; z-index:99;"></NXnav>
+        
         <div class="content1">
            
                <el-image  :preview-src-list="imglist"  class="left" fit="scale-down" :src="img">
@@ -9,10 +10,11 @@
                 </div>
               </el-image>
              
-            <msgbar :name="this.img" class="col"></msgbar>
+            <msgbar  :name="this.img" class="col"></msgbar>
             
             
         </div>
+          
         <div class="articletk">
              
                <div class="heart">
@@ -65,6 +67,7 @@
                 <el-button type="primary" @click="addtalk()">确 定</el-button>
               </span>
             </el-dialog>
+           
     </div>
 </template>
 <style  scoped>
@@ -129,6 +132,7 @@ ul{
 }
 </style>
 <script>
+
 import msgbar from '../components/msgbar'
 import NXnav from '../components/NXnav'
 import Talklist from "@/components/Talklist"
@@ -144,6 +148,12 @@ export default {
   },
   data(){
     return {
+     
+       table: false,
+      dialog: false,
+      loading: false,
+  
+      /////
       dialogVisible:false,
       color:"danger",
       iscollect:"+收藏",
@@ -158,6 +168,29 @@ export default {
     }
   },
   methods:{
+     handleClose(done) {
+      if (this.loading) {
+        return;
+      }
+      this.$confirm('确定要提交表单吗？')
+        .then(() => {
+          this.loading = true;
+          this.timer = setTimeout(() => {
+            done();
+            // 动画关闭需要一定的时间
+            setTimeout(() => {
+              this.loading = false;
+            }, 400);
+          }, 2000);
+        })
+        .catch(() => {});
+    },
+    cancelForm() {
+      this.loading = false;
+      this.dialog = false;
+      clearTimeout(this.timer);
+    },
+    //++++++++++++++++++++++++++++++++++
     tocollect(){
       this.$axios({
         url:'/tocollect',
@@ -231,7 +264,7 @@ export default {
   },
   async  beforeMount(){
      
-      this.$store.dispatch('getuserinfo')
+     
       await  this.$axios({
             url:'/getpics',
             method:'get',
@@ -257,7 +290,9 @@ export default {
        await  this.gettalk()
 
         
-    }
+    },
+    
+
   
 }
 </script>

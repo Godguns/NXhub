@@ -1,13 +1,13 @@
 <template>
     <div class="content" >
       
-         <NXnav></NXnav>
+         <NXnav  ></NXnav>
              
         <div class="home">
             <main class="col">
                <div class="fa">
                    <el-card shadow="never" class="box-card">
-                     <div style="transform: translateX(-27px); width:600px;" class="cardbody">
+                     <div style="  transform: scale(.9);transform: translateX(63px); width:730px;" class="cardbody">
                            <textarea @focus="inputmsg"  placeholder="分享你的新鲜事把！" class="textarea" v-model="value" ></textarea>
                          <el-button class="fabubt" @click="fabu" type="danger">发布</el-button>
                      </div>
@@ -69,15 +69,18 @@
     display: flex !important;
     align-content: center !important;
     justify-content: center;
+    margin-right: 100px;
 }
 .box-card{
     display: flex;
     justify-content: center;
    background: transparent;
-    width: 100%;
+    width: 770px;
     display: flex;
     align-items: center;
     border: none;
+    margin-left: 10px;
+   
    
 }
 
@@ -103,6 +106,8 @@ textarea{
     border-bottom-left-radius: 20px;
     outline: none;
        width: 46vw;
+       
+     
    
 }
 
@@ -145,8 +150,11 @@ main{
         height: 50px;
     }
    .content{
-      background-size: cover;
-       background-image: url('http://dongdove.cn/download-1.png');
+     
+    
+       /* background-image: url('http://dongdove.cn/download-1.png') ; */
+       background: rgb(236, 249, 253);
+     /* background:rgba(232, 252, 244, 0.9); */
    }
 </style>
 <script>
@@ -154,7 +162,7 @@ main{
     import Rightbar from "@/components/Rightbar"
     import NXside from "@/components/NXside"
     import NXnav from "@/components/NXnav"
-     
+     import io from "socket.io-client"
 export default {
 
    components:{
@@ -163,10 +171,14 @@ export default {
        Rightbar,
        iNew
    },
-
+     beforeRouteUpdate () {
+       //this.$store.dispatch('socketinfo')
+  },
     data(){
         
         return{
+          online:this.$store.state.online,
+             socket: io('http://localhost:4000'),
             pic:"",
             value:"",
             show:false,
@@ -181,8 +193,30 @@ export default {
         }
     },
 
-    mounted(){
-    
+    created(){
+
+               this.socket.on('connect',()=>{
+                   this.$store.state.online="success"
+               
+ })
+              
+                
+
+         //  this.socket.on('connect',()=>{
+
+                        //    this.online="success"
+                        //   this.$store.state.online="success"
+                   
+                    // })
+                 window.addEventListener('beforeunload', () => {
+         var data={
+        username:sessionStorage.getItem('username'),
+      }
+       this.socket.emit("exit",data)
+       })
+      
+        console.log(this.$store.state.online)
+    //this.socketin()
               if(this.username==null){
            this.$router.push({path:'/'})
            console.log("error")
@@ -280,8 +314,10 @@ export default {
         this.pic = 'http://dongdove.cn/'+res.hash
         console.log("上传地址为",this.pic)
        
-    }
     },
+   
+    },
+
   
 }
 </script>
