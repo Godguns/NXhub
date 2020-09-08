@@ -8,6 +8,7 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import axios from 'axios'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+
 //import VueSocketIO from 'vue-socket.io'
 //import io from "socket.io-client"
 Vue.config.productionTip = false

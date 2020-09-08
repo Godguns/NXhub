@@ -70,7 +70,7 @@
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
           <template v-slot:button-content>
-             <el-button  style="transform:scale(.4); margin-left:20px !important;" :type="online"  circle></el-button>
+             <el-button  style="transform:scale(.4); margin-left:20px !important;" type="primary"  circle></el-button>
              <el-image style="margin-top:5px;" fit="cover"  class="avater" :src="avater" alt=""></el-image>
            <!-- <b-img class="avater"  :src="avater" rounded="circle" ></b-img> -->
           </template>

@@ -26,7 +26,7 @@
                      
                       </el-dialog>
                      
-                         <el-button  style=" transform:scale(.5);width:2px;height:2px;line-height:2px; position:relative; top:30px;left:-20px;"  @click="showdiag" :type="online" circle></el-button>
+                         <el-button  style=" transform:scale(.5);width:2px;height:2px;line-height:2px; position:relative; top:30px;left:-20px;"  @click="showdiag" type="primary" circle></el-button>
                     <span style="margin-left:20px; font-size:20px;" >{{username}}</span>
   </div>
     <ul class="list">
@@ -294,7 +294,7 @@ export default {
                img:sessionStorage.getItem('imgsrc')
            }
        }).then(response=>{
-         console.log("哇哈哈哈哈")
+         console.log("哇哈哈哈哈",response)
           this.history=response.data.data.history;
           this.avater=response.data.data.avater;
           this.username=response.data.data.username;

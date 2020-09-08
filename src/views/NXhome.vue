@@ -27,7 +27,7 @@
                                 :on-remove="remove"
                                 :on-success="handleSuccess"
                                 :data="{token: token}"
-  list-type="picture-card"
+  list-type="text"
  >
    <el-tooltip class="item" effect="dark" content="添加图片" placement="right">
           <i slot="default" class="el-icon-plus"></i>
