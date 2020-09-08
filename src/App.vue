@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    
-    <router-view  />
+    <NXnav v-if="header_show"></NXnav>
+    <router-view v-on:header="header" />
   </div>
 </template>
 
@@ -29,13 +29,29 @@
 }
 </style>
 <script>
+  
 
-         
+
+      import NXnav from '@/components/NXnav'
       
 export default {
- 
+   components:{
+     NXnav
+   },
+ data(){
+  
+   return {
+    header_show:false,
+   }
+ },
  mounted(){
-    
+   
+     
+ },
+ methods:{
+   header:function (bool) {
+        this.header_show = bool;
+      }
  }
 }
 </script>

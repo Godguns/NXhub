@@ -1,13 +1,13 @@
 <template>
     <div class="content" >
       
-         <NXnav  ></NXnav>
+      
              
         <div class="home">
             <main class="col">
                <div class="fa">
                    <el-card shadow="never" class="box-card">
-                     <div style="  transform: scale(.9);transform: translateX(63px); width:730px;" class="cardbody">
+                     <div style=" transform: translateX(-10px); width:530px;" class="cardbody">
                            <textarea @focus="inputmsg"  placeholder="分享你的新鲜事把！" class="textarea" v-model="value" ></textarea>
                          <el-button class="fabubt" @click="fabu" type="danger">发布</el-button>
                      </div>
@@ -69,13 +69,13 @@
     display: flex !important;
     align-content: center !important;
     justify-content: center;
-    margin-right: 100px;
+   
 }
 .box-card{
     display: flex;
     justify-content: center;
    background: transparent;
-    width: 770px;
+   
     display: flex;
     align-items: center;
     border: none;
@@ -105,7 +105,7 @@ textarea{
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     outline: none;
-       width: 46vw;
+      min-width: 360px;
        
      
    
@@ -128,7 +128,7 @@ article{
     clear: both;
 }
 .fa{
-    width: 705px;
+   
     margin-bottom: 10px;
     margin-left: 5px;
 
@@ -136,7 +136,7 @@ article{
 }
 .home{
    padding-left: 360px;
-   padding-right: 360px;
+   padding-right: 300px;
 
 }
 main{
@@ -161,12 +161,12 @@ main{
     import iNew from "@/components/iNew"
     import Rightbar from "@/components/Rightbar"
     import NXside from "@/components/NXside"
-    import NXnav from "@/components/NXnav"
+  
      import io from "socket.io-client"
 export default {
 
    components:{
-       NXnav,
+      
        NXside,
        Rightbar,
        iNew
@@ -178,7 +178,7 @@ export default {
         
         return{
           online:this.$store.state.online,
-             socket: io('http://localhost:4000'),
+             socket: io('http://49.235.16.43:4001'),
             pic:"",
             value:"",
             show:false,
@@ -194,20 +194,26 @@ export default {
     },
 
     created(){
-
-               this.socket.on('connect',()=>{
-                   this.$store.state.online="success"
-               
- })
+  this.$emit('header',true);
+            //   this.socket.on('datalist',data=>{
+            //       this.$store.state.onlines=data
+            //         console.log(this.$store.state.onlines,"主页哈哈哈")
+            //        data.forEach(element => {
+                     
+                     
+            //           if(element==sessionStorage.getItem('username')){
+            //             this.gonline="success"
+            //           }
+                    
+            //             if(element===this.username){
+            //               this.online="success"
+            //             }
+            //        });
+            //       })
               
                 
 
-         //  this.socket.on('connect',()=>{
-
-                        //    this.online="success"
-                        //   this.$store.state.online="success"
-                   
-                    // })
+        
                  window.addEventListener('beforeunload', () => {
          var data={
         username:sessionStorage.getItem('username'),

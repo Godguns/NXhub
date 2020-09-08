@@ -1,6 +1,6 @@
 <template>
-    <div class="home">
-        <NXnav style="position:fixed;width:100vw; z-index:99;"></NXnav>
+    <div @click="refrash" class="home">
+        
         
         <div class="content1">
            
@@ -134,13 +134,13 @@ ul{
 <script>
 
 import msgbar from '../components/msgbar'
-import NXnav from '../components/NXnav'
+
 import Talklist from "@/components/Talklist"
 
 export default {
   
   components:{
-    NXnav,
+   
     msgbar,
     Talklist,
     
@@ -164,10 +164,14 @@ export default {
       info:"",
       text:"",
       id:"",
-      talks:[]
+      talks:[],
+      one:true
     }
   },
   methods:{
+    refrash(){
+    
+    },
      handleClose(done) {
       if (this.loading) {
         return;
@@ -263,7 +267,7 @@ export default {
 
   },
   async  beforeMount(){
-     
+      this.$emit('header',true);
      
       await  this.$axios({
             url:'/getpics',

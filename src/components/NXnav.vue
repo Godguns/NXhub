@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div >
   <b-navbar class="nxnav" toggleable="lg" type="light" variant="info">
     <b-navbar-brand href="#/nxhome">NXhub</b-navbar-brand>
 
@@ -38,9 +38,18 @@
                 <!-- <el-button size="mini" type="text" @click="visible = false">取消</el-button>
                 <el-button type="primary" size="mini" @click="visible = false">确定</el-button> -->
               </div>
-               <el-button slot="reference" style="transform:scale(.8)" type="info" icon="el-icon-message" circle></el-button>
-             
+               <!-- <el-button slot="reference" style="transform:scale(.8)" type="info" icon="el-icon-message" circle></el-button> -->
+            
             </el-popover>
+              <div style="display:flex; margin-top:3px; ">
+                  <el-image
+                   @click="showdiag(index)"
+                  v-for="(item,index) in msglist" :key="index"
+                  style="transfrom:scale(.8); border:1px solid #ccc; margin:0 3px; width: 32px; height: 32px; border-radius:50%;"
+                  :src="item"
+                  fit="cover"></el-image>
+                
+                </div>
          </b-nav-item>
           
              <b-nav-item-dropdown   no-caret right>
@@ -62,7 +71,7 @@
           <!-- Using 'button-content' slot -->
           <template v-slot:button-content>
              <el-button  style="transform:scale(.4); margin-left:20px !important;" :type="online"  circle></el-button>
-             <el-image fit="cover"  class="avater" :src="avater" alt=""></el-image>
+             <el-image style="margin-top:5px;" fit="cover"  class="avater" :src="avater" alt=""></el-image>
            <!-- <b-img class="avater"  :src="avater" rounded="circle" ></b-img> -->
           </template>
           <b-dropdown-item href="#/peason">个人主页</b-dropdown-item>
@@ -72,11 +81,13 @@
     </b-collapse>
   </b-navbar>
 
-<el-dialog title="消息详情" :visible.sync="dialogTableVisible">
-          <div >
+<el-dialog  title="消息详情" :visible.sync="dialogTableVisible">
+          <div style="  overflow: scroll;
+  max-height: 400px;">
             <div v-for="(item,index) in messages" :key="index">
                   <div class="people" v-show="item.author!==user&&item.avater==new_fromavater" >
                <el-image
+              
                   style="border:1px solid #ccc; margin:0 3px; width: 32px; height: 32px; border-radius:50%;"
                   :src="item.avater"
                   fit="cover"></el-image>
@@ -84,10 +95,10 @@
                      {{item.text}}
                   </div>
             </div>
-            <div class="my" v-show="item.author==user" >
+            <div class="my" v-show="(item.author==user)&&(item.to==temp||item.msg_key==temp)" >
                   <el-image
                   style="border:1px solid #ccc; margin:0 3px; width: 32px; height: 32px; border-radius:50%;"
-                  src="http://dongdove.cn/FsO1ipvGbz-Cs3XIipzdbIvHM-gS"
+                  :src="avater"
                   fit="cover"></el-image>
                   <div class="m_msg">
                       {{item.text}}
@@ -95,6 +106,8 @@
             </div>
             </div>
             
+          
+          </div>
            <div class="control"  @keyup.enter="sendmessage">
               <el-input
              style="border:none !important;"
@@ -105,7 +118,6 @@
                 v-model="textarea2">
               </el-input>
            </div>
-          </div>
 </el-dialog>
 </div>
 </template>
@@ -174,10 +186,14 @@
   import io from "socket.io-client"
 export default {
   
-  
+     beforeRouteUpdate () {
+      
+  },
     data(){
         return {
-           socket: io('http://localhost:4000'),
+          temp:"",
+          show:true,
+           socket: io('http://49.235.16.43:4001'),
           fromavater:[],
           new_fromavater:"",
           from:[],
@@ -194,38 +210,56 @@ export default {
             avater:sessionStorage.getItem('avater')
         }
     },
-
+beforeUpdate(){
+//  if(sessionStorage.getItem('username')!==null){
+//         this.show=true;
+//         console.log("获取用户数据:",sessionStorage.getItem('username'))
+//      }
+},
     beforeMount(){
-     
+           
+    //  if(sessionStorage.getItem('username')==null){
+    //     this.show=false;
+    //     console.log("获取用户数据:",sessionStorage.getItem('username'))
+    //  }
       this.socket.on('disconnect',()=>{
    this.$store.state.online="danger"
    
 })
 
-          this.socket.on('welcome',()=>{
-                 this.online="success"
-                         this.$store.state.online="success"  
-              })
+          // this.socket.on('welcome',()=>{
+          //        this.online="success"
+          //                this.$store.state.online="success"  
+          //     })
        this.socket.on('connect',()=>{
-
-                          var socketdata={
+            var socketdata={
                     username:sessionStorage.getItem('username'),
                     avater:sessionStorage.getItem('avater'),
                     socket_id: this.socket.id
                 }
               
+                  
                   this. socket.emit('online',socketdata);
-         
                       })
+                         
+                  
            this.socket.on(sessionStorage.getItem('username'),(data)=>{
-                       console.log("发给我的消息是",data)
-                      
-                       this.$store.state.p_queue.push({
+                     
+  
+                    
+                       
+                       
+                            console.log("发给我的消息是",data)
+                             this.$store.state.p_queue.push({
                         text:data.data.text,
                         author:data.data.from,
                         avater:data.data.avater,
                         to:data.data.to
-                      })
+                      });
+                      
+                        
+
+
                        // this.messages.push(data.data)
                       if(this.msglist.length===0){
                          this.msglist.push(data.data.avater)
@@ -244,12 +278,21 @@ export default {
                   
 
                      })   
-   
-    this.online=this.$store.state.online,
-      console.log(this.online+"kkkk")
+                        window.addEventListener('beforeunload', () => {
+                          var data={
+                          username:sessionStorage.getItem('username'),
+                        }
+                        this.socket.emit("exit",data)
+                        })
+ 
+                          // this.online=this.$store.state.online,
+                          //   console.log(this.online+"kkkk")
     },
+   
     methods:{
       showdiag(e){
+        this.temp=this.from[e];
+        console.log("零时的temp=",this.temp)
         this.dialogTableVisible = true;
       this.new_from=this.from[e]
       this.new_fromavater=this.fromavater[e]
@@ -264,6 +307,7 @@ export default {
             author:sessionStorage.getItem('username'),
             avater:sessionStorage.getItem('avater'),
               to:this.new_from,
+              key:this.temp
           })
      var data={
           from:sessionStorage.getItem('username'),

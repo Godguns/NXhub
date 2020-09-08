@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import io from "socket.io-client"
+
 axios.defaults.withCredentials = true;
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL="http://dongdove.cn";
@@ -10,9 +10,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    which_name:"",
+    show:false,
     m_queue:[],
     p_queue:[],
-    socket: io('http://localhost:4000'),
+    onlines:[],
     collect:[],
     history:[],
     online:"danger",
@@ -29,6 +31,10 @@ export default new Vuex.Store({
     fork:[]
   },
   mutations: {
+    addshow(){
+      this.state.show=true
+      console.log(this.state.show)
+    },
       talk(n){
         this.state.items=n
         

@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <NXnav style="width:100vw; "></NXnav>
+        
    
         <section>
             <div style=" height:70px;width:100vw;background:#fff;">
@@ -166,12 +166,12 @@ display: inline-block;
   }
 </style>
 <script>
-import NXnav from '@/components/NXnav'
+
 import RCard from '@/components/RCard'
 export default {
    
     components:{
-        NXnav,
+       
         RCard
 
     },
@@ -195,7 +195,8 @@ export default {
           console.log(e)
           sessionStorage.setItem('imgsrc',this.imgs[e])
              this.$router.push({
-          path: `/picinfo/${e}`,
+         path: `/picinfo/${e}`,
+        //  path: `/newblank/${e}`,
         })
         },
            getalbum(){
@@ -212,7 +213,7 @@ export default {
     },
   
     beforeMount(){
-     
+      this.$emit('header',true);
         this.$axios({
             url:'/getpics',
             method:'get',

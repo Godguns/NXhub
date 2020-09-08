@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <NXnav class="nxnav"></NXnav>
+        <!-- <NXnav class="nxnav"></NXnav> -->
         
          <b-spinner v-show="show" variant="success" style="width: 3rem; height: 3rem; margin-top:20px;" label="Large Spinner" type="grow"></b-spinner>
           <div>
@@ -294,12 +294,12 @@ h3{
   
 </style>
 <script>
-import NXnav from "@/components/NXnav"
+
 
 
 export default {
     components:{
-        NXnav
+       
   
        
 
@@ -326,7 +326,9 @@ export default {
             avater:sessionStorage.getItem('avater')
        } 
     },
+  
     mounted(){
+
       console.log("这是个人收藏",this.collect)
         this.$axios({
             method:'get',
@@ -347,6 +349,7 @@ export default {
         })
     },
     created(){
+       this.$emit('header',true);
        this.$store.dispatch('getuserinfo')
        //this.getuserfork()
     },

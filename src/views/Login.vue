@@ -117,8 +117,9 @@ export default {
     url: '/api/v1/auth/login?username='+that.username+"&password="+that.pass,
     
 })
-.then(function (response) {
+.then( (response)=>{
   console.log(response);
+  //this.$show=true
        //document.cookie="session_id=8f6efba5-f8cc-44d5-90ed-fedecffc2403;domain=test.seefs.cn";
      that.msg=response.data.msg;
      that.$store.state.username=response.data.data.username;

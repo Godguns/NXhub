@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <NXnav></NXnav>
+        
        <!-- <el-upload
   class="avatar-uploader"
    action="http://upload-z2.qiniup.com"
@@ -155,10 +155,10 @@
   }
 </style>
 <script>
-import NXnav from '@/components/NXnav'
+
 export default {
     components:{
-        NXnav
+       
 
     },
      data() {
@@ -172,6 +172,9 @@ export default {
         imageUrl: "",
         token:sessionStorage.getItem('token')
       };
+    },
+    created(){
+       this.$emit('header',true);
     },
     methods: {
       handleAvatarSuccess(res) {

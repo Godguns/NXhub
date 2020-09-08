@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <NXnav></NXnav>
+       
         <section>
             <div style="height:70px;width:100vw;background:#fff;">
                 <img src="http://dongdove.cn/file.jpeg" alt="">
@@ -56,11 +56,11 @@
     </div>
 </template>
 <script>
-import NXnav from '@/components/NXnav'
+
 import acard from '@/components/card_author'
 export default {
     components:{
-        NXnav,
+       
         acard
         
     },
@@ -75,6 +75,7 @@ export default {
         }
     },
     beforeMount(){
+         this.$emit('header',true);
         this.$axios({
             url:'/findimgs_byid',
             method:'get',

@@ -5,7 +5,7 @@
 export default {
     mounted(){
        setTimeout(()=>{
-           // this.$router.replace({path:`/picinfo/${this.$route.params.id}`})
+            this.$router.push({path:`/picinfo/`+this.$route.params.id})
        },0)
     }
 }

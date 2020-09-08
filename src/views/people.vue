@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <NXnav class="nxnav"></NXnav>
+       
           <div>
 <div class="nav">
     <el-tabs class="navc" v-model="activeName" >
@@ -255,13 +255,13 @@ h3{
   
 </style>
 <script>
-import NXnav from "@/components/NXnav"
+
 
 
 export default {
     
     components:{
-        NXnav,
+      
        
   
        
@@ -309,7 +309,7 @@ export default {
     },
   
     created(){
-
+       this.$emit('header',true);
       // this.$store.dispatch('getuserinfo')
     },
     

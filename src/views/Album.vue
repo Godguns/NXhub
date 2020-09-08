@@ -1,6 +1,6 @@
 <template>
     <div class="home" >
-        <NXnav></NXnav>
+        
         <div class="adbox">
             <img class="ad" src="http://dongdove.cn/%E6%88%AA%E5%B1%8F2020-09-02%20%E4%B8%8B%E5%8D%888.20.20.png" alt="">
         </div>
@@ -79,13 +79,13 @@
 </style>
 <script>
 import card from '@/components/RCard'
-import NXnav from '@/components/NXnav'
+
 //import anime from 'animejs'
 
 export default {
     components:{
         card,
-        NXnav
+       
     },
     data(){
         return {
@@ -100,6 +100,7 @@ export default {
         }
     },
     beforeMount(){
+         this.$emit('header',true);
         this.getalbum()
     },
     mounted(){

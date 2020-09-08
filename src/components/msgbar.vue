@@ -12,25 +12,28 @@
   >
 
   <div  class="title2">
+                        
                         <el-image
                         @click="gopeople(username)"
                         style=" border-radius:50%; border:1px solid #ccc; width: 52px; height: 52px"
                         :src="avater"
                         fit="cover"></el-image>
-                         <el-button  style=" transform: scale(.7);position:relative; top:30px;left:-20px;width:5px;height:5px;"  @click="showdiag" :type="online"  circle></el-button>
+                        
                        
 
                       <el-dialog  :visible.sync="dialogTableVisible">
                        
                      
                       </el-dialog>
-                        
+                     
+                         <el-button  style=" transform:scale(.5);width:2px;height:2px;line-height:2px; position:relative; top:30px;left:-20px;"  @click="showdiag" :type="online" circle></el-button>
                     <span style="margin-left:20px; font-size:20px;" >{{username}}</span>
   </div>
     <ul class="list">
                     <li>粉丝 {{fans}}</li>
                     <li>关注{{gz}} </li>
                     <li>收藏 --</li>
+                    
                 </ul>
       
   </b-card>
@@ -47,10 +50,11 @@
            
         </div>
 
-        <el-dialog title="消息详情" :visible.sync="dialogTableVisible">
-          <div  >
+        <el-dialog style=" " title="消息详情" :visible.sync="dialogTableVisible">
+          <div style="  overflow: scroll;
+  max-height: 400px;" >
             <div v-for="(item,index) in messages" :key="index">
-                   <div class="people" v-show="item.author!==user&&item.to==user
+                   <div class="people" v-show="item.author!==user&&(item.to==user&&item.author==username)
                    ">
                <el-image
                   style="border:1px solid #ccc; margin:0 3px; width: 32px; height: 32px; border-radius:50%;"
@@ -60,10 +64,10 @@
                      {{item.text}}
                   </div>
             </div>
-            <div class="my" v-show="item.author==user">
+            <div class="my" v-show="item.author==user&&(item.to==username||item.msg_key==username)">
                   <el-image
                   style="border:1px solid #ccc; margin:0 3px; width: 32px; height: 32px; border-radius:50%;"
-                  src="http://dongdove.cn/FsO1ipvGbz-Cs3XIipzdbIvHM-gS"
+                  :src="user_avater"
                   fit="cover"></el-image>
                   <div class="m_msg">
                      {{item.text}}
@@ -71,6 +75,8 @@
             </div>
             </div>
            
+          
+          </div>
            <div class="control"  @keyup.enter="sendmessage">
               <el-input
              style="border:none !important;"
@@ -81,7 +87,6 @@
                 v-model="textarea2">
               </el-input>
            </div>
-          </div>
 </el-dialog>
     </div>
     
@@ -91,6 +96,7 @@
 
 .in{
   border:none !important;
+
 }
 .control{
   margin-top: 13px;
@@ -209,15 +215,18 @@ export default {
     components:{
        
     },
+
+
+  
     props:['name'],
 
     data(){
         return {
-
+            user_avater:sessionStorage.getItem('avater'),
             messages:this.$store.state.p_queue,
           textarea2:"",
             peoplelist:[],
-            socket: io('http://localhost:4000'),
+            socket: io('http://49.235.16.43:4001'),
             people_msg:[],
             mine_msg:[],
             dialogTableVisible:false,
@@ -233,16 +242,51 @@ export default {
             txlist:this.$store.state.m_queue
         }
     },
+  
       beforeRouteUpdate () {
-       // this.socketinfo()
-    // 在当前路由改变，但是该组件被复用时调用
-    // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
-    // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
-    // 可以访问组件实例 `this`
+            this.socketinfo()
+          // this.socket.on('connect',()=>{
+          //  this.socket.on('datalist',data=>{
+          //         this.$store.state.onlines=data
+          //           console.log(this.$store.state.onlines,"主页哈哈哈")
+          //          data.forEach(element => {
+                     
+                     
+          //             if(element==sessionStorage.getItem('username')){
+          //               this.gonline="success"
+          //             }
+                    
+          //               if(element===this.username||element==sessionStorage.getItem('username')){
+          //                 this.online="success"
+          //                 console.log("2",element+"和"+this.username)
+          //               }
+          //          });
+          //         })
+    // })
+           
   },
+  
   mounted(){
+  
         this.socketinfo()
- 
+           //this.socket.on('connect',()=>{
+          //  this.socket.on('datalist',data=>{
+          //         this.$store.state.onlines=data
+          //           console.log(this.$store.state.onlines,"主页哈哈哈")
+          //          data.forEach(element => {
+                     
+                     
+                      
+                    
+          //               if(element===this.username||element==sessionStorage.getItem('username')){
+          //                 this.online="success"
+          //                 console.log("3",element+"和"+this.username)
+          //               }else{
+          //                 console.log("没有发现")
+          //               }
+          //          });
+          //         })
+     //})
        this.$axios({
            method:'get',
            url:'/usermsg',
@@ -254,22 +298,48 @@ export default {
           this.history=response.data.data.history;
           this.avater=response.data.data.avater;
           this.username=response.data.data.username;
+          this.$store.state.which_name=this.username
           sessionStorage.setItem('picauthor',this.username)
             this.gz=response.data.data.fork.length;
             this.fans=response.data.data.fans.length;
+            if(this.username==sessionStorage.getItem('username')){
+              this.online="success"
+            }
             
+            
+       }).then(()=>{
+
+          console.log(this.$store.state.onlines,"2020")
+  
+         this.socket.on('connect',()=>{
+          //  this.socket.on('datalist',data=>{
+          //         this.$store.state.onlines=data
+          //           console.log(this.$store.state.onlines,"主页哈哈哈")
+          //          data.forEach(element => {
+
+          //               if(element===this.username||element==sessionStorage.getItem('username')){
+          //                 this.online="success"
+          //                 console.log("4",element+"和"+this.username)
+          //               }else{
+          //                 console.log("没有发现")
+          //               }
+          //          });
+          //         })
+     })
        })
+       
     
     },
+    
   
     methods:{
       socketinfo(){
 this.socket.on('disconnect',()=>{
-  // this.$store.state.online="danger"
+   this.$store.state.online="danger"
    //this.$router.go(-1)
 })
      this. socket.on('welcome',()=>{
-      
+       
      });
  
                     //   this.socket.on('isconnect',()=>{
@@ -277,20 +347,20 @@ this.socket.on('disconnect',()=>{
                     //  })
                  
                 
-                  this.socket.on('datalist',data=>{
-                    console.log(data)
-                   data.forEach(element => {
+                  // this.socket.on('datalist',data=>{
+                  //   console.log(data,"hahaha")
+                  //  data.forEach(element => {
                      
                      
-                      if(element==sessionStorage.getItem('username')){
-                        this.gonline="success"
-                      }
+                  //     if(element==sessionStorage.getItem('username')){
+                  //       this.gonline="success"
+                  //     }
                     
-                        if(element===this.username){
-                          this.online="success"
-                        }
-                   });
-                  })
+                  //       if(element===this.username){
+                  //         this.online="success"
+                  //       }
+                  //  });
+                  // })
    
                   this.socket.on('out',(d)=>{
                     this.online="danger"
@@ -332,9 +402,11 @@ this.socket.on('disconnect',()=>{
             text:this.textarea2,
             author:sessionStorage.getItem('username'),
             avater:sessionStorage.getItem('avater'),
-             to:""
+            
+             msg_key:this.username
           }
         )
+       
         //this.txlist.push(this.textarea2)
          var data={
           from:sessionStorage.getItem('username'),
@@ -387,11 +459,7 @@ this.socket.on('disconnect',()=>{
       },
     },
     beforeDestroy(){
-      // var data={
-      //   username:sessionStorage.getItem('username'),
-
-      // }
-      // socket.emit("exit",data)
-    }
+     
+    },
 }
 </script>
