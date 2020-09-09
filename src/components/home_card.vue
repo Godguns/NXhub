@@ -2,51 +2,50 @@
     <div class="home">
           <div class="img">
               <el-image
-              
+             
+              lazy
             style="border-radius:14px;width: 184px; height: 184px"
-            :src="list"
-            @click="bigshow(list)"
-             :preview-src-list="alist"
+            :src="list.imgsrc"
+           
+            
             fit="cover"></el-image>
           </div>
+           
             <div class="title">
-               <!-- <div>
+                
+               <div>
                     <el-image
-                   
+                    lazy
                     style=" border-radius:50%;width: 24px; height: 24px;display:inline-block;"
-                    :src="avater"
+                    :src="list.avater"
                     fit="cover">
                      </el-image>
                </div>
-               
-                <p>Godguns</p> -->
+              
+                <p style="line-height:24px;">{{list.author}}</p>
 
             </div>
 
     </div>
 </template>
-<style  scoped>
-.home{
-    position: relative;
+<script>
+export default {
+    props:['list'],
+    data(){
+        return {
+           
+        }
+    },
+    methods:{
+  
+    }
 }
-/* .img::before{
-    content: "";
-    z-index: 1;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    left: 0px;
-    bottom: 0px;
-   
-
-} */
-/* .img::before:hover{
-    background-color: rgba(0, 0, 0, 0.15);
-} */
-
+</script>
+<style scoped>
 .home{
     width: 184px;
     height: 238px;
+  
 }
 .title{
   display: flex;
@@ -66,19 +65,3 @@
     transition: color 0.2s ease 0s;
     }
 </style>
-<script>
-export default {
-    props:['list'],
-    data(){
-        return {
-            alist:[ 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg'],
-            avater:sessionStorage.getItem('avater')
-        }
-    },
-    methods:{
-        bigshow(e){
-            this.alist[0]=e;
-        }
-    }
-}
-</script>

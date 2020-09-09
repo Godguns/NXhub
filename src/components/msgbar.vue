@@ -226,7 +226,7 @@ export default {
             messages:this.$store.state.p_queue,
           textarea2:"",
             peoplelist:[],
-            socket: io('http://49.235.16.43:4001'),
+            socket: io('http://localhost:4001'),
             people_msg:[],
             mine_msg:[],
             dialogTableVisible:false,
@@ -245,48 +245,17 @@ export default {
   
       beforeRouteUpdate () {
             this.socketinfo()
-          // this.socket.on('connect',()=>{
-          //  this.socket.on('datalist',data=>{
-          //         this.$store.state.onlines=data
-          //           console.log(this.$store.state.onlines,"主页哈哈哈")
-          //          data.forEach(element => {
-                     
-                     
-          //             if(element==sessionStorage.getItem('username')){
-          //               this.gonline="success"
-          //             }
-                    
-          //               if(element===this.username||element==sessionStorage.getItem('username')){
-          //                 this.online="success"
-          //                 console.log("2",element+"和"+this.username)
-          //               }
-          //          });
-          //         })
-    // })
+        
            
+  },
+  created(){
+    
   },
   
   mounted(){
   
         this.socketinfo()
-           //this.socket.on('connect',()=>{
-          //  this.socket.on('datalist',data=>{
-          //         this.$store.state.onlines=data
-          //           console.log(this.$store.state.onlines,"主页哈哈哈")
-          //          data.forEach(element => {
-                     
-                     
-                      
-                    
-          //               if(element===this.username||element==sessionStorage.getItem('username')){
-          //                 this.online="success"
-          //                 console.log("3",element+"和"+this.username)
-          //               }else{
-          //                 console.log("没有发现")
-          //               }
-          //          });
-          //         })
-     //})
+      
        this.$axios({
            method:'get',
            url:'/usermsg',
@@ -361,6 +330,7 @@ this.socket.on('disconnect',()=>{
                   //       }
                   //  });
                   // })
+                  
    
                   this.socket.on('out',(d)=>{
                     this.online="danger"

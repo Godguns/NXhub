@@ -110,7 +110,7 @@
 }
 .el-divider__text{
     color: #606266;
-     background: rgb(243, 246, 249);
+     /* background: rgb(243, 246, 249); */
     
 }
 .home{

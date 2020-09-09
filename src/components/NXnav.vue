@@ -1,14 +1,15 @@
 <template>
     <div >
   <b-navbar class="nxnav" toggleable="lg" type="light" variant="info">
-    <b-navbar-brand href="#/nxhome">NXhub</b-navbar-brand>
+     
+    <b-navbar-brand href="#/newhome" >NXhub</b-navbar-brand>
 
     <!-- <b-navbar-toggle ></b-navbar-toggle> -->
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item href="#/pixiv">Pixiv社区</b-nav-item>
-         <!-- <b-nav-item href="#" >实验室🧪</b-nav-item> -->
+        <b-nav-item href="#/pixiv">社区</b-nav-item>
+         <b-nav-item href="#/nxhome" >首页</b-nav-item>
         <b-nav-item href="#/album" >专辑</b-nav-item>
 
         <b-nav-form  >
@@ -56,7 +57,7 @@
             <template v-slot:button-content>
              
               
-               <el-button style="color:#606266;transform: scale(.8);border:none; background: rgb(243, 246, 249);" type="info" round>投稿作品+</el-button>
+               <el-button style="color:#606266;transform: scale(.8);border:none; background: rgb(243, 246, 249);" type="primary" round>投稿作品+</el-button>
               <!-- <p style="color:#606266;border-radius:30px;padding:5px ; background: rgb(243, 246, 249); line-height:30px; margin-right:20px;margin-bottom:0px;">投稿作品</p> -->
                 <!-- <b-icon  class="mb-2" style="color: rgb(128,128,128);" icon="plus"> </b-icon> -->
      
@@ -168,6 +169,7 @@
         height: 30px;
     }
     .nxnav{
+    
         line-height: 1.5em;
         height: 53px !important;
         /* rgb(27, 31, 35) */
@@ -193,7 +195,7 @@ export default {
         return {
           temp:"",
           show:true,
-           socket: io('http://49.235.16.43:4001'),
+           socket: io('http://localhost:4001'),
           fromavater:[],
           new_fromavater:"",
           from:[],
@@ -215,6 +217,19 @@ beforeUpdate(){
 //         this.show=true;
 //         console.log("获取用户数据:",sessionStorage.getItem('username'))
 //      }
+  this.socket.on('datalist',data=>{
+                  
+                    console.log(this.$store.state.onlines,"主页哈哈哈")
+                   data.forEach(element => {
+
+                        if(element===this.username||element==sessionStorage.getItem('username')){
+                          this.online="success"
+                          console.log("4",element+"和"+this.username)
+                        }else{
+                          console.log("没有发现")
+                        }
+                   });
+                  })
 },
     beforeMount(){
            
@@ -232,6 +247,9 @@ beforeUpdate(){
           //                this.$store.state.online="success"  
           //     })
        this.socket.on('connect',()=>{
+          console.log()
+
+
             var socketdata={
                     username:sessionStorage.getItem('username'),
                     avater:sessionStorage.getItem('avater'),
@@ -240,6 +258,7 @@ beforeUpdate(){
               
                   
                   this. socket.emit('online',socketdata);
+            
                       })
                          
                   

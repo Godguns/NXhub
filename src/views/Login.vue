@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <div>
-      <h2>登录到NXhub</h2>
+      <h2>登录到NXPixiv</h2>
        <b-spinner v-show="show" class="prograss" type="grow" label="Spinning"></b-spinner>
   <b-card
    
@@ -138,7 +138,7 @@ export default {
  //console.log(response.data);
    setTimeout(()=>{
        that.show=false
-     that.$router.push({path:'/nxhome'})
+     that.$router.push({path:'/newhome'})
    },500)
 })
 .catch(function (error) {

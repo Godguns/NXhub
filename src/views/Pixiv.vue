@@ -11,7 +11,7 @@
 
 
 
-
+ <h4 style="margin-left:70px;text-align:left;color:#606266;">推荐专辑</h4>
 <div class="cdbody">
     
 <RCard style="width: 392px !important;" @click.native="go(item)" :list=item class="cd" v-for="(item,index) in list" :key="index"></RCard>
@@ -19,12 +19,13 @@
 
   
 
- <el-divider  content-position="left"><h3>Pixiv每日推荐</h3></el-divider>
+ <h5 style="margin-left:70px;text-align:left;color:#606266;">Pixiv每日推荐</h5>
      <div class="pbl">
             <b-card-group class="group"  columns>
                 
                 <b-card
                 v-for="(item,index) in imgs" :key="index"
+                
                 img-width="300px"
                 class="card"
                 @click="goinfo(index)"
@@ -36,7 +37,7 @@
                              <div class="author">
                                  <div style="display:flex">
                     <el-image
-                   
+                   lazy
                     style=" border-radius:50%;border:1px solid #909399;width: 35px; height: 35px"
                     :src="avater[index]"
                     fit="cover"></el-image>
@@ -205,7 +206,7 @@ export default {
                 url:'/getR_album',
 
             }).then(response=>{
-                this.list=response.data.data
+                this.list=response.data.data.reverse()
               console.log(this.list)
 
             })

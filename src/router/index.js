@@ -13,6 +13,7 @@ import album from '../views/Album'
 import albuminfo from '../views/Albuminfo.vue'
 import chat from '../views/chat'
 import newblank from  '../views/newblank.vue'
+import newhome from '../views/newhome.vue'
 Vue.use(VueRouter)
 
   const routes = [
@@ -56,6 +57,11 @@ Vue.use(VueRouter)
   {
     path:'/blank',
     component:blank
+    
+  },
+  {
+    path:'/newhome',
+    component:newhome
     
   },
   {

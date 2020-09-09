@@ -5,7 +5,7 @@
             <img class="ad" src="http://dongdove.cn/%E6%88%AA%E5%B1%8F2020-09-02%20%E4%B8%8B%E5%8D%888.20.20.png" alt="">
         </div>
         <div style=" margin-top: 30px !important;">
-             <el-divider  content-position="left"><h3 style="color:#606266;">插画专辑</h3></el-divider>
+            <h3 style="margin-left:50px;text-align:left;color:#606266;">插画专辑</h3>
         </div>
          
         <div class="content">
@@ -118,7 +118,7 @@ export default {
                 url:'/get_album',
 
             }).then(response=>{
-                this.list=response.data.data
+                this.list=response.data.data.reverse()
                 this.Album_info=response.data.data.Album_info;
                 this.Album_author=response.data.data.Album_author;
                 this.master_img=response.data.data.master_img;

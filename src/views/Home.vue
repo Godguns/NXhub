@@ -13,6 +13,9 @@ export default {
         Navbar,
         LG
 
+    },
+    created(){
+         this.$emit('header',false);
     }
 }
 </script>

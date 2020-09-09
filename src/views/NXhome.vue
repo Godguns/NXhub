@@ -178,7 +178,7 @@ export default {
         
         return{
           online:this.$store.state.online,
-             socket: io('http://49.235.16.43:4001'),
+             socket: io('http://localhost:4001'),
             pic:"",
             value:"",
             show:false,
@@ -194,41 +194,22 @@ export default {
     },
 
     created(){
-  this.$emit('header',true);
-            //   this.socket.on('datalist',data=>{
-            //       this.$store.state.onlines=data
-            //         console.log(this.$store.state.onlines,"主页哈哈哈")
-            //        data.forEach(element => {
-                     
-                     
-            //           if(element==sessionStorage.getItem('username')){
-            //             this.gonline="success"
-            //           }
-                    
-            //             if(element===this.username){
-            //               this.online="success"
-            //             }
-            //        });
-            //       })
+  
+             
               
-                
+          this.$emit('header',false);      
 
         
-                 window.addEventListener('beforeunload', () => {
-         var data={
-        username:sessionStorage.getItem('username'),
-      }
-       this.socket.emit("exit",data)
-       })
+    
       
-        console.log(this.$store.state.online)
+        // console.log(this.$store.state.online)
     //this.socketin()
               if(this.username==null){
-           this.$router.push({path:'/'})
+           this.$router.replace({path:'/'})
            console.log("error")
 
        }else{
-
+this.$emit('header',true);
           
            this.ngetalk()
            this.getuserinfo()
