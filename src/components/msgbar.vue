@@ -226,7 +226,7 @@ export default {
             messages:this.$store.state.p_queue,
           textarea2:"",
             peoplelist:[],
-            socket: io('http://localhost:4001'),
+            socket: io('http://49.235.16.43:4001'),
             people_msg:[],
             mine_msg:[],
             dialogTableVisible:false,
@@ -310,28 +310,6 @@ this.socket.on('disconnect',()=>{
      this. socket.on('welcome',()=>{
        
      });
- 
-                    //   this.socket.on('isconnect',()=>{
-                        
-                    //  })
-                 
-                
-                  // this.socket.on('datalist',data=>{
-                  //   console.log(data,"hahaha")
-                  //  data.forEach(element => {
-                     
-                     
-                  //     if(element==sessionStorage.getItem('username')){
-                  //       this.gonline="success"
-                  //     }
-                    
-                  //       if(element===this.username){
-                  //         this.online="success"
-                  //       }
-                  //  });
-                  // })
-                  
-   
                   this.socket.on('out',(d)=>{
                     this.online="danger"
                     console.log(d)

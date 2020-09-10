@@ -71,6 +71,7 @@
   top: 50px;
 }
 h2{
+  color: linear-gradient(108.54deg, rgb(220, 255, 203), rgb(225, 255, 237), rgb(184, 229, 255))!important;
   font-weight: 400;
   position: absolute;
   top: 150px;

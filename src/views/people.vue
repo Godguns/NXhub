@@ -7,12 +7,13 @@
     <el-tab-pane class="navcc1" label="TA的信息" name="first">
        <el-divider content-position="left" style="color:rgb(218,242,207)">个性标签</el-divider>
                  <el-tag
+                 effect="plain"
                  class="tip"
-                v-for="tag in tags"
-                :key="tag.name"
+                v-for="(tag,index) in tags"
+                :key="index"
                 closable
-                :type="tag.type">
-                {{tag.name}}
+                :type="type[index]">
+                {{tag}}
               </el-tag>
        <el-divider content-position="left" style="color:rgb(218,242,207)">TA的动态</el-divider>
             <el-timeline class="timelinecontent" >
@@ -270,6 +271,7 @@ export default {
     
     data(){
        return{
+         type:['primary','success','warning','danger','info','primary','success','warning','danger','info','primary','success','warning','danger','info'],
          forks:[],
          User_gz:[],
            msg:"关注",
@@ -283,11 +285,7 @@ export default {
            imageUrl:"",
            list:[],
             tags: [
-          { name: '技术控', type: '' },
-          { name: '死肥宅', type: 'success' },
-          { name: '技术第一', type: 'info' },
-          { name: '拯救世界', type: 'warning' },
-          { name: '哔哩哔哩干杯( ゜-゜)つロ', type: 'danger' }
+         
         ],
             avater:""
        } 
@@ -302,6 +300,19 @@ export default {
                   }).then(response=>{
                  
                   this.User_gz=response.data.info.fork;
+                  
+                
+             
+        })
+          this.$axios({
+                method:'get',
+                url:'/get_tags',
+                params:{
+                  username:this.$route.params.username
+                }
+                  }).then(response=>{
+                 
+                  this.tags=response.data.tags
                   
                 
              

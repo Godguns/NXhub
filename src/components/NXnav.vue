@@ -195,7 +195,7 @@ export default {
         return {
           temp:"",
           show:true,
-           socket: io('http://localhost:4001'),
+           socket: io('http://49.235.16.43:4001'),
           fromavater:[],
           new_fromavater:"",
           from:[],

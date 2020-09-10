@@ -16,11 +16,11 @@
        
       <b-navbar-nav class="ml-auto">
          <b-nav-form>
-          <b-form-input style="margin-right:30px;height:35px; align-items: center; padding-left:20px; border-radius:25px;" size="sm" class="mr-sm-2" placeholder="搜索作者·标签"></b-form-input>
+          <!-- <b-form-input style="height:35px; align-items: center; padding-left:20px; border-radius:25px;" size="sm" class="mr-sm-2" placeholder="搜索作者·标签"></b-form-input> -->
          
         </b-nav-form>
-       
-   <el-button style="width:120px;height:35px; align-items: center;" type="primary" @click="gologin" round>登录</el-button>
+       <p style="margin-top:7px;">已有账号？</p>
+   <el-button style="width:120px;height:35px; line-height:10px; align-items: center;" type="primary" @click="gologin" round>登录</el-button>
     <!-- <el-button type="info" style="height:35px; align-items: center; background:white !important;" round plain>注册</el-button> -->
       <!-- <div class="sign" @click="gosign" >注册</div>
       <div  class="login" @click="gologin" >登录</div> -->

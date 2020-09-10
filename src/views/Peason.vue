@@ -8,14 +8,26 @@
     <el-tabs class="navc" v-model="activeName" >
     <el-tab-pane class="navcc1" label="个人信息" name="first">
        <el-divider content-position="left" style="color:rgb(218,242,207)">个性标签</el-divider>
-                 <el-tag
-                 class="tip"
-                v-for="tag in tags"
-                :key="tag.name"
-                closable
-                :type="tag.type">
-                {{tag.name}}
-              </el-tag>
+               <el-tag
+                    :key="index"
+                    v-for="(tag,index) in dynamicTags"
+                    closable
+                    :type="type[index]"
+                    :disable-transitions="false"
+                    @close="handleClose(tag)">
+                    {{tag}}
+                  </el-tag>
+                  <el-input
+                    class="input-new-tag"
+                    v-if="inputVisible"
+                    v-model="inputValue"
+                    ref="saveTagInput"
+                    size="small"
+                    @keyup.enter.native="handleInputConfirm"
+                    @blur="handleInputConfirm"
+                  >
+                  </el-input>
+                  <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
        <el-divider content-position="left" style="color:rgb(218,242,207)">全部动态</el-divider>
             <el-timeline class="timelinecontent" >
              
@@ -56,6 +68,34 @@
                 img-width="300px"
                 class="card"
                 @click="goinfo(item)"
+                :img-src="item"
+                img-alt="Image"
+                 overlay
+                >
+             
+                </b-card>
+                
+
+               
+            
+                
+            </b-card-group>
+            </div>
+          
+           
+            
+    </el-tab-pane>
+      <el-tab-pane class="navcc1" label="我的发布" name="third">
+        <el-divider content-position="left">全部</el-divider>
+
+             <div class="pbl">
+            <b-card-group class="group"  columns>
+                
+                <b-card
+                v-for="(item,index) in history" :key="index"
+                img-width="300px"
+                class="card"
+                @click="goinfo2(item)"
                 :img-src="item"
                 img-alt="Image"
                  overlay
@@ -290,7 +330,21 @@ h3{
  
    
     
-
+ .el-tag + .el-tag {
+    margin-left: 10px;
+  }
+  .button-new-tag {
+    margin-left: 10px;
+    height: 32px;
+    line-height: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .input-new-tag {
+    width: 90px;
+    margin-left: 10px;
+    vertical-align: bottom;
+  }
   
 </style>
 <script>
@@ -306,7 +360,9 @@ export default {
     },
     data(){
        return{
+          type:['primary','success','warning','danger','info','primary','success','warning','danger','info','primary','success','warning','danger','info'],
          forks:[],
+         history:JSON.parse(sessionStorage.getItem('history')),
          collect:JSON.parse(sessionStorage.getItem('collect')),
          show:false,
          forkimg:[],
@@ -316,13 +372,9 @@ export default {
            token:"",
            imageUrl:"",
            list:[],
-            tags: [
-          { name: '技术控', type: '' },
-          { name: '死肥宅', type: 'success' },
-          { name: '技术第一', type: 'info' },
-          { name: '拯救世界', type: 'warning' },
-          { name: '哔哩哔哩干杯( ゜-゜)つロ', type: 'danger' }
-        ],
+          dynamicTags: [],
+        inputVisible: false,
+        inputValue: '',
             avater:sessionStorage.getItem('avater')
        } 
     },
@@ -355,8 +407,66 @@ export default {
     },
     beforeMount(){
        this.getuserfork()
+        this.$axios({
+        url:'get_tags',
+        method:'get',
+        params:{
+          tags:this.dynamicTags,
+          username:sessionStorage.getItem('username')
+        }
+      }).then(response=>{
+       this.dynamicTags.push(...response.data.tags)
+      })
+    },
+    beforeDestroy(){
+     
+      this.$axios({
+        url:'set_tags',
+        method:'get',
+        params:{
+          tags:this.dynamicTags,
+          username:sessionStorage.getItem('username')
+        }
+      }).then(response=>{
+       // alert(response.data)
+       console.log(response.data)
+      })
     },
     methods:{
+       handleClose(tag) {
+        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+      },
+
+      showInput() {
+        this.inputVisible = true;
+        this.$nextTick(() => {
+          this.$refs.saveTagInput.$refs.input.focus();
+        });
+      },
+
+      handleInputConfirm() {
+        let inputValue = this.inputValue;
+        if (inputValue) {
+          this.dynamicTags.push(inputValue);
+        }
+        this.inputVisible = false;
+        this.inputValue = '';
+      },
+          goinfo2(e){
+        
+        this.$axios({
+          method:'get',
+          url:'/toinfopic',
+          params:{
+            img:e
+          }
+        }).then(response=>{
+          console.log(response.data.data)
+            sessionStorage.setItem('imgsrc',e)
+          this.$router.push({path:`/picinfo/${response.data.data}`})
+        
+        })
+      },
       goinfo(e){
         
         this.$axios({
@@ -367,6 +477,7 @@ export default {
           }
         }).then(response=>{
           console.log(response.data.data)
+            sessionStorage.setItem('imgsrc',e)
           this.$router.push({path:`/picinfo/${response.data.data}`})
         
         })

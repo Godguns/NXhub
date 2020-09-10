@@ -8,14 +8,7 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import axios from 'axios'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import VueSocketIO from 'vue-socket.io'
-Vue.use(new VueSocketIO({
-  debug: true,
-  // 服务器端地址
-  connection: 'http://localhost:4001',
-  vuex: {
-  }
-}))
+
 //import VueSocketIO from 'vue-socket.io'
 //import io from "socket.io-client"
 Vue.config.productionTip = false

@@ -2,9 +2,10 @@
     <div>
         <Navbar></Navbar>
         <div>
+        <div>
             <h1>注册成为用户</h1>
         </div>
- <div class="content" role="group">  
+      <div class="content" role="group">  
 
     <label for="input-live1">用户名:</label>
     <b-form-input
@@ -88,6 +89,7 @@
 
    <b-button v-b-modal="'my-modal'" @click="sign" size="lg">Sign in</b-button>
     <b-modal  size="sm" centered id="my-modal">{{msg}}</b-modal>
+    </div>
     </div>
 </template>
 <style  scoped>

@@ -6,6 +6,11 @@
             </div>
 
         </section>
+         <h4 style=" margin-left:50px; text-align:left;color:#606266;">推荐专辑</h4>
+                <div class="cdbody">
+    
+                <RCard style="width: 392px !important;" @click.native="go(item)" :list=item class="cd" v-for="(item,index) in list2" :key="index"></RCard>
+                </div>
             <div style=" margin-top: 30px !important;">
             <h4 style=" margin-left:50px; text-align:left;color:#606266;">推荐作品</h4>
             </div>
@@ -16,11 +21,7 @@
             <img class="ad" src="http://dongdove.cn/%E6%88%AA%E5%B1%8F2020-09-02%20%E4%B8%8B%E5%8D%888.20.20.png" alt="">
         </div>
 
-             <h4 style=" margin-left:50px; text-align:left;color:#606266;">推荐专辑</h4>
-                <div class="cdbody">
-    
-                <RCard style="width: 392px !important;" @click.native="go(item)" :list=item class="cd" v-for="(item,index) in list2" :key="index"></RCard>
-                </div>
+            
 
     </div>
 </template>
@@ -36,10 +37,22 @@ export default {
         return{
             list:[],
             imgs:[],
-            list2:[]
+            list2:[],
+            token:""
         }
     },
     created(){
+                this.$axios({
+            method:'get',
+            url:'/api/v1/file/token'
+        }).then(response=>{
+         
+            this.token=response.data.token;
+             sessionStorage.setItem('token',this.token)
+            
+           
+        });
+     
                      window.addEventListener('beforeunload', () => {
          var data={
         username:sessionStorage.getItem('username'),
