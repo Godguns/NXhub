@@ -31,6 +31,7 @@
   <div v-for="(o,index) in TJ" :key="index" class=" item">
     <!-- <el-avatar style=" border:1px solid #ccc;" :src="o.avater">  </el-avatar> -->
     <el-image
+    @click="gopeople(o.username)"
       style="width: 43px; height: 43px;border:1px solid #ccc; border-radius:50%;"
       :src="o.avater"
       fit="cover"></el-image>
@@ -176,6 +177,14 @@ export default {
     this.getTJ()
   },
     methods:{
+         gopeople(e){
+           
+            if(e!==sessionStorage.getItem('username')){
+                 this.$router.push({path:`/people/${e}`})
+            }else{
+                 this.$router.push({path:`/peason`})
+            }
+        },
       gopeason(){
         this.$router.push({path:'/peason'})
       },

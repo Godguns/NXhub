@@ -31,6 +31,7 @@
     overflow-x: hidden;
     border: none;
     border-radius: 5px;
+   margin-right: 10px;
      background: rgb(243, 246, 249);
 }
 .card-body{
@@ -39,8 +40,8 @@
     .card2{
         background-size:cover;
         border-radius: 15px !important;
-     margin-left: 20px;
-     
+      
+    
      
         border: none;
         position: relative;

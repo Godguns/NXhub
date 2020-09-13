@@ -87,12 +87,15 @@
    <b-form-text id="input-live-help">.Make sure it's at least 15 characters OR at least 8 characters including a number and a lowercase letter. Learn more.</b-form-text>
   </div>
 
-   <b-button v-b-modal="'my-modal'" @click="sign" size="lg">Sign in</b-button>
+   <b-button v-b-modal="'my-modal'" @click="sign" class="lg" size="lg">Sign in</b-button>
     <b-modal  size="sm" centered id="my-modal">{{msg}}</b-modal>
     </div>
     </div>
 </template>
 <style  scoped>
+.lg{
+  margin-top: 30px;
+}
 .card{
     margin: 0;
     padding: 0;

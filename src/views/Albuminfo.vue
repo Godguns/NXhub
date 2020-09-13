@@ -10,7 +10,7 @@
       
          <el-image
 
-                   style="width:100vw;height:108px; filter: blur(20px);"
+                   style="margin-left:-50px;  width:100vw;height:108px; filter: blur(20px);"
                    :src="master_img"
                     fit="fill"></el-image>
       
@@ -18,16 +18,18 @@
             <div class="img_fm">
                 <el-image
 
-                    style="width: 125px; height: 125px; border-radius:6px;"
+                    style="margin-top:-100px; width: 125px; height: 125px; border-radius:6px;"
                      :src="master_img"
                     fit="cover"></el-image>
-                    
-            </div>
-           <div>
-                <h3>{{msg}}</h3>
+                        <div style="margin-left:50px; margin-top:-130px;">
+                                       <h3>{{msg}}</h3>
                 <h6 style="margin-top:-30px;">共{{list.length}}项目作品</h6>
-                <span>{{time}}</span>
-           </div>
+                <span style="block;">{{time}}</span>
+                        </div>
+            </div>
+               
+     
+          
             
         </div>
          <div class="lb">
@@ -109,11 +111,14 @@ export default {
 </script>
 <style  scoped>
 .home{
+    
+    
     background: white;
 }
 .adbox{
    
-    width:100vw;
+    width:90vw;
+    margin-left: -50px;
     background-color: white;
 }
 .ad{
@@ -156,6 +161,7 @@ li:first-child{
     overflow: -moz-scrollbars-none;
     height: 80px;
     width: 100vw;
+    margin-top: 100px;
 }
 h3{
     line-height: 120px;
@@ -163,11 +169,12 @@ h3{
 }
 .content{
     padding-left: 72px;
-    margin-top:-20px;
-  display: flex;
-
+   
+  
 }
 .img_fm{
+  
+    display: flex;
     border:1px solid #fff ;
 }
 </style>

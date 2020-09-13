@@ -11,15 +11,15 @@
 
 
 
- <h4 style="margin-left:70px;text-align:left;color:#606266;">推荐专辑</h4>
+ <!-- <h4 style="margin-left:70px;text-align:left;color:#606266;">推荐专辑</h4>
 <div class="cdbody">
     
 <RCard style="width: 392px !important;" @click.native="go(item)" :list=item class="cd" v-for="(item,index) in list" :key="index"></RCard>
-</div>
+</div> -->
 
   
 
- <h5 style="margin-left:70px;text-align:left;color:#606266;">Pixiv每日推荐</h5>
+ 
      <div class="pbl">
             <b-card-group class="group"  columns>
                 
@@ -168,12 +168,12 @@ display: inline-block;
 </style>
 <script>
 
-import RCard from '@/components/RCard'
+//import RCard from '@/components/RCard'
 export default {
    
     components:{
        
-        RCard
+       // RCard
 
     },
     data(){
@@ -183,6 +183,7 @@ export default {
             info:[],
             avater:[],
             imgs:[],
+            rules:[],
             imglist:['http://dongdove.cn/c60d5480664052f6064d8c084a15c2b8d0177234.jpg%402320w_664h.jpg','http://dongdove.cn/9531a9cdd4a3df606ec7961d32c4b56644424058.jpg%402320w_664h.jpg','http://dongdove.cn/11d1b1d61b099c2e27d071558d6bb62ed2ea0ffb.png%402320w_664h.png']
         }
     },
@@ -206,7 +207,7 @@ export default {
                 url:'/getR_album',
 
             }).then(response=>{
-                this.list=response.data.data.reverse()
+                this.list=response.data.data
               console.log(this.list)
 
             })
@@ -223,6 +224,7 @@ export default {
             console.log(response.data.data)
             for(var i=0;i<response.data.data.length;i++){
                 this.imgs.push(response.data.data[i].imgsrc)
+               
                 this.avater.push(response.data.data[i].avater)
                 this.info.push(response.data.data[i].author)
                 this.time.push(response.data.data[i].time)

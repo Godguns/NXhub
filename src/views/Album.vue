@@ -29,7 +29,7 @@
 }
 .home{
     background-color: white;
-    height: 500vh;
+    
     /* background: rgb(34, 34, 34); */
 }
 /* >>> svg{

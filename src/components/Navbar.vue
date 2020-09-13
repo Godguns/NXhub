@@ -36,10 +36,12 @@
 <style  scoped>
  .nav{
      height:9vh;
+     position: relative;
+     z-index: 9;
      box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 10px;
+    margin-top: -70px;
      background-color: transparent !important;
  }
-
  .sign{
     
    border-radius: 5px;

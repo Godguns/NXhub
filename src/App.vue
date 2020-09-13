@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <NXnav v-if="header_show"></NXnav>
-    <router-view v-on:header="header" />
+    <NXnav class="bar"  v-if="header_show"></NXnav>
+    <router-view class="content" v-on:header="header" />
   </div>
 </template>
 
@@ -14,7 +14,14 @@
   color: #2c3e50;
   
 }
-
+.bar{
+  position: fixed;
+  width: 100vw;
+  z-index: 99;
+}
+.content{
+  transform: translateY(70px);
+}
 #nav {
   padding: 30px;
 }

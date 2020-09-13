@@ -1,8 +1,6 @@
 <template>
     <div class="home">
-                <div>
-                   
-                </div>
+                
             <div style=" margin-top: 30px !important;">
             <h4 style=" margin-left:50px; text-align:left;color:#606266;">推荐作品</h4>
             </div>
@@ -39,7 +37,7 @@ export default {
             console.log(response)
             this.list=response.data.data.reverse()
                for(var i=0;i<20;i++){
-                this.imgs.push(response.data.data[i].imgsrc)
+            //    this.imgs.push(response.data.data[i].imgsrc)
                
             }
         })
@@ -140,5 +138,7 @@ display: inline-block;
     .home{
         background: white;
         margin-left:50px;
+        position: relative;
+       
     }
 </style>

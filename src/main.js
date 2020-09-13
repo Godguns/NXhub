@@ -7,6 +7,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import axios from 'axios'
 import ElementUI from 'element-ui';
+import echarts from "echarts";
+Vue.prototype.$echarts = echarts;
+
 import 'element-ui/lib/theme-chalk/index.css';
 
 //import VueSocketIO from 'vue-socket.io'
@@ -19,10 +22,11 @@ Vue.prototype.$show=false
 Vue.use(ElementUI);
 axios.defaults.withCredentials = true;
 
-axios.defaults.baseURL="http://localhost:4001";
+axios.defaults.baseURL="/api";
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; 
 
 
+Vue.prototype.$echarts = echarts;
 Vue.prototype.$axios = axios;
 
 // Install BootstrapVue

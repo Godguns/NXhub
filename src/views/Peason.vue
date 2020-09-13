@@ -7,7 +7,8 @@
 <div class="nav">
     <el-tabs class="navc" v-model="activeName" >
     <el-tab-pane class="navcc1" label="个人信息" name="first">
-       <el-divider content-position="left" style="color:rgb(218,242,207)">个性标签</el-divider>
+      
+       <!-- <el-divider content-position="left" style="color:rgb(218,242,207)">个性标签</el-divider>
                <el-tag
                     :key="index"
                     v-for="(tag,index) in dynamicTags"
@@ -27,7 +28,8 @@
                     @blur="handleInputConfirm"
                   >
                   </el-input>
-                  <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+                  <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button> -->
+                   <div id="main" ref="chart" style=" height:250px;"></div>
        <el-divider content-position="left" style="color:rgb(218,242,207)">全部动态</el-divider>
             <el-timeline class="timelinecontent" >
              
@@ -178,6 +180,11 @@
     </div>
 </template>
 <style  scoped>
+#main{
+  background-color: white;
+  margin-bottom: 30px;
+ 
+}
 .pbl{
   height: 70vh;
   transform: scale(.7);
@@ -360,6 +367,7 @@ export default {
     },
     data(){
        return{
+         cdata:"",
           type:['primary','success','warning','danger','info','primary','success','warning','danger','info','primary','success','warning','danger','info'],
          forks:[],
          history:JSON.parse(sessionStorage.getItem('history')),
@@ -404,6 +412,10 @@ export default {
        this.$emit('header',true);
        this.$store.dispatch('getuserinfo')
        //this.getuserfork()
+       this.$nextTick(function () {
+            this.draw();
+        });
+       
     },
     beforeMount(){
        this.getuserfork()
@@ -433,6 +445,103 @@ export default {
       })
     },
     methods:{
+      getVirtulData(year) {
+    year = year || '2017';
+    var date = +this.$echarts.number.parseDate(year + '-01-01');
+    var end = +this.$echarts.number.parseDate((+year + 1) + '-01-01');
+    var dayTime = 3600 * 24 * 1000;
+    var data = [];
+    for (var time = date; time < end; time += dayTime) {
+        data.push([
+            this.$echarts.format.formatTime('yyyy-MM-dd', time),
+            Math.floor(Math.random() * 10000)
+        ]);
+    }
+    return data;
+},
+      draw(){
+        this.cdata= [
+          ['2016-03-20', 7000],['2016-05-02', 7000],['2016-01-02', 7000], ['2016-03-02', 7000], ['2016-07-02', 7000]];
+         let myChart = this.$echarts.init(this.$refs.chart);
+      let   option = {
+    backgroundColor: '#fff',
+   pointSize: 1,
+    title: {
+        top: 30,
+        text: '本年度贡献量',
+        subtext: '',
+        left: 'center',
+        textStyle: {
+            color: '#111'
+        }
+    },
+    tooltip: {
+        trigger: 'item'
+    },
+    legend: {
+       show:"none"
+    },
+    calendar: [{
+       dayLabel: {
+        nameMap: 'cn'
+    },
+        top: 100,
+        left: 'center',
+        range: ['2016-01-01', '2016-8-30'],
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#ccc',
+                width: .5,
+                type: 'solid'
+            }
+        },
+        yearLabel: {
+            formatter: ' ',
+            textStyle: {
+                color: '#ccc'
+            }
+        },
+        itemStyle: {
+          
+            color: '#fff',
+            borderWidth: .5,
+            borderColor: '#ccc'
+        }
+    },],
+    series: [
+    
+       
+        {
+          
+           
+            name: ' 12月',
+            type: 'effectScatter',
+            coordinateSystem: 'calendar',
+            data: this.cdata.sort(function (a, b) {
+                return b[1] - a[1];
+            }).slice(0, 12),
+            symbolSize: function (val) {
+                return val[1] / 500;
+            },
+            showEffectOn: 'render',
+            rippleEffect: {
+                brushType: 'fill'
+            },
+            hoverAnimation: true,
+            itemStyle: {
+              width:'1',
+                color: '#42b983',
+                shadowBlur: 15,
+                
+                shadowColor: '#fff'
+            },
+            zlevel: 1
+        }
+    ]
+};
+myChart.setOption(option);
+      },
        handleClose(tag) {
         this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
       },
@@ -451,6 +560,7 @@ export default {
         }
         this.inputVisible = false;
         this.inputValue = '';
+        
       },
           goinfo2(e){
         

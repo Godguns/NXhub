@@ -4,7 +4,7 @@
               <el-image
              
               lazy
-            style="border-radius:14px;width: 184px; height: 184px"
+            style="width: 184px; height: 184px"
             :src="list.imgsrc"
            
             
@@ -13,16 +13,18 @@
            
             <div class="title">
                 
-               <div>
+               <div style="display:flex;">
                     <el-image
                     lazy
                     style=" border-radius:50%;width: 24px; height: 24px;display:inline-block;"
                     :src="list.avater"
                     fit="cover">
                      </el-image>
+                      <span style="font-size:14px; line-height:24px;">{{list.author}}</span>
+                    
                </div>
-              
-                <p style="line-height:24px;">{{list.author}}</p>
+               <p style="color:#409EFF; line-height:24px;">#{{list.info}}</p>
+               
 
             </div>
 
@@ -45,7 +47,20 @@ export default {
 .home{
     width: 184px;
     height: 238px;
-  
+    margin-bottom: 10px;
+    border-radius: 14px;
+    overflow: hidden;
+   
+}
+.img{
+    transition: .3s;
+}
+.img:hover{
+    transform: scale(.98);
+}
+.home:hover{
+    border: none;
+     box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 2px;
 }
 .title{
   display: flex;

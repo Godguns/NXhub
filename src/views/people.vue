@@ -5,6 +5,7 @@
 <div class="nav">
     <el-tabs class="navc" v-model="activeName" >
     <el-tab-pane class="navcc1" label="TA的信息" name="first">
+     
        <el-divider content-position="left" style="color:rgb(218,242,207)">个性标签</el-divider>
                  <el-tag
                  effect="plain"
@@ -15,6 +16,7 @@
                 :type="type[index]">
                 {{tag}}
               </el-tag>
+               <br>
        <el-divider content-position="left" style="color:rgb(218,242,207)">TA的动态</el-divider>
             <el-timeline class="timelinecontent" >
              
@@ -290,7 +292,8 @@ export default {
             avater:""
        } 
     },
-    mounted(){
+    created(){
+       this.$emit('header',true);
       this.getpeopleinfo()
       this.getuserfork();
             this.$axios({
@@ -311,7 +314,7 @@ export default {
                   username:this.$route.params.username
                 }
                   }).then(response=>{
-                 
+                 console.log(response.data.tags)
                   this.tags=response.data.tags
                   
                 
@@ -319,10 +322,10 @@ export default {
         })
     },
   
-    created(){
-       this.$emit('header',true);
+   // created(){
+       //this.$emit('header',true);
       // this.$store.dispatch('getuserinfo')
-    },
+   // },
     
     methods:{
        gopeople(e){

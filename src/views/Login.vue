@@ -52,8 +52,12 @@
     <!-- This is a form text block (formerly known as help block) -->
    
   </div>
+      <div>
+           <el-button  class="back" @click="goindex" type="success" icon="el-icon-back
+" circle></el-button>
 
     <b-button @click="login"  class="bt" href="#" size="lg" >Go somewhere</b-button>
+      </div>
    
      
   </b-card>
@@ -61,8 +65,22 @@
   </div>
 </template>
 <style  scoped>
+.back{
+  transform: scale(.7);
+  position: absolute;
+  top: 28px;
+  left: 18px;
+  background-color: #409EFF;
+  
+}
+.about{
+  position: relative;
+  
+}
 .bt{
  height: 50px !;
+margin: 0 auto;
+margin-top: 70px;
   
   
 }
@@ -71,12 +89,12 @@
   top: 50px;
 }
 h2{
-  color: linear-gradient(108.54deg, rgb(220, 255, 203), rgb(225, 255, 237), rgb(184, 229, 255))!important;
-  font-weight: 400;
+  
+  font-weight: 900;
   position: absolute;
-  top: 150px;
-  left: 50%;
-  transform: translate(-50%,-50%);
+  top: 30px;
+  left: 43%;
+  z-index: 9;
 }
     .mb-2{
       position: relative;
@@ -95,6 +113,10 @@ label{
     top: -20px;
     font-weight: 600;
 }
+.mb-2{
+  margin-top: 60px;
+   box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 5px;
+}
 
 </style>
 <script>
@@ -109,7 +131,9 @@ export default {
     }
   },
   methods:{
-    
+    goindex(){
+ this.$router.push({path:'/'})
+    },
     login(){
       this.show=true
        var that=this

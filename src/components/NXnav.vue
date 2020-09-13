@@ -169,7 +169,8 @@
         height: 30px;
     }
     .nxnav{
-    
+      
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 10px;
         line-height: 1.5em;
         height: 53px !important;
         /* rgb(27, 31, 35) */

@@ -178,7 +178,7 @@ export default {
         
         return{
           online:this.$store.state.online,
-             socket: io('http://localhost:4001'),
+             socket: io('http://49.235.16.43:4001'),
             pic:"",
             value:"",
             show:false,

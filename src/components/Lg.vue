@@ -58,6 +58,8 @@
     transition: box-shadow 0.3s cubic-bezier(0.85, 1.97, 0.46, 0.4) 0s, transform;
 }
 .lb{
+    position: relative;
+       
     background: linear-gradient(108.54deg, rgb(220, 255, 203), rgb(225, 255, 237), rgb(184, 229, 255));
 
 }

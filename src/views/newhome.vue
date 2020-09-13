@@ -1,26 +1,22 @@
 <template>
     <div class="home">
-          <section>
-            <div style="height:70px;width:100vw;background:#fff;">
-                <img src="http://dongdove.cn/file.jpeg" alt="">
-            </div>
-
-        </section>
-         <h4 style=" margin-left:50px; text-align:left;color:#606266;">推荐专辑</h4>
+         
+      
                 <div class="cdbody">
     
                 <RCard style="width: 392px !important;" @click.native="go(item)" :list=item class="cd" v-for="(item,index) in list2" :key="index"></RCard>
                 </div>
-            <div style=" margin-top: 30px !important;">
-            <h4 style=" margin-left:50px; text-align:left;color:#606266;">推荐作品</h4>
-            </div>
+            
             <div class="content">
                   <newcard  @click.native=" goinfo(index)" v-for="(item,index) in list" :key="index" :list="item"></newcard>
             </div>
          <div class="adbox">
             <img class="ad" src="http://dongdove.cn/%E6%88%AA%E5%B1%8F2020-09-02%20%E4%B8%8B%E5%8D%888.20.20.png" alt="">
         </div>
-
+ <div class="cdbody">
+    
+                <!-- <RCard style="width: 392px !important;" @click.native="go(item)" :list=item class="cd" v-for="(item,index) in list2" :key="index"></RCard> -->
+                </div> 
             
 
     </div>
@@ -31,13 +27,14 @@ import RCard from '@/components/RCard'
 export default {
     components:{
         newcard,
-        RCard
+       RCard
     },
     data(){
         return{
             list:[],
             imgs:[],
             list2:[],
+            gs:[],
             token:""
         }
     },
@@ -68,7 +65,7 @@ export default {
             console.log(response)
             this.list=response.data.data
                for(var i=0;i<response.data.data.length;i++){
-                this.imgs.push(response.data.data[i].imgsrc)
+                this.gs.push(i)
                
             }
         })
@@ -77,7 +74,7 @@ export default {
                 url:'/getR_album',
 
             }).then(response=>{
-                this.list2=response.data.data.reverse()
+                this.list2=response.data.data
               console.log(this.list2)
 
             })
@@ -100,7 +97,8 @@ export default {
        
           if(sessionStorage.getItem('username')){
 
-                          sessionStorage.setItem('imgsrc',this.imgs[e])
+            sessionStorage.setItem('imgsrc',this.list[e].imgsrc)
+            console.log(this.list[e])
              this.$router.push({
          path: `/picinfo/${e}`,
        
@@ -118,6 +116,7 @@ export default {
 </script>
 <style  scoped>
 .adbox{
+    margin-top: 60px;
    margin-left: -50px;
     width:95vw;
     background-color: white;
@@ -131,6 +130,7 @@ export default {
 .cdbody{
    /* display: flex;
    justify-content: flex-start; */
+   margin-left: -40px;
     -ms-overflow-style: none;
     overflow: -moz-scrollbars-none;
     transform: scale(.8);
